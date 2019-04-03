@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as name from './../constants';
+import { ConnectConfig } from 'ssh2';
 
 /**Check Settings**/
 export function existsSettings ():boolean{
@@ -87,23 +88,23 @@ export function initializeExtensionSettings () {
 
 
 /**Read Settings**/
-export function readSettingsFile():string|undefined{
+export function readSettingsFile():any{
     var root = vscode.workspace.rootPath;
 
-    name.VSCODE_OUTPUT.appendLine(`Reading Settings File => ${name.EXTENSION_SETTINGS_FILE}`)
+    name.VSCODE_OUTPUT.appendLine(`Reading Settings File => ${name.EXTENSION_SETTINGS_FILE}`);
     try{
         let res = fs.readFileSync(root+'/'+name.EXTENSION_WORKSPACE_SETTINGS_FOLDER+'/'+name.EXTENSION_SETTINGS_FILE).toString();
         name.VSCODE_OUTPUT.appendLine(`Success => ${name.EXTENSION_SETTINGS_FILE} read`);
-        if (res != undefined){
+        if (res !== undefined){
             return JSON.parse(res.toString());
         }
         else {
-            return (undefined);
+            throw(new Error('Error reading settings: undefined!'));
         }
     }
     catch(err){
         name.VSCODE_OUTPUT.appendLine(`Failed => ${err}`);
-        return (undefined);
+        throw (err);
     }
 }
 /**Read Settings End**/
