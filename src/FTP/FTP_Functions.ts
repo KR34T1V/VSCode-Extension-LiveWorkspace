@@ -95,7 +95,41 @@ export function remoteRenameFTP (src: string, dest: string, settings: i.FtpSetti
             name.VSCODE_OUTPUT.appendLine(`FTP-Rename ${err}`);
         }
         else {
-            name.VSCODE_OUTPUT.appendLine(`FTP-Rename ${src} => ${dest}`);
+            name.VSCODE_OUTPUT.appendLine(`FTP-Renamed: ${src} => ${dest}`);
+        }
+    });
+}
+
+export function remoteDeleteFTP (path: string, settings: i.FtpSettingsJSON) {
+    let remote = new ftpClient();
+    
+    remote.connect(settings);
+    remote.on('error',function(error) {
+        name.VSCODE_OUTPUT.appendLine(`Oops, ${error}`);
+    });
+    remote.delete(path, function (err) {
+        if (err){
+            name.VSCODE_OUTPUT.appendLine(`FTP-Delete ${err}`);
+        }
+        else {
+            name.VSCODE_OUTPUT.appendLine(`FTP-Deleted: ${path}`);
+        }
+    });
+}
+
+export function remoteAbortFTP (settings: i.FtpSettingsJSON) {
+    let remote = new ftpClient();
+    
+    remote.connect(settings);
+    remote.on('error',function(error) {
+        name.VSCODE_OUTPUT.appendLine(`Oops, ${error}`);
+    });
+    remote.abort(function (err) {
+        if (err){
+            name.VSCODE_OUTPUT.appendLine(`FTP-Abort ${err}`);
+        }
+        else {
+            name.VSCODE_OUTPUT.appendLine(`FTP-Aborted All Transfers!`);
         }
     });
 }
