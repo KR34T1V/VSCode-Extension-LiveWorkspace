@@ -8,7 +8,10 @@ import * as Client from 'ssh2-sftp-client';
 export function remoteListRoot () {
     let remote = new Client();
     let json = sftp.readSettingsFile();
-
+    remote.on('error', 
+    (desc)=> {
+        name.VSCODE_OUTPUT.appendLine(`SFTP => ${desc}`);
+    });
     remote.connect({
         host: json.host,
         port: json.port,
@@ -24,7 +27,7 @@ export function remoteListRoot () {
     }).then(
         (err)=>{
             throw(err);
-    })
+    });
 }
 
 export function activate(context: vscode.ExtensionContext) {

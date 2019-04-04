@@ -8,6 +8,7 @@ export const DEFAULT_SETTINGS = `
 {
     "profile": "default",
 
+    "protocol": "ftp",
     "host": "localhost",
     "port": "21",
     "remotePath": "/",

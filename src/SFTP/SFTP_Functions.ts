@@ -80,7 +80,7 @@ export function initializeExtensionSettings () {
         createSettings();
     }
     else{
-        name.VSCODE_OUTPUT.appendLine('Settings Exist!');
+        name.VSCODE_OUTPUT.appendLine('Settings Found!');
     }
 }
 /**Create Settings End**/
@@ -91,10 +91,10 @@ export function initializeExtensionSettings () {
 export function readSettingsFile():any{
     var root = vscode.workspace.rootPath;
 
-    name.VSCODE_OUTPUT.appendLine(`Reading Settings File => ${name.EXTENSION_SETTINGS_FILE}`);
+    name.VSCODE_OUTPUT.appendLine(`Loading Settings`);
     try{
         let res = fs.readFileSync(root+'/'+name.EXTENSION_WORKSPACE_SETTINGS_FOLDER+'/'+name.EXTENSION_SETTINGS_FILE).toString();
-        name.VSCODE_OUTPUT.appendLine(`Success => ${name.EXTENSION_SETTINGS_FILE} read`);
+        name.VSCODE_OUTPUT.appendLine(`Read Success!`);
         if (res !== undefined){
             return JSON.parse(res.toString());
         }
