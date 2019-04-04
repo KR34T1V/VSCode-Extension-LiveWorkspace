@@ -1,41 +1,24 @@
 import * as vscode from 'vscode';
-import * as sftp from './SFTP/SFTP_Functions';
-import * as fs from 'fs';
+import * as ft from './functions';
 import * as name from './constants';
-import * as Client from 'ssh2-sftp-client';
+import * as fs from 'fs';
+import * as ftp from './FTP/FTP_Functions';
+import * as i from './interfaces';
 
-
-export function remoteListRoot () {
-    let remote = new Client();
-    let json = sftp.readSettingsFile();
-    remote.on('error', 
-    (desc)=> {
-        name.VSCODE_OUTPUT.appendLine(`SFTP => ${desc}`);
-    });
-    remote.connect({
-        host: json.host,
-        port: json.port,
-        username: json.username,
-        password: json.password,
-        debug: console.log
-    }).then(
-        ()=>{
-            return remote.list(json.remotePath);
-    }).then(
-        (data)=>{
-            console.log(data);
-    }).then(
-        (err)=>{
-            throw(err);
-    });
+export function manageProtocol(settings: i.SettingsJSON){
+    if (settings.protocol === "sftp"){
+        //CALL SFTP PATH 
+    }
+    else {
+        //CALL FTP PATH
+    }
 }
 
 export function activate(context: vscode.ExtensionContext) {
 		console.log('Congratulations, your extension "ftp-filecontrol" is now active!');
 	let disposable = vscode.commands.registerCommand('extension.helloWorld', () => {
         /*Create Folder*/
-        sftp.initializeExtensionSettings();
-        remoteListRoot();
+        ft.createSettings();
     });
 	context.subscriptions.push(disposable);
 }

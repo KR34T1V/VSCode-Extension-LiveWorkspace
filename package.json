@@ -36,7 +36,9 @@
 		"vscode": "^1.1.33"
 	},
 	"dependencies": {
+		"@types/ftp": "^0.3.29",
 		"@types/ssh2-sftp-client": "^2.4.1",
+		"ftp": "^0.3.10",
 		"ssh2-sftp-client": "^2.5.0"
 	}
 }
