@@ -10,7 +10,8 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+        "onCommand:extension.helloWorld",
+        "workspaceContains:.vscode/ftp-filecontrol.json"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -25,7 +26,7 @@
                 {
                     "id": "live-workspace",
                     "title": "Live-Workspace",
-                    "icon": "./src/Treeview/laptop.svg"
+                    "icon": "./src/treeview/laptop.svg"
                 }
             ]
         },
@@ -36,7 +37,13 @@
                     "name": "Example View"
                 }
             ]
-        }
+        },
+        "jsonValidation": [
+            {
+                "fileMatch": ".vscode/sftp.json",
+                "url": "./schema/live-workspace.schema.json"
+            }
+        ]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

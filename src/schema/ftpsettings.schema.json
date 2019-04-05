@@ -1,0 +1,57 @@
+{
+    "title": "FTPSettings",
+    "description": "Settings Schema for using ftp",
+    "type": "object",
+    "properties": {
+        "profile": {
+            "description": "Contains a profile name for current settins.",
+            "type": "string"
+        },
+        "protocol": {
+            "description": "Contains the transfer protocol to be userd.",
+            "type": "string"
+        },
+        "host": {
+            "description": "Contains the host server which to connect to.",
+            "type": "string"
+        },
+        "port": {
+            "description": "Contains the port number which to connect to.",
+            "type": "integer"
+        },
+        "remotePath": {
+            "description": "Contains the directory to load as root.",
+            "type": "string"
+        },
+        "username": {
+            "description": "Contains the username with which to connect.",
+            "type": "string"
+        },
+        "password": {
+            "description": "Contains the password with which to connect.",
+            "type": "string"
+        },
+        "connTimeout": {
+            "description": "Contains the number of milliseconds to wait for the control connection to be established.",
+            "type": "integer"
+        },
+        "passvTimeout": {
+            "description": "Contains the number of milliseconds to wait for PASV data connection to be established.",
+            "type": "integer"
+        },
+        "keepalive": {
+            "description": "Contains the number of milliseconds to send a 'dummy' (NOOP) command to keep the connection alive.",
+            "type": "integer"
+        },
+        "ignore": {
+            "description": "",
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "uniqueItems": true,
+            "default": [".vscode", ".git", ".DS_Store", "*.LCK"]
+        }
+    },
+    "required": ["protocol", "host", "port", "remotePath", "username", "password"]
+}
