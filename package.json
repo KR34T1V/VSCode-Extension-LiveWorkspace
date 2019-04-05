@@ -7,7 +7,7 @@
 		"vscode": "^1.29.0"
 	},
 	"categories": [
-		"Other"
+        "Other"
 	],
 	"activationEvents": [
         "onCommand:extension.helloWorld",
@@ -26,15 +26,15 @@
                 {
                     "id": "live-workspace",
                     "title": "Live-Workspace",
-                    "icon": "./src/treeview/laptop.svg"
+                    "icon": "./src/media/laptop.svg"
                 }
             ]
         },
         "views": {
             "live-workspace": [
                 {
-                    "id": "exampleView",
-                    "name": "Example View"
+                    "id": "live-workspace-remote",
+                    "name": "Remote"
                 }
             ]
         },
