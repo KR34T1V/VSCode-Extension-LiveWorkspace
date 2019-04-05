@@ -13,12 +13,12 @@ export interface SettingsJSON {
     "keepaliveMaxCount": number;
 }
 
-export interface ftpSettingsJSON {
+export interface FtpSettingsJSON {
     "host": string;
     "port": number;
     "user": string;
     "password": string;
     "connTimeout": number;
-    "passvTimout": number;
+    "passvTimeout": number;
     "keepalive": number;
 }
