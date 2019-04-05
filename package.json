@@ -19,7 +19,24 @@
 				"command": "extension.helloWorld",
 				"title": "Hello World"
 			}
-		]
+        ],
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "live-workspace",
+                    "title": "Live-Workspace",
+                    "icon": "./src/Treeview/laptop.svg"
+                }
+            ]
+        },
+        "views": {
+            "live-workspace": [
+                {
+                    "id": "exampleView",
+                    "name": "Example View"
+                }
+            ]
+        }
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

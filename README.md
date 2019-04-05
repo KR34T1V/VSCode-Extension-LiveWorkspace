@@ -1,3 +1,5 @@
+Logo Provided by "Freepik" at https://www.flaticon.com/free-icon/laptop_22819
+
 # ftp-filecontrol README
 
 This is the README for your extension "ftp-filecontrol". After writing up a brief description, we recommend including the following sections.
