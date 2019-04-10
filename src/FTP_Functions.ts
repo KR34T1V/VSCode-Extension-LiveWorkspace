@@ -1,8 +1,8 @@
-import * as name from '../constants';
+import * as name from './constants';
 import * as fs from 'fs';
 import * as ftpClient from 'ftp';
-import * as ft from './../functions';
-import * as i from '../interfaces';
+import * as ft from './functions';
+import * as i from './interfaces';
 
 export function extractFTPSettings (json: i.SettingsJSON): i.FtpSettingsJSON {
     let ftpSettings = {
@@ -18,7 +18,7 @@ export function extractFTPSettings (json: i.SettingsJSON): i.FtpSettingsJSON {
     return ftpSettings;
 }
 
-export function remoteListFTP (path: string, settings: i.FtpSettingsJSON) {
+export function remoteListFTP (path: string, settings: i.FtpSettingsJSON): Thenable<object> {
     let remote = new ftpClient();
 
     return new Promise (function (res, rej) {

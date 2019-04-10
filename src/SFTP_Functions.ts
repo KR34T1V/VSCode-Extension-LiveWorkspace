@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
-import * as ft from '../functions';
-import * as name from './../constants';
+import * as ft from './functions';
+import * as name from './constants';
 import * as sftpClient from 'ssh2-sftp-client';
 
 

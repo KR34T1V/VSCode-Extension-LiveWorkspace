@@ -22,3 +22,25 @@ export interface FtpSettingsJSON {
     "passvTimeout": number;
     "keepalive": number;
 }
+
+export interface FileRights {
+    "user": string;
+    "group": string;
+    "other": string;
+}
+
+export interface FTPListingObject {
+    "name":FTPListingObjectItem;
+}
+
+export interface FTPListingObjectItem {
+    "type": string;
+    "name": string;
+    "sticky": false;
+    "rights": FileRights;
+    "acl": boolean;
+    "owner": string;
+    "group": string;
+    "size": number;
+    "date": Date;
+}
