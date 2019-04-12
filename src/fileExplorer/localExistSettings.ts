@@ -4,7 +4,7 @@ import {EXTENSION_WORKSPACE_SETTINGS_FOLDER,
         EXTENSION_SETTINGS_FILE 
         } from '../constants';
 
-export function localExistsSettings ():boolean{
+export function localExistSettings ():boolean{
     var root = vscode.workspace.rootPath;
 
     if (fs.existsSync(root+'/'+EXTENSION_WORKSPACE_SETTINGS_FOLDER+'/'+EXTENSION_SETTINGS_FILE)){

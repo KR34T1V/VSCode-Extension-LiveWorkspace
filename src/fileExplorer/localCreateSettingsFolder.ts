@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
+import { localExistSettingsFolder } from './localExistSettingsFolder';
 import { VSCODE_OUTPUT,
         EXTENSION_WORKSPACE_SETTINGS_FOLDER,
         } from '../constants';
@@ -8,7 +9,7 @@ export function localCreateSettingsFolder ():boolean {
     var root = vscode.workspace.rootPath;
     
     VSCODE_OUTPUT.appendLine(`Creating Settings Folder! => ${EXTENSION_WORKSPACE_SETTINGS_FOLDER}`);
-    if (!existsSettingsFolder()){
+    if (!localExistSettingsFolder()){
         try {
             fs.mkdirSync(root+'/'+EXTENSION_WORKSPACE_SETTINGS_FOLDER);
             VSCODE_OUTPUT.appendLine(`\tSuccess => ${EXTENSION_WORKSPACE_SETTINGS_FOLDER} created!`);
