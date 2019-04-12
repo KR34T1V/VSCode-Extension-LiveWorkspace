@@ -29,6 +29,5 @@ export function ftpRemoteGet (path: string, settings: FtpSettingsJSON) {
                 stream.pipe(fs.createWriteStream(path));
             });
         });
-
     });
 }
