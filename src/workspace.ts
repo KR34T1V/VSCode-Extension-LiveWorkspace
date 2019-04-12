@@ -1,10 +1,4 @@
 import * as vscode from 'vscode';
-import * as ft from './functions';
-import * as ftp from './FTP_Functions';
-import * as name from './constants';
-import * as url from 'url';
-import { resolve } from 'path';
-
 
 export interface FtpNode {
 

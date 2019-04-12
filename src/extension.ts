@@ -1,10 +1,4 @@
 import * as vscode from 'vscode';
-import * as ft from './functions';
-import * as name from './constants';
-import * as fs from 'fs';
-import * as ftp from './FTP_Functions';
-import * as i from './interfaces';
-import * as workspace from './workspace'; 
 import * as command from './commands';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -15,7 +9,5 @@ export function activate(context: vscode.ExtensionContext) {
     });
 	context.subscriptions.push(disposable);
 }
-
-
 
 export function deactivate() {}

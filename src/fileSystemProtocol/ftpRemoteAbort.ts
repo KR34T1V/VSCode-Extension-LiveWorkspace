@@ -5,7 +5,7 @@ import { FtpSettingsJSON } from '../interfaces';
 export function ftpRemoteAbort (settings: FtpSettingsJSON) {
     let remote = new ftpClient();
     
-    return new Promise ((res, rej)=>{
+    return new Promise ((reslove)=>{
         
         remote.connect(settings);
         remote.on('error',function(error) {

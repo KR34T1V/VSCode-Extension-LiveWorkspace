@@ -16,5 +16,4 @@ export async function commandRefresh () {
             console.log(elem);
         });
     });
-    
 }

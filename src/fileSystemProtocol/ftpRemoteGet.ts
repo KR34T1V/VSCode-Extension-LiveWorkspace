@@ -6,7 +6,7 @@ import * as fs from 'fs';
 export function ftpRemoteGet (path: string, settings: FtpSettingsJSON) {
     let remote = new ftpClient();
     
-    return new Promise ((res, rej)=>{
+    return new Promise ((resolve)=>{
 
         remote.connect(settings);
         remote.on('error',function(error) {
