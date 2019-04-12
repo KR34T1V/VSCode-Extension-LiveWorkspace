@@ -10,7 +10,8 @@ export async function commandRefresh () {
     //FTP
     var settingsFTP = await ftp.extractFTPSettings(settingsJSON);
     console.log(`Path: ${path}`);
-    ftp.remoteListFTP(path, settingsFTP).then(function (res: object){
+    ftp.remoteListFTP(path, settingsFTP)
+    .then(function (res: object){
         var Arr = Object.values(res);
         Arr.forEach(function(elem: FTPListingObjectItem) {
             console.log(elem);
