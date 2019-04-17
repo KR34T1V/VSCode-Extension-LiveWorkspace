@@ -3,6 +3,8 @@ import { basename, dirname } from 'path';
 import { localExistSettings, localGetSettingsJSON } from '../fileExplorer';
 import { ftpGetSettingsJSON, ftpRemoteList } from '../fileSystemProtocol';
 import { FTPListingObjectItem, SettingsJSON, FtpNode, FtpSettingsJSON } from '../interfaces';
+import { VSCODE_OUTPUT } from '../constants';
+import { log } from 'util';
 
 function convertUri (SettingsJSON: SettingsJSON, array: object)  {
     var listing: Array<FtpNode> = [];
@@ -51,9 +53,9 @@ export class FtpModel {
 
     public getChildren(node: FtpNode): Thenable<FtpNode[]>{
         return new Promise((resolve)=>{
-            ftpRemoteList(node.resource.fsPath, this.ftpSettings)
+            ftpRemoteList(`${this.remotePath}${node.resource.path}`, this.ftpSettings)
             .then((result)=>{
-               return resolve(this.sort(Object.values(result).map(entry => ({ resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}///${entry.name}`), isDirectory: entry.type === 'd' }))));
+               return resolve(this.sort(Object.values(result).map(entry => ({ resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}${node.resource.path}/${entry.name}`), isDirectory: entry.type === 'd' }))));
             });
         });
     }
