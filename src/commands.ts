@@ -3,7 +3,7 @@ import { ftpRemoteList, ftpGetSettingsJSON } from './fileSystemProtocol';
 import { SettingsJSON, FTPListingObjectItem } from './interfaces';
 
 export async function commandRefresh () {
-    var settingsJSON: SettingsJSON = localGetSettingsJSON();
+    var settingsJSON: SettingsJSON = await localGetSettingsJSON();
     var path = settingsJSON.remotePath;
     //if sftp
     //FTP

@@ -1,3 +1,5 @@
+import * as vscode from 'vscode';
+
 export interface SettingsJSON {
     "profile": string | number;
     "protocol": string;
@@ -43,4 +45,11 @@ export interface FTPListingObjectItem {
     "group": string;
     "size": number;
     "date": Date;
+}
+
+export interface FtpNode {
+
+	resource: vscode.Uri;
+	isDirectory: boolean;
+
 }

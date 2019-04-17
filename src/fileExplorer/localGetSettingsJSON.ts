@@ -4,8 +4,9 @@ import { VSCODE_OUTPUT,
         EXTENSION_WORKSPACE_SETTINGS_FOLDER,
         EXTENSION_SETTINGS_FILE 
         } from '../constants';
+import { SettingsJSON } from '../interfaces';
 
-export function localGetSettingsJSON():any{
+export function localGetSettingsJSON(): Thenable<SettingsJSON>{
     var root = vscode.workspace.rootPath;
 
     return new Promise((resolve)=>{
