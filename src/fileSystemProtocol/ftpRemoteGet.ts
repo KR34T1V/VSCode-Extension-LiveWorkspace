@@ -21,7 +21,7 @@ export function ftpRemoteGet (path: string, settings: FtpSettingsJSON) {
                     throw(err);
                 }
                 else {
-                    VSCODE_OUTPUT.appendLine(`\tGet (Remote->Local) => ${path}`);
+                    VSCODE_OUTPUT.appendLine(`\tGet Remote => (${path})`);
                 }
                 stream.once('close', function () {
                     remote.end();

@@ -20,7 +20,7 @@ export function ftpRemoteDelete (path: string, settings: FtpSettingsJSON) {
                     throw(err);
                 }
                 else {
-                    VSCODE_OUTPUT.appendLine(`\tDeleted => ${path}`);
+                    VSCODE_OUTPUT.appendLine(`\tRemote Deleted => (${path})`);
                 }
             });
         });

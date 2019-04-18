@@ -16,11 +16,11 @@ export function ftpRemoteRename (src: string, dest: string, settings: FtpSetting
             VSCODE_OUTPUT.appendLine('FTP: connected!');
             remote.rename(src, dest, function (err) {
                 if (err){
-                    VSCODE_OUTPUT.appendLine(`\tError Rename => ${err}`);
+                    VSCODE_OUTPUT.appendLine(`\tError Rename => (${err})`);
                     throw(err);
                 }
                 else {
-                    VSCODE_OUTPUT.appendLine(`\tRenamed => (${src} -> ${dest})`);
+                    VSCODE_OUTPUT.appendLine(`\tRenamed Remote => (${src} -> ${dest})`);
                 }
             });
         });
