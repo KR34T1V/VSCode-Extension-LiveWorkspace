@@ -10,7 +10,8 @@ export function ftpGetSettingsJSON (json: SettingsJSON):Thenable<FtpSettingsJSON
             "password": json.password,
             "connTimeout": json.connTimeout,
             "passvTimeout": json.passvTimout,
-            "keepalive": json.keepalive
+            "keepalive": json.keepalive,
+            "ignore": json.ignore
         };
         resolve(ftpSettings);
     });

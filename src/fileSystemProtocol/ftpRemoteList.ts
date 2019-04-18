@@ -17,11 +17,11 @@ export function ftpRemoteList (path: string, settings: FtpSettingsJSON): Thenabl
     
             remote.list(path, function(err, list){
                 if (err){
-                    VSCODE_OUTPUT.appendLine(`\tError List => ${err}`);
+                    VSCODE_OUTPUT.appendLine(`\tError List=> ${err}`);
                     throw(err);
                 }
                 else {
-                    VSCODE_OUTPUT.appendLine(`\tList (Remote->Local) => ${path}`);
+                    VSCODE_OUTPUT.appendLine(`\tList Remote=> ${path}`);
                 }
                 remote.end();
                 resolve(list);

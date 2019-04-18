@@ -46,7 +46,10 @@ export class FtpModel {
         return new Promise((resolve)=>{
             ftpRemoteList(this.remotePath, this.ftpSettings)
             .then((result)=>{
-               return resolve(this.sort(Object.values(result).map(entry => ({ resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}///${entry.name}`), isDirectory: entry.type === 'd' }))));
+               return resolve(this.sort(Object.values(result).map((entry) => {
+                   return {resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}/${entry.name}`),
+                   isDirectory: entry.type === 'd' };
+               })));
             });
         });
     }
