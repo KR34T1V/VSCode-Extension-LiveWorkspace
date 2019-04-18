@@ -1,10 +1,8 @@
 import * as vscode from 'vscode';
 import { basename, dirname } from 'path';
 import { localExistSettings, localGetSettingsJSON } from '../fileExplorer';
-import { ftpGetSettingsJSON, ftpRemoteList } from '../fileSystemProtocol';
+import { ftpGetSettingsJSON, ftpRemoteList, ftpRemoteGet } from '../fileSystemProtocol';
 import { FTPListingObjectItem, SettingsJSON, FtpNode, FtpSettingsJSON } from '../interfaces';
-import { VSCODE_OUTPUT } from '../constants';
-import { log } from 'util';
 
 function convertUri (SettingsJSON: SettingsJSON, array: object)  {
     var listing: Array<FtpNode> = [];
@@ -63,6 +61,13 @@ export class FtpModel {
         });
     }
 
+    public getFileStream(resource: vscode.Uri): Thenable<string>{
+        
+        return new Promise(()=>{
+            ftpRemoteGet(resource.path, this.ftpSettings);
+        });
+    }
+
     private sort(nodes: FtpNode[]): FtpNode[] {
 		return nodes.sort((n1, n2) => {
 			if (n1.isDirectory && !n2.isDirectory) {
@@ -73,7 +78,7 @@ export class FtpModel {
 			}
 			return basename(n1.resource.fsPath).localeCompare(basename(n2.resource.fsPath));
 		});
-	}
+    }
 }
 
 export class FtpTreeDataProvider implements vscode.TreeDataProvider<FtpNode> {

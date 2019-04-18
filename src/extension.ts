@@ -8,8 +8,7 @@ export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('extension.helloWorld', () => {
         /*Create Folder*/
         new FtpExplorer(context);
-        commandFileExplorerRefresh()
-        .then((res)=>console.log(res));
+        //commandFileExplorerRefresh();
     });
 	context.subscriptions.push(disposable);
 }

@@ -18,9 +18,40 @@
 		"commands": [
 			{
 				"command": "extension.helloWorld",
-				"title": "Hello World"
-			}
+                "title": "Hello World"
+
+            },
+            {
+                "command": "liveworkspace.reload",
+                "title": "Reload",
+                "icon": {
+                    "dark": "./src/media/darkReload.svg",
+                    "light": "./src/media/lightReload.svg"
+                }
+            },
+            {
+                "command": "liveworkspace.checkout",
+                "title": "Check Out"
+            },
+            {
+                "command": "liveworkspace.checkin",
+                "title": "Check In"
+            }
         ],
+        "menus": {
+            "commandPalette": [
+
+            ],
+            "view/title": [
+                {
+                    "command": "liveworkspace.reload",
+                    "when": "view == live-workspace-remote",
+                    "group": "navigation"
+                }
+            ],
+            "view/item/context": [
+            ]
+        },
         "viewsContainers": {
             "activitybar": [
                 {
