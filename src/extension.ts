@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { FtpTreeDataProvider, FtpExplorer, commandFileExplorerRefresh } from './commands/';
+import { FtpExplorer } from './commands/';
 import { commandRefresh } from './commands';
 import { FtpNode } from './workspace';
 

@@ -49,8 +49,6 @@ export interface FTPListingObjectItem {
 }
 
 export interface FtpNode {
-
 	resource: vscode.Uri;
 	isDirectory: boolean;
-
 }

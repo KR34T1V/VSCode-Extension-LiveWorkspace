@@ -4,39 +4,6 @@ import { localExistSettings, localGetSettingsJSON } from '../fileExplorer';
 import { ftpGetSettingsJSON, ftpRemoteList, ftpRemoteGet } from '../fileSystemProtocol';
 import { FTPListingObjectItem, SettingsJSON, FtpNode, FtpSettingsJSON } from '../interfaces';
 
-function convertUri (SettingsJSON: SettingsJSON, array: object)  {
-    var listing: Array<FtpNode> = [];
-    return new Promise((resolve)=>{
-        
-        var Arr = Object.values(array);
-        var host = SettingsJSON.host;
-
-        Arr.forEach(function(element: FTPListingObjectItem) {
-            listing.push({
-                'resource': vscode.Uri.parse(`ftp://${host}${SettingsJSON.remotePath}${element.name}`),
-                'isDirectory': element.type === 'd'
-            });
-        });
-        resolve(listing);
-    });
-}
-
-export async function commandFileExplorerRefresh() {
-    if (!localExistSettings()){
-        throw (new Error('Settings File not present!'));
-    }
-    else {
-        var SettingsJSON = await localGetSettingsJSON();
-        var remotePath = SettingsJSON.remotePath;
-
-        var viewItems = await ftpGetSettingsJSON(SettingsJSON)
-        .then((result)=>ftpRemoteList(remotePath, result))
-        .then((result)=>convertUri(SettingsJSON, result))
-        .then((result)=>{return(result);});
-        return(viewItems);
-    }
-}
-
 export class FtpModel {
     constructor(private remotePath: string, private ftpSettings: FtpSettingsJSON){}
 
@@ -44,10 +11,10 @@ export class FtpModel {
         return new Promise((resolve)=>{
             ftpRemoteList(this.remotePath, this.ftpSettings)
             .then((result)=>{
-               return resolve(this.sort(Object.values(result).map((entry) => {
-                   return {resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}/${entry.name}`),
-                   isDirectory: entry.type === 'd' };
-               })));
+                var data = Object.values(result);
+                var sorted = this.sort(data.map((entry) => { return {resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}/${entry.name}`), isDirectory: entry.type === 'd' };}));
+                
+                return resolve(this.ignore(sorted));
             });
         });
     }
@@ -56,15 +23,10 @@ export class FtpModel {
         return new Promise((resolve)=>{
             ftpRemoteList(`${this.remotePath}${node.resource.path}`, this.ftpSettings)
             .then((result)=>{
-               return resolve(this.sort(Object.values(result).map(entry => ({ resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}${node.resource.path}/${entry.name}`), isDirectory: entry.type === 'd' }))));
+                var data = Object.values(result);
+                var sorted = this.sort(data.map(entry => ({ resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}${node.resource.path}/${entry.name}`), isDirectory: entry.type === 'd' })));
+                return resolve(this.ignore(sorted));
             });
-        });
-    }
-
-    public getFileStream(resource: vscode.Uri): Thenable<string>{
-        
-        return new Promise(()=>{
-            ftpRemoteGet(resource.path, this.ftpSettings);
         });
     }
 
@@ -79,6 +41,31 @@ export class FtpModel {
 			return basename(n1.resource.fsPath).localeCompare(basename(n2.resource.fsPath));
 		});
     }
+    //REFACTOR THIS GARBAGE VVVVVV
+    private ignore(node: FtpNode[]) {
+        var TempNode: FtpNode[] = [];
+        node.forEach((element1, i) => {
+             this.ftpSettings.ignore.forEach( element2 => {
+                element2 =  element2.replace('/', '\\/').replace('.','\\.').replace('*','.*');
+                var regExp = new RegExp(`^${element2}$`, "i");
+                var thePath =  element1.resource.path;
+                if(thePath.match(regExp)){
+                    TempNode.push(element1);
+                }
+            });
+        });
+        return this.FilterFunc(TempNode, node);
+    }
+
+    private FilterFunc(IgnoreArray: FtpNode[], NodeArray: FtpNode[]): FtpNode[] {
+        IgnoreArray.forEach(elem=> {
+            if (NodeArray.includes(elem)) {
+                NodeArray.splice(NodeArray.indexOf(elem), 1);
+            }
+       });
+       return NodeArray;
+    }
+    //REFACTOR THIS GARBAGE ^^^^^^^^
 }
 
 export class FtpTreeDataProvider implements vscode.TreeDataProvider<FtpNode> {
