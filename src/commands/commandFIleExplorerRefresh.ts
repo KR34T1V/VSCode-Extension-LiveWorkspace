@@ -12,7 +12,7 @@ export class FtpModel {
             ftpRemoteList(this.remotePath, this.ftpSettings)
             .then((result)=>{
                 var data = Object.values(result);
-                var sorted = this.sort(data.map((entry) => { return {resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}/${entry.name}`), isDirectory: entry.type === 'd' };}));                
+                var sorted = this.sort(data.map((entry) => { return {resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}${this.remotePath}/${entry.name}`), isDirectory: entry.type === 'd' };}));
                 return resolve(sorted);
             });
         });
@@ -20,7 +20,7 @@ export class FtpModel {
 
     public getChildren(node: FtpNode): Thenable<FtpNode[]>{
         return new Promise((resolve)=>{
-            ftpRemoteList(`${this.remotePath}${node.resource.path}`, this.ftpSettings)
+            ftpRemoteList(node.resource.path, this.ftpSettings)
             .then((result)=>{
                 var data = Object.values(result);
                 var sorted = this.sort(data.map(entry => ({ resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}${node.resource.path}/${entry.name}`), isDirectory: entry.type === 'd' })));
@@ -76,7 +76,11 @@ export class FtpTreeDataProvider implements vscode.TreeDataProvider<FtpNode> {
         return {
             resourceUri: element.resource,
             collapsibleState: element.isDirectory ? vscode.TreeItemCollapsibleState.Collapsed : void 0,
-            command: void 0
+            command: element.isDirectory ? void 0 : {
+                command: 'file-control.openFtpResource',
+                arguments: [element.resource],
+                title: 'Open File'
+            }
         };
     }
     
@@ -119,5 +123,10 @@ export class FtpExplorer {
                 });
             });
         }
+        vscode.commands.registerCommand('file-control.openFtpResource', (resource)=>this.openFtpResource(resource));
+    }
+
+    private openFtpResource(resource: vscode.Uri) {
+        // vscode.window.showTextDocument();
     }
 }
