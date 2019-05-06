@@ -12,9 +12,8 @@ export class FtpModel {
             ftpRemoteList(this.remotePath, this.ftpSettings)
             .then((result)=>{
                 var data = Object.values(result);
-                var sorted = this.sort(data.map((entry) => { return {resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}/${entry.name}`), isDirectory: entry.type === 'd' };}));
-                
-                return resolve(this.ignore(sorted));
+                var sorted = this.sort(data.map((entry) => { return {resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}/${entry.name}`), isDirectory: entry.type === 'd' };}));                
+                return resolve(sorted);
             });
         });
     }
@@ -25,7 +24,7 @@ export class FtpModel {
             .then((result)=>{
                 var data = Object.values(result);
                 var sorted = this.sort(data.map(entry => ({ resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}${node.resource.path}/${entry.name}`), isDirectory: entry.type === 'd' })));
-                return resolve(this.ignore(sorted));
+                return resolve(sorted);
             });
         });
     }
@@ -37,35 +36,36 @@ export class FtpModel {
 			}
 			if (!n1.isDirectory && n2.isDirectory) {
 				return 1;
-			}
+            }
 			return basename(n1.resource.fsPath).localeCompare(basename(n2.resource.fsPath));
 		});
     }
     //REFACTOR THIS GARBAGE VVVVVV
-    private ignore(node: FtpNode[]) {
-        var TempNode: FtpNode[] = [];
-        node.forEach((element1, i) => {
-             this.ftpSettings.ignore.forEach( element2 => {
-                element2 =  element2.replace('/', '\\/').replace('.','\\.').replace('*','.*');
-                var regExp = new RegExp(`^${element2}$`, "i");
-                var thePath =  element1.resource.path;
-                if(thePath.match(regExp)){
-                    TempNode.push(element1);
-                }
-            });
-        });
-        return this.FilterFunc(TempNode, node);
-    }
+    // private ignore(node: FtpNode[]) {
+    //     var TempNode: FtpNode[] = [];
+    //     node.forEach((element1, i) => {
+    //          this.ftpSettings.ignore.forEach( element2 => {
+    //             element2 =  element2.replace('/', '\\/').replace('.','\\.').replace('*','.*');
+    //             var regExp = new RegExp(`^${element2}$`, "i");
+    //             var thePath =  element1.resource.path;
+    //             if(thePath.match(regExp)){
+    //                 TempNode.push(element1);
+    //             }
+    //         });
+    //     });
+    //     return this.FilterFunc(TempNode, node);
+    // }
 
-    private FilterFunc(IgnoreArray: FtpNode[], NodeArray: FtpNode[]): FtpNode[] {
-        IgnoreArray.forEach(elem=> {
-            if (NodeArray.includes(elem)) {
-                NodeArray.splice(NodeArray.indexOf(elem), 1);
-            }
-       });
-       return NodeArray;
-    }
+    // private FilterFunc(IgnoreArray: FtpNode[], NodeArray: FtpNode[]): FtpNode[] {
+    //     IgnoreArray.forEach(elem=> {
+    //         if (NodeArray.includes(elem)) {
+    //             NodeArray.splice(NodeArray.indexOf(elem), 1);
+    //         }
+    //    });
+    //    return NodeArray;
+    // }
     //REFACTOR THIS GARBAGE ^^^^^^^^
+
 }
 
 export class FtpTreeDataProvider implements vscode.TreeDataProvider<FtpNode> {
