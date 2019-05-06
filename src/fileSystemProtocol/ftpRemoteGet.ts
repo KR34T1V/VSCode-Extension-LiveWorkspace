@@ -5,6 +5,7 @@ import * as fs from 'fs';
 
 export function ftpRemoteGet (path: string, settings: FtpSettingsJSON) {
     let remote = new ftpClient();
+    console.log(path);
     
     return new Promise ((resolve)=>{
 
@@ -16,17 +17,25 @@ export function ftpRemoteGet (path: string, settings: FtpSettingsJSON) {
         remote.on('ready', function () {
             VSCODE_OUTPUT.appendLine('FTP: connected!');
             remote.get(path, function (err, stream) {
+                let string = '';
                 if (err){
                     VSCODE_OUTPUT.appendLine(`\tError Get => ${err}`);
                     throw(err);
                 }
                 else {
                     VSCODE_OUTPUT.appendLine(`\tGet Remote => (${path})`);
+                    stream.on('data', function (buffer){
+                        if (buffer) {
+                            var part = buffer.toString();
+                            string += part;
+                        }
+                    });
                 }
                 stream.once('close', function () {
                     remote.end();
+                    console.log(string);
+                    resolve(string);
                 });
-                stream.pipe(fs.createWriteStream(path));
             });
         });
     });
