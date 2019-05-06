@@ -4,7 +4,6 @@ import { FtpSettingsJSON } from '../interfaces';
 
 export function ftpRemoteList (path: string, settings: FtpSettingsJSON): Thenable<object> {
     let remote = new ftpClient();
-
     return new Promise (function (resolve) {
         
         remote.connect(settings);

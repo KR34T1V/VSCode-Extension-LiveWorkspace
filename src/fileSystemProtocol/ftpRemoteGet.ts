@@ -3,7 +3,7 @@ import { VSCODE_OUTPUT } from '../constants';
 import { FtpSettingsJSON } from '../interfaces';
 import * as fs from 'fs';
 
-export function ftpRemoteGet (path: string, settings: FtpSettingsJSON) {
+export function ftpRemoteGet (path: string, settings: FtpSettingsJSON): Thenable<string> {
     let remote = new ftpClient();
     console.log(path);
     
@@ -33,7 +33,6 @@ export function ftpRemoteGet (path: string, settings: FtpSettingsJSON) {
                 }
                 stream.once('close', function () {
                     remote.end();
-                    console.log(string);
                     resolve(string);
                 });
             });
