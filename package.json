@@ -22,7 +22,7 @@
 
             },
             {
-                "command": "liveworkspace.reload",
+                "command": "live-workspace.refresh",
                 "title": "Reload",
                 "icon": {
                     "dark": "./src/media/darkReload.svg",
@@ -30,11 +30,11 @@
                 }
             },
             {
-                "command": "liveworkspace.checkout",
+                "command": "live-workspace.checkout",
                 "title": "Check Out"
             },
             {
-                "command": "liveworkspace.checkin",
+                "command": "live-workspace.checkin",
                 "title": "Check In"
             }
         ],
@@ -44,7 +44,7 @@
             ],
             "view/title": [
                 {
-                    "command": "liveworkspace.reload",
+                    "command": "live-workspace.refresh",
                     "when": "view == live-workspace-remote",
                     "group": "navigation"
                 }

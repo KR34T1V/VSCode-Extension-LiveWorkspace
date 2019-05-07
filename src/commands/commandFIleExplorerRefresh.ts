@@ -12,8 +12,8 @@ export class FtpModel {
             ftpRemoteList(this.remotePath, this.ftpSettings)
             .then((result)=>{
                 var data = Object.values(result);
-                var sorted = this.sort(data.map((entry) => { return {resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}${this.remotePath}/${entry.name}`), isDirectory: entry.type === 'd' };}));
-                return resolve(this.ignore(sorted));
+                var sorted = this.sort(data.map((entry) => { return {resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}${this.remotePath}${entry.name}`), isDirectory: entry.type === 'd' };}));
+                return resolve(sorted);
             });
         });
     }
@@ -24,7 +24,7 @@ export class FtpModel {
             .then((result)=>{
                 var data = Object.values(result);
                 var sorted = this.sort(data.map(entry => ({ resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}${node.resource.path}/${entry.name}`), isDirectory: entry.type === 'd' })));
-                return resolve(this.ignore(sorted));
+                return resolve(sorted);
             });
         });
     }
@@ -45,7 +45,7 @@ export class FtpModel {
 		});
     }
     //REFACTOR THIS GARBAGE VVVVVV
-    private ignore(node: FtpNode[]) {
+    /*private ignore(node: FtpNode[]) {
         var TempNode: FtpNode[] = [];
         node.forEach((element1, i) => {
              this.ftpSettings.ignore.forEach( element2 => {
@@ -67,21 +67,27 @@ export class FtpModel {
             }
        });
        return NodeArray;
-    }
+    }*/
     //REFACTOR THIS GARBAGE ^^^^^^^^
 
 }
 
 export class FtpTreeDataProvider implements vscode.TreeDataProvider<FtpNode>, vscode.TextDocumentContentProvider {
-
+    private _onDidChangeTreeData: vscode.EventEmitter<any> = new vscode.EventEmitter<any>();
+    readonly onDidChangeTreeData: vscode.Event<any> = this._onDidChangeTreeData.event;
+    
     constructor(private readonly model: FtpModel){ }
+
+    public refresh(): any {
+		this._onDidChangeTreeData.fire();
+	}
 
 	public getTreeItem(element: FtpNode): vscode.TreeItem {
         return {
             resourceUri: element.resource,
             collapsibleState: element.isDirectory ? vscode.TreeItemCollapsibleState.Collapsed : void 0,
             command: element.isDirectory ? void 0 : {
-                command: 'file-control.openFtpResource',
+                command: 'live-workspace.openFtpResource',
                 arguments: [element.resource],
                 title: 'Open File'
             }
@@ -114,7 +120,7 @@ export class FtpExplorer {
 
     constructor (context: vscode.ExtensionContext) {
         var ftpModel;
-        var treeDataProvider;
+        var treeDataProvider: any;
         var remotePath: string;
         var ftpSettings: FtpSettingsJSON;
         if (localExistSettings()){
@@ -128,7 +134,8 @@ export class FtpExplorer {
                     ftpModel = new FtpModel(remotePath, ftpSettings);
                     treeDataProvider = new FtpTreeDataProvider(ftpModel);
                     vscode.window.createTreeView('live-workspace-remote', { treeDataProvider });
-                    vscode.commands.registerCommand('file-control.openFtpResource', resource => this.openResource(resource));
+                    vscode.commands.registerCommand('live-workspace.refresh', () => treeDataProvider.refresh());
+                    vscode.commands.registerCommand('live-workspace.openFtpResource', resource => this.openResource(resource));
                     context.subscriptions.push(vscode.workspace.registerTextDocumentContentProvider('ftp', treeDataProvider));
                 });
             });

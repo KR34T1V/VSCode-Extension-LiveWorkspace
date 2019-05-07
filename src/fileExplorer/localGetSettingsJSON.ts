@@ -16,7 +16,9 @@ export function localGetSettingsJSON(): Thenable<SettingsJSON>{
             let result = fs.readFileSync(root+'/'+EXTENSION_WORKSPACE_SETTINGS_FOLDER+'/'+EXTENSION_SETTINGS_FILE).toString();
             VSCODE_OUTPUT.appendLine(`Read Success!`);
             if (result !== undefined){
-                resolve(JSON.parse(result.toString()));
+                let obj: SettingsJSON = JSON.parse(result.toString());
+                obj.remotePath = cleanPath(obj.remotePath);
+                resolve(obj);
             }
             else {
                 throw(new Error('Error reading settings: undefined!'));
@@ -27,4 +29,13 @@ export function localGetSettingsJSON(): Thenable<SettingsJSON>{
             throw (err);
         }
     });
+}
+
+function cleanPath (path: string): string {
+    path = path.trim();
+    let len = path.length;
+    if (!path.endsWith('/')) {
+        path.concat('/');
+    }
+    return path;
 }
