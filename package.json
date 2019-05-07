@@ -1,25 +1,24 @@
 {
-	"name": "ftp-filecontrol",
-	"displayName": "FTP-FileControl",
-	"description": "",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.29.0"
-	},
-	"categories": [
+    "name": "ftp-filecontrol",
+    "displayName": "FTP-FileControl",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.29.0"
+    },
+    "categories": [
         "Other"
-	],
-	"activationEvents": [
+    ],
+    "activationEvents": [
         "onCommand:extension.helloWorld",
         "workspaceContains:.vscode/ftp-filecontrol.json"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "extension.helloWorld",
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.helloWorld",
                 "title": "Hello World"
-
             },
             {
                 "command": "live-workspace.refresh",
@@ -39,9 +38,7 @@
             }
         ],
         "menus": {
-            "commandPalette": [
-
-            ],
+            "commandPalette": [],
             "view/title": [
                 {
                     "command": "live-workspace.refresh",
@@ -50,6 +47,14 @@
                 }
             ],
             "view/item/context": [
+                {
+                    "command": "live-workspace.checkout",
+                    "when": "view == live-workspace-remote && viewItem == file"
+                },
+                {
+                    "command": "live-workspace.checkin",
+                    "when": "view == live-workspace-remote && viewItem == file"
+                }
             ]
         },
         "viewsContainers": {
@@ -75,25 +80,25 @@
                 "url": "./schema/live-workspace.schema.json"
             }
         ]
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "npm run compile && node ./node_modules/vscode/bin/test"
-	},
-	"devDependencies": {
-		"@types/mocha": "^2.2.42",
-		"@types/node": "^10.12.21",
-		"tslint": "^5.12.1",
-		"typescript": "^3.3.1",
-		"vscode": "^1.1.33"
-	},
-	"dependencies": {
-		"@types/ftp": "^0.3.29",
-		"@types/ssh2-sftp-client": "^2.4.1",
-		"ftp": "^0.3.10",
-		"ssh2-sftp-client": "^2.5.0"
-	}
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^10.12.21",
+        "tslint": "^5.12.1",
+        "typescript": "^3.3.1",
+        "vscode": "^1.1.33"
+    },
+    "dependencies": {
+        "@types/ftp": "^0.3.29",
+        "@types/ssh2-sftp-client": "^2.4.1",
+        "ftp": "^0.3.10",
+        "ssh2-sftp-client": "^2.5.0"
+    }
 }

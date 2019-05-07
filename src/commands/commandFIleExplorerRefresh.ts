@@ -90,7 +90,8 @@ export class FtpTreeDataProvider implements vscode.TreeDataProvider<FtpNode>, vs
                 command: 'live-workspace.openFtpResource',
                 arguments: [element.resource],
                 title: 'Open File'
-            }
+            },
+            contextValue: element.isDirectory ? 'folder' : 'file'
         };
     }
     
