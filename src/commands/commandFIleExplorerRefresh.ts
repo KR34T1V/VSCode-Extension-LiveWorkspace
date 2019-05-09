@@ -144,6 +144,8 @@ export class FtpExplorer {
     }
 
     private openResource(resource: vscode.Uri): void {
+        console.log(resource);
+    
         vscode.window.showTextDocument(resource);
     }
 }

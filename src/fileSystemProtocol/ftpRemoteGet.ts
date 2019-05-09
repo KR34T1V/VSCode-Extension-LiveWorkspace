@@ -5,7 +5,6 @@ import * as fs from 'fs';
 
 export function ftpRemoteGet (path: string, settings: FtpSettingsJSON): Thenable<string> {
     let remote = new ftpClient();
-    console.log(path);
     
     return new Promise ((resolve)=>{
 

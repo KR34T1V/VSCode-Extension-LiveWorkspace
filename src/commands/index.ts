@@ -1,1 +1,3 @@
-export * from './commandFIleExplorerRefresh';
+export * from './commandFileExplorerRefresh';
+export * from './commandCheckOutFile';
+export * from './classFtpFileStream';
