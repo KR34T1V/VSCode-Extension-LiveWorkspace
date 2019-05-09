@@ -9,7 +9,7 @@ export function checkOutFile(node: FtpNode) {
     .then((json)=>ftpGetSettingsJSON(json))
     .then((settings)=>{
         var stream = new FtpFileStream(settings);
-        stream.ftpTryCheckOut(node);
+        stream.ftpCheckOut(node);
     })
     .then(()=>{
 
