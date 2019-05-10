@@ -195,4 +195,18 @@ export class FtpFileStream {
             }
         });
     }
+
+    
+    /*Delete Remote File/Folder*/
+    public ftpDelete (node: any) {
+        let resource = node.resource;
+        let dir = dirname(resource.path);
+        let name = basename(resource.path);
+        vscode.window.showWarningMessage(`Delete ${name}`, `Away With It!`, `Oh Sh*t, Still Need That`)
+        .then((result)=>{
+            if (result === `Away With It!`){
+                ftpRemoteDelete(resource.path, this.ftpSettings);
+            }
+        });
+    }
 }

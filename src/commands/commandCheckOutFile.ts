@@ -57,3 +57,12 @@ export function renameFile (node: FtpNode) {
         stream.ftpRename(node);
     });
 }
+
+export function deleteFile (node: FtpNode) {
+    localGetSettingsJSON()
+    .then((json)=>ftpGetSettingsJSON(json))
+    .then((settings)=>{
+        var stream = new FtpFileStream(settings);
+        stream.ftpDelete(node);
+    });
+}

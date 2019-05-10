@@ -47,6 +47,10 @@
             {
                 "command": "live-workspace.rename",
                 "title": "Rename"
+            },
+            {
+                "command": "live-workspace.delete",
+                "title": "Delete"
             }
         ],
         "menus": {
@@ -77,6 +81,10 @@
                 },
                 {
                     "command": "live-workspace.rename",
+                    "when": "view == live-workspace-remote"
+                },
+                {
+                    "command": "live-workspace.delete",
                     "when": "view == live-workspace-remote"
                 }
             ]
