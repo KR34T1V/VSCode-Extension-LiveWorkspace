@@ -1,7 +1,7 @@
 import { FtpFileStream } from './';
 import * as vscode from 'vscode';
 import { localGetSettingsJSON } from '../fileExplorer';
-import { ftpGetSettingsJSON } from '../fileSystemProtocol';
+import { ftpGetSettingsJSON } from '../fileTransferProtocol';
 import { FtpNode } from '../interfaces';
 
 export function viewFile (resource: vscode.Uri) {
@@ -64,5 +64,23 @@ export function deleteFile (node: FtpNode) {
     .then((settings)=>{
         var stream = new FtpFileStream(settings);
         stream.ftpDelete(node);
+    });
+}
+
+export function createNewFolder (node: FtpNode) {
+    localGetSettingsJSON()
+    .then((json)=>ftpGetSettingsJSON(json))
+    .then((settings)=>{
+        var stream = new FtpFileStream(settings);
+        stream.ftpNewFolder(node);
+    });
+}
+
+export function createNewFile (node: FtpNode) {
+    localGetSettingsJSON()
+    .then((json)=>ftpGetSettingsJSON(json))
+    .then((settings)=>{
+        var stream = new FtpFileStream(settings);
+        stream.ftpNewFile(node);
     });
 }

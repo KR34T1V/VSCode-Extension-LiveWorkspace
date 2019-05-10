@@ -1,9 +1,10 @@
 import * as fs from 'fs';
 import * as vscode from 'vscode';
 import * as mkdirp from "mkdirp";
-import { ftpRemoteGet, ftpRemoteList, ftpRemotePut, ftpRemoteDelete, ftpRemoteRename } from '../fileSystemProtocol';
+import { ftpRemoteGet, ftpRemoteList, ftpRemotePut, ftpRemoteDelete, ftpRemoteRename, ftpRemoteMkdir } from '../fileTransferProtocol';
 import { FtpSettingsJSON, FtpNode } from '../interfaces';
 import { basename, dirname } from 'path';
+import { ftpRemoteRmDir } from '../fileTransferProtocol/ftpRemoteRmDir';
 
 
 export class FtpFileStream {
@@ -203,9 +204,56 @@ export class FtpFileStream {
         let name = basename(resource.path);
         vscode.window.showWarningMessage(`Delete ${name}`, `Away With It!`, `Oh Sh*t, Still Need That`)
         .then((result)=>{
-            if (result === `Away With It!`){
-                ftpRemoteDelete(resource.path, this.ftpSettings);
+            if (node.isDirectory){
+                if (result === `Away With It!`){
+                    ftpRemoteRmDir(resource.path, this.ftpSettings);
+                }
+            } else {
+                if (result === `Away With It!`){
+                    ftpRemoteDelete(resource.path, this.ftpSettings);
+                }
             }
         });
     }
+
+    /*Create New Remote Folder*/
+    public ftpNewFolder (node: any) {
+        let resource = node.resource;
+        let path = resource.path;
+        let dir = dirname(resource.path);
+        let name = basename(resource.path);
+        vscode.window.showInputBox()
+        .then((result)=>{
+            if (node.isDirectory){
+                if (result !== undefined && result.length){  
+                    ftpRemoteMkdir(`${path}/${result}`, this.ftpSettings);
+                }
+            } else {
+                if (result !== undefined && result.length){
+                    ftpRemoteMkdir(`${dir}/${result}`, this.ftpSettings);
+                }
+            }
+        });
+    }
+
+        /*Create New Remote File*/
+        public ftpNewFile (node: any) {
+            let resource = node.resource;
+            let path = resource.path;
+            let dir = dirname(resource.path);
+            let name = basename(resource.path);
+            vscode.window.showInputBox()
+            .then((result)=>{
+                if (node.isDirectory){
+                    if (result !== undefined && result.length){
+                        ftpRemotePut(`File Created by ${this.ftpSettings.user}`, `${path}/${result}`, this.ftpSettings);
+                    }
+                } else {
+                    if (result !== undefined && result.length){
+                        ftpRemotePut(`File Created by ${this.ftpSettings.user}`, `${dir}/${result}`, this.ftpSettings);
+                    }
+                }
+            });
+        }
+
 }

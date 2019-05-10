@@ -51,6 +51,14 @@
             {
                 "command": "live-workspace.delete",
                 "title": "Delete"
+            },
+            {
+                "command": "live-workspace.newfolder",
+                "title": "New Folder"
+            },
+            {
+                "command": "live-workspace.newfile",
+                "title": "New File"
             }
         ],
         "menus": {
@@ -85,6 +93,14 @@
                 },
                 {
                     "command": "live-workspace.delete",
+                    "when": "view == live-workspace-remote"
+                },
+                {
+                    "command": "live-workspace.newfolder",
+                    "when": "view == live-workspace-remote"
+                },
+                {
+                    "command": "live-workspace.newfile",
                     "when": "view == live-workspace-remote"
                 }
             ]

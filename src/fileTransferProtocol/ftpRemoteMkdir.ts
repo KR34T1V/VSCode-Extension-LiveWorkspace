@@ -2,7 +2,7 @@ import * as ftpClient from 'ftp';
 import { VSCODE_OUTPUT } from '../constants';
 import { FtpSettingsJSON } from '../interfaces';
 
-export function ftpRemotePut (path: string, settings: FtpSettingsJSON) {
+export function ftpRemoteMkdir (path: string, settings: FtpSettingsJSON) {
     let remote = new ftpClient();
     
     return new Promise ((resolve)=>{
@@ -23,6 +23,7 @@ export function ftpRemotePut (path: string, settings: FtpSettingsJSON) {
                     VSCODE_OUTPUT.appendLine(`\tMkdir Remote => (${path})`);
                 }
                 remote.end();
+                resolve(1);
             });
         });
 

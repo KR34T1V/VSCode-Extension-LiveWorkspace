@@ -1,5 +1,5 @@
 import { localGetSettingsJSON } from './fileExplorer';
-import { ftpRemoteList, ftpGetSettingsJSON } from './fileSystemProtocol';
+import { ftpRemoteList, ftpGetSettingsJSON } from './fileTransferProtocol';
 import { SettingsJSON, FTPListingObjectItem } from './interfaces';
 
 export async function commandRefresh () {

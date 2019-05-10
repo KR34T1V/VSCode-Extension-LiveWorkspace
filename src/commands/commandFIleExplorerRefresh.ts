@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { basename, dirname } from 'path';
 import { localExistSettings, localGetSettingsJSON } from '../fileExplorer';
-import { ftpGetSettingsJSON, ftpRemoteList, ftpRemoteGet } from '../fileSystemProtocol';
+import { ftpGetSettingsJSON, ftpRemoteList, ftpRemoteGet } from '../fileTransferProtocol';
 import { FtpNode, FtpSettingsJSON } from '../interfaces';
 
 export class FtpModel {
