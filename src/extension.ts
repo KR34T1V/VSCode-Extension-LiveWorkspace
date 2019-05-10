@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { FtpExplorer, checkOutFile, checkInFile, uploadFile, viewFile, downloadFile } from './commands/';
+import { FtpExplorer, checkOutFile, checkInFile, uploadFile, viewFile, downloadFile, renameFile } from './commands/';
 
 export function activate(context: vscode.ExtensionContext) {
 		console.log('Congratulations, your extension "ftp-filecontrol" is now active!');
@@ -12,6 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand('live-workspace.checkin', node => checkInFile(node)));
     context.subscriptions.push(vscode.commands.registerCommand('live-workspace.upload', node => uploadFile(node)));
     context.subscriptions.push(vscode.commands.registerCommand('live-workspace.download', node => downloadFile(node)));
+    context.subscriptions.push(vscode.commands.registerCommand('live-workspace.rename', node => renameFile(node)));
     vscode.commands.registerCommand('live-workspace.openFtpResource', resource => viewFile(resource));
     
 }

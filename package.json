@@ -43,6 +43,10 @@
             {
                 "command": "live-workspace.download",
                 "title": "Download"
+            },
+            {
+                "command": "live-workspace.rename",
+                "title": "Rename"
             }
         ],
         "menus": {
@@ -70,6 +74,10 @@
                 {
                     "command": "live-workspace.download",
                     "when": "view == live-workspace-remote && viewItem == file"
+                },
+                {
+                    "command": "live-workspace.rename",
+                    "when": "view == live-workspace-remote"
                 }
             ]
         },

@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as vscode from 'vscode';
 import * as mkdirp from "mkdirp";
-import { ftpRemoteGet, ftpRemoteList, ftpRemotePut, ftpRemoteDelete } from '../fileSystemProtocol';
+import { ftpRemoteGet, ftpRemoteList, ftpRemotePut, ftpRemoteDelete, ftpRemoteRename } from '../fileSystemProtocol';
 import { FtpSettingsJSON, FtpNode } from '../interfaces';
 import { basename, dirname } from 'path';
 
@@ -181,6 +181,18 @@ export class FtpFileStream {
                     resolve(1);
                 }
             });
+        });
+    }
+
+    /*Rename Remote File/Folder*/
+    public ftpRename (node: any) {
+        let resource = node.resource;
+        let dir = dirname(resource.path);
+        vscode.window.showInputBox()
+        .then((value)=>{
+            if (value !== undefined && value.length){
+                ftpRemoteRename(resource.path, `${dir}/${value}`, this.ftpSettings);
+            }
         });
     }
 }

@@ -48,3 +48,12 @@ export function downloadFile (node: FtpNode) {
         stream.ftpDownload(node);
     });
 }
+
+export function renameFile (node: FtpNode) {
+    localGetSettingsJSON()
+    .then((json)=>ftpGetSettingsJSON(json))
+    .then((settings)=>{
+        var stream = new FtpFileStream(settings);
+        stream.ftpRename(node);
+    });
+}
