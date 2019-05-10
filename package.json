@@ -35,6 +35,10 @@
             {
                 "command": "live-workspace.checkin",
                 "title": "Check In"
+            },
+            {
+                "command": "live-workspace.upload",
+                "title": "Upload"
             }
         ],
         "menus": {
@@ -53,6 +57,10 @@
                 },
                 {
                     "command": "live-workspace.checkin",
+                    "when": "view == live-workspace-remote && viewItem == file"
+                },
+                {
+                    "command": "live-workspace.upload",
                     "when": "view == live-workspace-remote && viewItem == file"
                 }
             ]

@@ -22,6 +22,8 @@ export function ftpRemoteRename (src: string, dest: string, settings: FtpSetting
                 else {
                     VSCODE_OUTPUT.appendLine(`\tRenamed Remote => (${src} -> ${dest})`);
                 }
+                remote.end();
+                resolve(1);
             });
         });
 

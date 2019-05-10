@@ -4,13 +4,12 @@ import * as mkdirp from "mkdirp";
 import { ftpRemoteGet, ftpRemoteList, ftpRemotePut, ftpRemoteDelete } from '../fileSystemProtocol';
 import { FtpSettingsJSON, FtpNode } from '../interfaces';
 import { basename, dirname } from 'path';
-import { VSCODE_OUTPUT } from '../constants';
 
 
 export class FtpFileStream {
     constructor (private ftpSettings: FtpSettingsJSON){}
     
-    //Handle Checkout Command
+    /*Handle Checkout Command*/
     public async ftpCheckOut (node: any) {
         let resource = node.resource;
         let uri = vscode.Uri.parse(`file:///${vscode.workspace.rootPath}${resource.path}`);
@@ -34,7 +33,7 @@ export class FtpFileStream {
         //Check Date Stamp
     }
     
-    //Handle Checkin Command
+    /*Handle Checkin Command*/
     public async ftpCheckIn (node: any) {
         let resource = node.resource;
         let localPath = `${vscode.workspace.rootPath}${resource.path}`;
@@ -47,7 +46,7 @@ export class FtpFileStream {
                 .then(()=>ftpRemoteDelete(`${resource.path}.LCK`, this.ftpSettings))
                 .then(()=>{});
             } else if (result === 0) {
-                vscode.window.showWarningMessage(`Checkout file before you Checkin!`);
+                vscode.window.showWarningMessage(`Checkout file before you Check-In!`);
                 //STOP ACCESS
             } else {
                 //REPORT OWNER
@@ -56,7 +55,7 @@ export class FtpFileStream {
         });
     }
 
-    //Handle Upload Command
+    /*Handle Upload Command*/
     public async ftpUpload (node: any) {
         let resource = node.resource;
         let localPath = `${vscode.workspace.rootPath}${resource.path}`;
@@ -67,7 +66,7 @@ export class FtpFileStream {
                 //UPLOAD, UNLOCK AND REVEAL
                 ftpRemotePut(localPath,resource.path, this.ftpSettings)
             } else if (result === 0) {
-                vscode.window.showWarningMessage(`Checkout file before you Checkin!`);
+                vscode.window.showWarningMessage(`Checkout file before you Upload!`);
                 //STOP ACCESS
             } else {
                 //REPORT OWNER
@@ -89,7 +88,8 @@ export class FtpFileStream {
             resolve(1);
         });
     }
-    /*Check if LCK file is present on the server*/
+
+    /*Check LCK file on the server*/
     private ftpRemoteCheckLock (path: string) {
         return new Promise(async (resolve)=>{
             

@@ -5,7 +5,7 @@ import { FtpSettingsJSON } from '../interfaces';
 export function ftpRemoteAbort (settings: FtpSettingsJSON) {
     let remote = new ftpClient();
     
-    return new Promise ((reslove)=>{
+    return new Promise ((resolve)=>{
         
         remote.connect(settings);
         remote.on('error',function(error) {
@@ -22,6 +22,8 @@ export function ftpRemoteAbort (settings: FtpSettingsJSON) {
                 else {
                     VSCODE_OUTPUT.appendLine(`\tAborted All Transfers!`);
                 }
+                remote.end();
+                resolve(1);
             });
         });
 

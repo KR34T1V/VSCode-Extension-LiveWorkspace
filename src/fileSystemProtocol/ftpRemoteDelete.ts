@@ -23,6 +23,8 @@ export function ftpRemoteDelete (path: string, settings: FtpSettingsJSON) {
                 else {
                     VSCODE_OUTPUT.appendLine(`\tRemote Deleted => (${path})`);
                 }
+                remote.end();
+                resolve(1);
             });
         });
 
