@@ -10,6 +10,7 @@ import { VSCODE_OUTPUT } from '../constants';
 export class FtpFileStream {
     constructor (private ftpSettings: FtpSettingsJSON){}
     
+    //Handle Checkout Command
     public async ftpCheckOut (node: any) {
         let resource = node.resource;
         let uri = vscode.Uri.parse(`file:///${vscode.workspace.rootPath}${resource.path}`);
@@ -33,6 +34,7 @@ export class FtpFileStream {
         //Check Date Stamp
     }
     
+    //Handle Checkin Command
     public async ftpCheckIn (node: any) {
         let resource = node.resource;
         let localPath = `${vscode.workspace.rootPath}${resource.path}`;
@@ -54,11 +56,24 @@ export class FtpFileStream {
         });
     }
 
+    //Handle Upload Command
     public async ftpUpload (node: any) {
-        //Check LCK
-        //UPLOAD
-        //BLOCK
-        //SHOW OWNER
+        let resource = node.resource;
+        let localPath = `${vscode.workspace.rootPath}${resource.path}`;
+        //CHECK LCK
+        this.ftpRemoteCheckLock(resource.path)
+        .then((result)=>{
+            if (result === 1) {
+                //UPLOAD, UNLOCK AND REVEAL
+                ftpRemotePut(localPath,resource.path, this.ftpSettings)
+            } else if (result === 0) {
+                vscode.window.showWarningMessage(`Checkout file before you Checkin!`);
+                //STOP ACCESS
+            } else {
+                //REPORT OWNER
+                vscode.window.showWarningMessage(`Locked By: ${result}`);
+            }
+        });
     }
 
     /*Downloads the Remote File to Local*/

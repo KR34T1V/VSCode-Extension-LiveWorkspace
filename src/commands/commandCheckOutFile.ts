@@ -21,3 +21,12 @@ export function checkInFile(node: FtpNode) {
         stream.ftpCheckIn(node);
     });
 }
+
+export function uploadFile (node: FtpNode) {
+    localGetSettingsJSON()
+    .then((json)=>ftpGetSettingsJSON(json))
+    .then((settings)=>{
+        var stream = new FtpFileStream(settings);
+        stream.ftpUpload(node);
+    });
+}

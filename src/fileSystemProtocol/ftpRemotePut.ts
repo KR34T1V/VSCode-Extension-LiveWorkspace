@@ -23,6 +23,7 @@ export function ftpRemotePut (src: string, dest: string, settings: FtpSettingsJS
                     VSCODE_OUTPUT.appendLine(`\tPut Remote => (${src})`);
                 }
                 remote.end();
+                resolve(1);
             });
         });
 
