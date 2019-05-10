@@ -57,7 +57,7 @@ export class FtpFileStream {
                 //UPLOAD, UNLOCK AND REVEAL
                 ftpRemotePut(localPath,resource.path, this.ftpSettings)
                 .then(()=>ftpRemoteDelete(`${resource.path}.LCK`, this.ftpSettings))
-                .then(()=>{});
+                .then(()=>vscode.window.showTextDocument(resource));
             } else if (result === 0) {
                 vscode.window.showWarningMessage(`Checkout file before you Check-In!`);
                 //STOP ACCESS
@@ -196,7 +196,6 @@ export class FtpFileStream {
         });
     }
 
-    
     /*Delete Remote File/Folder*/
     public ftpDelete (node: any) {
         let resource = node.resource;
