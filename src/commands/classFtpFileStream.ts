@@ -88,6 +88,28 @@ export class FtpFileStream {
         });
     }
 
+    /*Handle Download Command*/
+    public ftpDownload (node: any) {
+        let resource = node.resource;
+        let uri = vscode.Uri.parse(`file:///${vscode.workspace.rootPath}${resource.path}`);
+        //CHECK LCK
+        this.ftpRemoteCheckLock(resource.path)
+        .then((result)=>{
+            if (result === 1) {
+                //DOWNLOAD AND OPEN
+                this.ftpDownloadFile(resource.path)
+                .then(()=>vscode.window.showTextDocument(uri));
+                //.then(()=>vscode.commands.executeCommand('workbench.action.files.revert')); //May Cause Issues (used to refresh document)
+            } else if (result === 0) {
+                vscode.window.showWarningMessage(`Checkout file before you Download!`);
+                //STOP ACCESS
+            } else {
+                //REPORT OWNER
+                vscode.window.showWarningMessage(`Locked By: ${result}`);
+            }
+        });
+    }
+
     /*Downloads the Remote File to Local*/
     private ftpDownloadFile (path: string) {
         return new Promise((resolve)=>{
@@ -152,13 +174,10 @@ export class FtpFileStream {
 
         return new Promise((resolve)=>{
             let dir = dirname(path);
-            console.log(dir);
-            
             mkdirp(dir, (err) => {
                 if (err) {
-                    console.error(err);
+                    throw(err);
                 } else {
-                    console.log(`Directory ${dir} Created!`);
                     resolve(1);
                 }
             });

@@ -39,3 +39,12 @@ export function uploadFile (node: FtpNode) {
         stream.ftpUpload(node);
     });
 }
+
+export function downloadFile (node: FtpNode) {
+    localGetSettingsJSON()
+    .then((json)=>ftpGetSettingsJSON(json))
+    .then((settings)=>{
+        var stream = new FtpFileStream(settings);
+        stream.ftpDownload(node);
+    });
+}

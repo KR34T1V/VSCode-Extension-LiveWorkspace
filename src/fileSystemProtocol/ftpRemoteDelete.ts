@@ -4,7 +4,6 @@ import { FtpSettingsJSON } from '../interfaces';
 
 export function ftpRemoteDelete (path: string, settings: FtpSettingsJSON) {
     let remote = new ftpClient();
-    console.log('Made iT');
     
     return new Promise ((resolve)=>{
 

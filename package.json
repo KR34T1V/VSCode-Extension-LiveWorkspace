@@ -39,6 +39,10 @@
             {
                 "command": "live-workspace.upload",
                 "title": "Upload"
+            },
+            {
+                "command": "live-workspace.download",
+                "title": "Download"
             }
         ],
         "menus": {
@@ -61,6 +65,10 @@
                 },
                 {
                     "command": "live-workspace.upload",
+                    "when": "view == live-workspace-remote && viewItem == file"
+                },
+                {
+                    "command": "live-workspace.download",
                     "when": "view == live-workspace-remote && viewItem == file"
                 }
             ]
