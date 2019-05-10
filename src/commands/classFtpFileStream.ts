@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as vscode from 'vscode';
 import * as mkdirp from "mkdirp";
-import { ftpRemoteGet, ftpRemoteList, ftpRemotePut } from '../fileSystemProtocol';
+import { ftpRemoteGet, ftpRemoteList, ftpRemotePut, ftpRemoteDelete } from '../fileSystemProtocol';
 import { FtpSettingsJSON, FtpNode } from '../interfaces';
 import { basename, dirname } from 'path';
 import { VSCODE_OUTPUT } from '../constants';
@@ -12,31 +12,55 @@ export class FtpFileStream {
     
     public async ftpCheckOut (node: any) {
         let resource = node.resource;
-        let Localpath = vscode.Uri.parse(`file:///${vscode.workspace.rootPath}${resource.path}`);
+        let uri = vscode.Uri.parse(`file:///${vscode.workspace.rootPath}${resource.path}`);
         //Check LCK
         this.ftpRemoteCheckLock(resource.path)
         .then((result)=>{
             if (result === 1){
                 //DOWNLOAD AND OPEN
                 this.ftpDownloadFile(resource.path)
-                .then(()=>vscode.window.showTextDocument(Localpath));
+                .then(()=>vscode.window.showTextDocument(uri));
             } else if (result === 0) {
                 //LOCK , DOWNLOAD AND OPEN
                 this.ftpRemoteLock(resource.path)
                 .then(()=>this.ftpDownloadFile(resource.path))
-                .then(()=>vscode.window.showTextDocument(Localpath));
+                .then(()=>vscode.window.showTextDocument(uri));
             } else {
+                //REPORT OWNER
                 vscode.window.showWarningMessage(`Locked By: ${result}`);
             }
         });
-        //Create LCK
         //Check Date Stamp
-        //On Success Download File To local
-        //Open local text editor
-        let path = vscode.Uri.parse(`file:///${vscode.workspace.rootPath}${resource.path}`);
-        //vscode.window.showTextDocument(path);
     }
     
+    public async ftpCheckIn (node: any) {
+        let resource = node.resource;
+        let localPath = `${vscode.workspace.rootPath}${resource.path}`;
+        //CHECK LCK
+        this.ftpRemoteCheckLock(resource.path)
+        .then((result)=>{
+            if (result === 1) {
+                //UPLOAD, UNLOCK AND REVEAL
+                ftpRemotePut(localPath,resource.path, this.ftpSettings)
+                .then(()=>ftpRemoteDelete(`${resource.path}.LCK`, this.ftpSettings))
+                .then(()=>{});
+            } else if (result === 0) {
+                vscode.window.showWarningMessage(`Checkout file before you Checkin!`);
+                //STOP ACCESS
+            } else {
+                //REPORT OWNER
+                vscode.window.showWarningMessage(`Locked By: ${result}`);
+            }
+        });
+    }
+
+    public async ftpUpload (node: any) {
+        //Check LCK
+        //UPLOAD
+        //BLOCK
+        //SHOW OWNER
+    }
+
     /*Downloads the Remote File to Local*/
     private ftpDownloadFile (path: string) {
         return new Promise((resolve)=>{

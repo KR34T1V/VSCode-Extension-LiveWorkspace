@@ -10,8 +10,14 @@ export function checkOutFile(node: FtpNode) {
     .then((settings)=>{
         var stream = new FtpFileStream(settings);
         stream.ftpCheckOut(node);
-    })
-    .then(()=>{
+    });
+}
 
+export function checkInFile(node: FtpNode) {
+    localGetSettingsJSON()
+    .then((json)=>ftpGetSettingsJSON(json))
+    .then((settings)=>{
+        var stream = new FtpFileStream(settings);
+        stream.ftpCheckIn(node);
     });
 }
