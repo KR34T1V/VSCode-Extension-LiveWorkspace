@@ -4,6 +4,15 @@ import { localGetSettingsJSON } from '../fileExplorer';
 import { ftpGetSettingsJSON } from '../fileSystemProtocol';
 import { FtpNode } from '../interfaces';
 
+export function viewFile (resource: vscode.Uri) {
+    localGetSettingsJSON()
+    .then((json)=>ftpGetSettingsJSON(json))
+    .then((settings)=>{
+        var stream = new FtpFileStream(settings);
+        stream.ftpViewFile(resource);
+    });
+}
+
 export function checkOutFile(node: FtpNode) {
     localGetSettingsJSON()
     .then((json)=>ftpGetSettingsJSON(json))

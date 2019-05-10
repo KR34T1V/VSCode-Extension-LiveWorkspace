@@ -136,14 +136,9 @@ export class FtpExplorer {
                     treeDataProvider = new FtpTreeDataProvider(ftpModel);
                     vscode.window.createTreeView('live-workspace-remote', { treeDataProvider });
                     vscode.commands.registerCommand('live-workspace.refresh', () => treeDataProvider.refresh());
-                    vscode.commands.registerCommand('live-workspace.openFtpResource', resource => this.openResource(resource));
                     context.subscriptions.push(vscode.workspace.registerTextDocumentContentProvider('ftp', treeDataProvider));
                 });
             });
         }
-    }
-
-    private openResource(resource: vscode.Uri): void {
-        vscode.window.showTextDocument(resource);
     }
 }

@@ -9,8 +9,21 @@ import { basename, dirname } from 'path';
 export class FtpFileStream {
     constructor (private ftpSettings: FtpSettingsJSON){}
     
+    /*Open local file if you are the owner*/
+    public ftpViewFile (resource: vscode.Uri) {
+        let localPath = vscode.Uri.parse(`file:///${vscode.workspace.rootPath}${resource.path}`);
+        this.ftpRemoteCheckLock(resource.path)
+        .then((result)=>{
+            if (result === 1){
+                vscode.window.showTextDocument(localPath);
+            } else {
+                vscode.window.showTextDocument(resource);
+            }
+        });
+    }
+
     /*Handle Checkout Command*/
-    public async ftpCheckOut (node: any) {
+    public ftpCheckOut (node: any) {
         let resource = node.resource;
         let uri = vscode.Uri.parse(`file:///${vscode.workspace.rootPath}${resource.path}`);
         //Check LCK
@@ -34,7 +47,7 @@ export class FtpFileStream {
     }
     
     /*Handle Checkin Command*/
-    public async ftpCheckIn (node: any) {
+    public ftpCheckIn (node: any) {
         let resource = node.resource;
         let localPath = `${vscode.workspace.rootPath}${resource.path}`;
         //CHECK LCK
@@ -56,7 +69,7 @@ export class FtpFileStream {
     }
 
     /*Handle Upload Command*/
-    public async ftpUpload (node: any) {
+    public ftpUpload (node: any) {
         let resource = node.resource;
         let localPath = `${vscode.workspace.rootPath}${resource.path}`;
         //CHECK LCK
@@ -64,7 +77,7 @@ export class FtpFileStream {
         .then((result)=>{
             if (result === 1) {
                 //UPLOAD, UNLOCK AND REVEAL
-                ftpRemotePut(localPath,resource.path, this.ftpSettings)
+                ftpRemotePut(localPath,resource.path, this.ftpSettings);
             } else if (result === 0) {
                 vscode.window.showWarningMessage(`Checkout file before you Upload!`);
                 //STOP ACCESS
@@ -151,6 +164,4 @@ export class FtpFileStream {
             });
         });
     }
-
-
 }
