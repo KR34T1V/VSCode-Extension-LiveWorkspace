@@ -1,10 +1,10 @@
 import * as fs from 'fs';
 import * as vscode from 'vscode';
-import * as mkdirp from "mkdirp";
 import { ftpRemoteGet, ftpRemoteList, ftpRemotePut, ftpRemoteDelete, ftpRemoteRename, ftpRemoteMkdir } from '../fileTransferProtocol';
 import { FtpSettingsJSON, FtpNode } from '../interfaces';
 import { basename, dirname } from 'path';
 import { ftpRemoteRmDir } from '../fileTransferProtocol/ftpRemoteRmDir';
+import { localCreateDirectory } from '../fileExplorer';
 
 
 export class FtpFileStream {
@@ -32,12 +32,12 @@ export class FtpFileStream {
         .then((result)=>{
             if (result === 1){
                 //DOWNLOAD AND OPEN
-                this.ftpDownloadFile(resource.path)
+                this.ftpDownloadFile(resource)
                 .then(()=>vscode.window.showTextDocument(uri));
             } else if (result === 0) {
                 //LOCK , DOWNLOAD AND OPEN
                 this.ftpRemoteLock(resource.path)
-                .then(()=>this.ftpDownloadFile(resource.path))
+                .then(()=>this.ftpDownloadFile(resource))
                 .then(()=>vscode.window.showTextDocument(uri));
             } else {
                 //REPORT OWNER
@@ -98,7 +98,7 @@ export class FtpFileStream {
         .then((result)=>{
             if (result === 1) {
                 //DOWNLOAD AND OPEN
-                this.ftpDownloadFile(resource.path)
+                this.ftpDownloadFile(resource)
                 .then(()=>vscode.window.showTextDocument(uri));
                 //.then(()=>vscode.commands.executeCommand('workbench.action.files.revert')); //May Cause Issues (used to refresh document)
             } else if (result === 0) {
@@ -112,16 +112,16 @@ export class FtpFileStream {
     }
 
     /*Downloads the Remote File to Local*/
-    private ftpDownloadFile (path: string) {
+    private ftpDownloadFile (resource: vscode.Uri) {
         return new Promise((resolve)=>{
 
-            this.ftpCreateDirectory(path);
-            ftpRemoteGet(path,this.ftpSettings)
+            localCreateDirectory(`${vscode.workspace.rootPath}${resource.fsPath}`)
+            .then(()=>ftpRemoteGet(resource.path,this.ftpSettings))
             .then((dataString)=>{
-                let localPath = `${vscode.workspace.rootPath}${path}`;
+                let localPath = `${vscode.workspace.rootPath}${resource.path}`;
                 fs.writeFileSync(localPath, dataString);
+                resolve(1);
             });
-            resolve(1);
         });
     }
 
@@ -170,20 +170,6 @@ export class FtpFileStream {
         });
     }
 
-    /*Create Preceding Directories In Path*/
-    private ftpCreateDirectory(path: string) {
-
-        return new Promise((resolve)=>{
-            let dir = dirname(path);
-            mkdirp(dir, (err) => {
-                if (err) {
-                    throw(err);
-                } else {
-                    resolve(1);
-                }
-            });
-        });
-    }
 
     /*Rename Remote File/Folder*/
     public ftpRename (node: any) {
