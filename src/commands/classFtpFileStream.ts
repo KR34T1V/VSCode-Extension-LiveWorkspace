@@ -186,7 +186,6 @@ export class FtpFileStream {
     /*Delete Remote File/Folder*/
     public ftpDelete (node: any) {
         let resource = node.resource;
-        let dir = dirname(resource.path);
         let name = basename(resource.path);
         vscode.window.showWarningMessage(`Delete ${name}`, `Away With It!`, `Oh Sh*t, Still Need That`)
         .then((result)=>{
@@ -204,42 +203,59 @@ export class FtpFileStream {
 
     /*Create New Remote Folder*/
     public ftpNewFolder (node: any) {
-        let resource = node.resource;
-        let path = resource.path;
-        let dir = dirname(resource.path);
-        let name = basename(resource.path);
-        vscode.window.showInputBox()
-        .then((result)=>{
-            if (node.isDirectory){
+        if (node === undefined){
+            vscode.window.showInputBox()
+            .then((result)=>{
                 if (result !== undefined && result.length){  
-                    ftpRemoteMkdir(`${path}/${result}`, this.ftpSettings);
+                    ftpRemoteMkdir(`${this.ftpSettings.remotePath}${result}`, this.ftpSettings);
                 }
-            } else {
-                if (result !== undefined && result.length){
-                    ftpRemoteMkdir(`${dir}/${result}`, this.ftpSettings);
+            });
+        } else {
+            let resource = node.resource;
+            let path = resource.path;
+            let dir = dirname(resource.path);
+            vscode.window.showInputBox()
+            .then((result)=>{
+                if (node.isDirectory){
+                    if (result !== undefined && result.length){  
+                        ftpRemoteMkdir(`${path}/${result}`, this.ftpSettings);
+                    }
+                } else {
+                    if (result !== undefined && result.length){
+                        ftpRemoteMkdir(`${dir}/${result}`, this.ftpSettings);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
         /*Create New Remote File*/
         public ftpNewFile (node: any) {
-            let resource = node.resource;
-            let path = resource.path;
-            let dir = dirname(resource.path);
-            let name = basename(resource.path);
-            vscode.window.showInputBox()
-            .then((result)=>{
-                if (node.isDirectory){
+            if (node === undefined){
+                vscode.window.showInputBox()
+                .then((result)=>{
                     if (result !== undefined && result.length){
-                        ftpRemotePut(`File Created by ${this.ftpSettings.user}`, `${path}/${result}`, this.ftpSettings);
+                        ftpRemotePut(`File Created by ${this.ftpSettings.user}`, `${this.ftpSettings.remotePath}${result}`, this.ftpSettings);
                     }
-                } else {
-                    if (result !== undefined && result.length){
-                        ftpRemotePut(`File Created by ${this.ftpSettings.user}`, `${dir}/${result}`, this.ftpSettings);
+                });
+            } else {
+
+                let resource = node.resource;
+                let path = resource.path;
+                let dir = dirname(resource.path);
+                vscode.window.showInputBox()
+                .then((result)=>{
+                    if (node.isDirectory){
+                        if (result !== undefined && result.length){
+                            ftpRemotePut(`File Created by ${this.ftpSettings.user}`, `${path}/${result}`, this.ftpSettings);
+                        }
+                    } else {
+                        if (result !== undefined && result.length){
+                            ftpRemotePut(`File Created by ${this.ftpSettings.user}`, `${dir}/${result}`, this.ftpSettings);
+                        }
                     }
-                }
-            });
+                });
+            }
         }
 
 }

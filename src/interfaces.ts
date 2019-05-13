@@ -19,6 +19,7 @@ export interface FtpSettingsJSON {
     "host": string;
     "port": number;
     "user": string;
+    "remotePath": string;
     "password": string;
     "connTimeout": number;
     "passvTimeout": number;
