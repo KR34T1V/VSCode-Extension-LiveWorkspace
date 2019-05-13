@@ -32,10 +32,13 @@ export function localGetSettingsJSON(): Thenable<SettingsJSON>{
 }
 
 function cleanPath (path: string): string {
-    path = path.trim();
-    let len = path.length;
-    if (!path.endsWith('/')) {
-        path.concat('/');
+    if (path === undefined){
+        path = '/';
+    } else {
+        path = path.trim();
+        if (!path.endsWith('/')) {
+            path.concat('/');
+        }
     }
     return path;
 }
