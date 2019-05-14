@@ -113,7 +113,8 @@ export class FtpTreeDataProvider implements vscode.TreeDataProvider<FtpNode>, vs
     }
 
     public provideTextDocumentContent(uri: vscode.Uri, token: vscode.CancellationToken): vscode.ProviderResult<string> {
-		return this.model.getContent(uri).then(content => content);
+        console.log(uri.path);
+        return this.model.getContent(uri);
 	}
 }
 

@@ -8,3 +8,4 @@ export * from './TreeView';
 export * from './commandRenameFile';
 export * from './commandUploadFile';
 export * from './commandViewFile';
+export * from './commandRefreshTree';

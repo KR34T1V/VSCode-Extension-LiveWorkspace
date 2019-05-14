@@ -2,6 +2,7 @@ import { FtpNode } from "../interfaces";
 import { localGetSettingsJSON } from "../fileExplorer";
 import { ftpGetSettingsJSON } from "../fileTransferProtocol";
 import { FtpFileStream } from "./classFtpFileStream";
+import { refreshTree } from "./commandRefreshTree";
 
 export function checkInFile(node: FtpNode) {
     localGetSettingsJSON()
@@ -9,5 +10,6 @@ export function checkInFile(node: FtpNode) {
     .then((settings)=>{
         var stream = new FtpFileStream(settings);
         stream.ftpCheckIn(node);
-    });
+    })
+    .then(()=>refreshTree());
 }
