@@ -17,7 +17,6 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.commands.registerCommand('live-workspace.newfolder', node => createNewFolder(node)));
     context.subscriptions.push(vscode.commands.registerCommand('live-workspace.newfile', node => createNewFile(node)));
     vscode.commands.registerCommand('live-workspace.openFtpResource', resource => viewFile(resource));
-    
 }
 
 export function deactivate() {}
