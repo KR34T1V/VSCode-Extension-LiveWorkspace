@@ -1,6 +1,6 @@
 {
-    "name": "ftp-filecontrol",
-    "displayName": "FTP-FileControl",
+    "name": "Live-Workspace",
+    "displayName": "Live-Workspace",
     "description": "",
     "version": "0.0.1",
     "engines": {
@@ -11,7 +11,7 @@
     ],
     "activationEvents": [
         "onCommand:extension.helloWorld",
-        "workspaceContains:.vscode/ftp-filecontrol.json"
+        "workspaceContains:.vscode/Live-Workspace.json"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -22,7 +22,7 @@
             },
             {
                 "command": "live-workspace.refresh",
-                "title": "Reload",
+                "title": "Refresh",
                 "icon": {
                     "dark": "./src/media/darkReload.svg",
                     "light": "./src/media/lightReload.svg"
@@ -73,34 +73,42 @@
             "view/item/context": [
                 {
                     "command": "live-workspace.checkout",
+                    "group": "a",
                     "when": "view == live-workspace-remote && viewItem == file"
                 },
                 {
                     "command": "live-workspace.checkin",
+                    "group": "a",
                     "when": "view == live-workspace-remote && viewItem == file"
                 },
                 {
                     "command": "live-workspace.upload",
+                    "group": "b",
                     "when": "view == live-workspace-remote && viewItem == file"
                 },
                 {
                     "command": "live-workspace.download",
+                    "group": "b",
                     "when": "view == live-workspace-remote && viewItem == file"
                 },
                 {
                     "command": "live-workspace.rename",
+                    "group": "d",
                     "when": "view == live-workspace-remote"
                 },
                 {
                     "command": "live-workspace.delete",
+                    "group": "d",
                     "when": "view == live-workspace-remote"
                 },
                 {
                     "command": "live-workspace.newfolder",
+                    "group": "c",
                     "when": "view == live-workspace-remote"
                 },
                 {
                     "command": "live-workspace.newfile",
+                    "group": "c",
                     "when": "view == live-workspace-remote"
                 }
             ]
