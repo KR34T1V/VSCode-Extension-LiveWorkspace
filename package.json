@@ -68,42 +68,42 @@
             "view/item/context": [
                 {
                     "command": "live-workspace.checkout",
-                    "group": "a",
+                    "group": "LWS-a",
                     "when": "view == live-workspace-remote && viewItem == file"
                 },
                 {
                     "command": "live-workspace.checkin",
-                    "group": "a",
+                    "group": "LWS-a",
                     "when": "view == live-workspace-remote && viewItem == file"
                 },
                 {
                     "command": "live-workspace.upload",
-                    "group": "b",
+                    "group": "LWS-b",
                     "when": "view == live-workspace-remote && viewItem == file"
                 },
                 {
                     "command": "live-workspace.download",
-                    "group": "b",
+                    "group": "LWS-b",
                     "when": "view == live-workspace-remote && viewItem == file"
                 },
                 {
                     "command": "live-workspace.rename",
-                    "group": "d",
+                    "group": "LWS-d",
                     "when": "view == live-workspace-remote"
                 },
                 {
                     "command": "live-workspace.delete",
-                    "group": "d",
+                    "group": "LWS-d",
                     "when": "view == live-workspace-remote"
                 },
                 {
                     "command": "live-workspace.newfolder",
-                    "group": "c",
+                    "group": "LWS-c",
                     "when": "view == live-workspace-remote"
                 },
                 {
                     "command": "live-workspace.newfile",
-                    "group": "c",
+                    "group": "LWS-c",
                     "when": "view == live-workspace-remote"
                 }
             ]
