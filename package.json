@@ -10,15 +10,11 @@
         "Other"
     ],
     "activationEvents": [
-        "onView:live-workspace-remote"
+        "workspaceContains:.vscode/Live-Workspace.json"
     ],
     "main": "./out/extension.js",
     "contributes": {
         "commands": [
-            {
-                "command": "extension.helloWorld",
-                "title": "Hello World"
-            },
             {
                 "command": "live-workspace.refresh",
                 "title": "Refresh",
