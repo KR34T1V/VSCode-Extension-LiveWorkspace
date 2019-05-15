@@ -10,8 +10,7 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.helloWorld",
-        "workspaceContains:.vscode/Live-Workspace.json"
+        "onView:live-workspace-remote"
     ],
     "main": "./out/extension.js",
     "contributes": {
