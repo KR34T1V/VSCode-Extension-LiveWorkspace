@@ -5,6 +5,7 @@ import { FtpSettingsJSON, FtpNode } from '../interfaces';
 import { basename, dirname } from 'path';
 import { ftpRemoteRmDir } from '../fileTransferProtocol/ftpRemoteRmDir';
 import { localCreateDirectory } from '../fileExplorer';
+import { refreshTree } from './commandRefreshTree';
 
 
 export class FtpFileStream {
@@ -38,7 +39,8 @@ export class FtpFileStream {
                 //LOCK , DOWNLOAD AND OPEN
                 this.ftpRemoteLock(resource.path)
                 .then(()=>this.ftpDownloadFile(resource))
-                .then(()=>vscode.window.showTextDocument(uri));
+                .then(()=>vscode.window.showTextDocument(uri))
+                .then(()=>refreshTree());
             } else {
                 //REPORT OWNER
                 vscode.window.showWarningMessage(`Locked By: ${result}`);
@@ -58,7 +60,8 @@ export class FtpFileStream {
                 //UPLOAD, UNLOCK AND REVEAL
                 ftpRemotePut(localPath,resource.path, this.ftpSettings)
                 .then(()=>ftpRemoteDelete(`${resource.path}.LCK`, this.ftpSettings))
-                .then(()=>vscode.window.showTextDocument(resource));
+                .then(()=>vscode.window.showTextDocument(resource))
+                .then(()=>refreshTree());
             } else if (result === 0) {
                 vscode.window.showWarningMessage(`Checkout file before you Check-In!`);
                 //STOP ACCESS
@@ -178,7 +181,8 @@ export class FtpFileStream {
         vscode.window.showInputBox()
         .then((value)=>{
             if (value !== undefined && value.length){
-                ftpRemoteRename(resource.path, `${dir}/${value}`, this.ftpSettings);
+                ftpRemoteRename(resource.path, `${dir}/${value}`, this.ftpSettings)
+                .then(()=>refreshTree());
             }
         });
     }
@@ -191,11 +195,13 @@ export class FtpFileStream {
         .then((result)=>{
             if (node.isDirectory){
                 if (result === `Away With It!`){
-                    ftpRemoteRmDir(resource.path, this.ftpSettings);
+                    ftpRemoteRmDir(resource.path, this.ftpSettings)
+                    .then(()=>refreshTree());
                 }
             } else {
                 if (result === `Away With It!`){
-                    ftpRemoteDelete(resource.path, this.ftpSettings);
+                    ftpRemoteDelete(resource.path, this.ftpSettings)
+                    .then(()=>refreshTree());
                 }
             }
         });
@@ -207,7 +213,8 @@ export class FtpFileStream {
             vscode.window.showInputBox()
             .then((result)=>{
                 if (result !== undefined && result.length){  
-                    ftpRemoteMkdir(`${this.ftpSettings.remotePath}${result}`, this.ftpSettings);
+                    ftpRemoteMkdir(`${this.ftpSettings.remotePath}${result}`, this.ftpSettings)
+                    .then(()=>refreshTree());
                 }
             });
         } else {
@@ -218,11 +225,13 @@ export class FtpFileStream {
             .then((result)=>{
                 if (node.isDirectory){
                     if (result !== undefined && result.length){  
-                        ftpRemoteMkdir(`${path}/${result}`, this.ftpSettings);
+                        ftpRemoteMkdir(`${path}/${result}`, this.ftpSettings)
+                        .then(()=>refreshTree());
                     }
                 } else {
                     if (result !== undefined && result.length){
-                        ftpRemoteMkdir(`${dir}/${result}`, this.ftpSettings);
+                        ftpRemoteMkdir(`${dir}/${result}`, this.ftpSettings)
+                        .then(()=>refreshTree());
                     }
                 }
             });
@@ -235,7 +244,8 @@ export class FtpFileStream {
                 vscode.window.showInputBox()
                 .then((result)=>{
                     if (result !== undefined && result.length){
-                        ftpRemotePut(`File Created by ${this.ftpSettings.user}`, `${this.ftpSettings.remotePath}${result}`, this.ftpSettings);
+                        ftpRemotePut(`File Created by ${this.ftpSettings.user}`, `${this.ftpSettings.remotePath}${result}`, this.ftpSettings)
+                        .then(()=>refreshTree());
                     }
                 });
             } else {
@@ -247,11 +257,13 @@ export class FtpFileStream {
                 .then((result)=>{
                     if (node.isDirectory){
                         if (result !== undefined && result.length){
-                            ftpRemotePut(`File Created by ${this.ftpSettings.user}`, `${path}/${result}`, this.ftpSettings);
+                            ftpRemotePut(`File Created by ${this.ftpSettings.user}`, `${path}/${result}`, this.ftpSettings)
+                            .then(()=>refreshTree());
                         }
                     } else {
                         if (result !== undefined && result.length){
-                            ftpRemotePut(`File Created by ${this.ftpSettings.user}`, `${dir}/${result}`, this.ftpSettings);
+                            ftpRemotePut(`File Created by ${this.ftpSettings.user}`, `${dir}/${result}`, this.ftpSettings)
+                            .then(()=>refreshTree());
                         }
                     }
                 });

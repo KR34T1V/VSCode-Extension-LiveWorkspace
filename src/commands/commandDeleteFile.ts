@@ -10,6 +10,5 @@ export function deleteFile (node: FtpNode) {
     .then((settings)=>{
         var stream = new FtpFileStream(settings);
         stream.ftpDelete(node);
-    })
-    .then(()=>refreshTree());
+    });
 }

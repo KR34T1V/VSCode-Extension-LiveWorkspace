@@ -10,6 +10,5 @@ export function renameFile (node: FtpNode) {
     .then((settings)=>{
         var stream = new FtpFileStream(settings);
         stream.ftpRename(node);
-    })
-    .then(()=>refreshTree());
+    });
 }

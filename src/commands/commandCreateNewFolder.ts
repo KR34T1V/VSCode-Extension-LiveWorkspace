@@ -10,6 +10,5 @@ export function createNewFolder (node: FtpNode) {
     .then((settings)=>{
         var stream = new FtpFileStream(settings);
         stream.ftpNewFolder(node);
-    })
-    .then(()=>refreshTree());
+    });
 }

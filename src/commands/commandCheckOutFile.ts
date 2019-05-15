@@ -10,6 +10,5 @@ export function checkOutFile(node: FtpNode) {
     .then((settings)=>{
         var stream = new FtpFileStream(settings);
         stream.ftpCheckOut(node);
-    })
-    .then(()=>refreshTree());
+    });
 }

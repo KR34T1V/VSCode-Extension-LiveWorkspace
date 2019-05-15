@@ -10,6 +10,5 @@ export function uploadFile (node: FtpNode) {
     .then((settings)=>{
         var stream = new FtpFileStream(settings);
         stream.ftpUpload(node);
-    })
-    .then(()=>refreshTree());
+    });
 }

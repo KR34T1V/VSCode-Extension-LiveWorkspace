@@ -7,9 +7,8 @@ import { refreshTree } from "./commandRefreshTree";
 export function createNewFile (node: FtpNode) {
     localGetSettingsJSON()
     .then((json)=>ftpGetSettingsJSON(json))
-    .then((settings)=>{
+    .then(async (settings)=>{
         var stream = new FtpFileStream(settings);
         stream.ftpNewFile(node);
-    })
-    .then(()=>refreshTree());
+    });
 }

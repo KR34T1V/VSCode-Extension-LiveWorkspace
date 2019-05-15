@@ -10,6 +10,5 @@ export function checkInFile(node: FtpNode) {
     .then((settings)=>{
         var stream = new FtpFileStream(settings);
         stream.ftpCheckIn(node);
-    })
-    .then(()=>refreshTree());
+    });
 }
