@@ -6,6 +6,7 @@ import { basename, dirname } from 'path';
 import { ftpRemoteRmDir } from '../fileTransferProtocol/ftpRemoteRmDir';
 import { localCreateDirectory } from '../fileExplorer';
 import { refreshTree } from './commandRefreshTree';
+import { WORKSPACE_CONFIG } from '../constants';
 
 
 export class FtpFileStream {
@@ -128,14 +129,35 @@ export class FtpFileStream {
         });
     }
 
+    /*Check if a username has been set*/
+    private checkUsername () {
+        return new Promise((resolve)=>{
+            if (!WORKSPACE_CONFIG.get('username')) {
+                vscode.window.showInputBox({placeHolder: 'Username', prompt: `Please Set a Username to with Live-Workspace. `})
+                .then((value)=>{
+                    if (value !== undefined){
+                        WORKSPACE_CONFIG.update('username', value.trim(), true)
+                        .then(()=>resolve(value));
+                    }
+                    else {
+                        vscode.window.showErrorMessage('Username Not Set!');
+                    }
+                });
+            }
+            else {
+                resolve(WORKSPACE_CONFIG.get('username'));
+            }
+        });
+    }
+
     /*Check LCK file on the server*/
     private ftpRemoteCheckLock (path: string) {
         return new Promise(async (resolve)=>{
-            
             path = `${path}.LCK`;
             let dir = dirname(path);
             let file = basename(path);
-            ftpRemoteList(dir,this.ftpSettings)
+            this.checkUsername()
+            .then(()=>ftpRemoteList(dir,this.ftpSettings))
             .then((result)=>{return (Object.values(result));})
             .then((result)=>{
                 for (let index = 0; index < result.length; index++) {
@@ -147,12 +169,13 @@ export class FtpFileStream {
                 return(undefined);
             })
             .then((result)=>{
+                let username = WORKSPACE_CONFIG.get('username');
                 if (result === undefined){
                     resolve(0);
                 } else {
                     ftpRemoteGet(result, this.ftpSettings)
                     .then((result)=>{
-                        if (result.trim() === this.ftpSettings.user.trim()){
+                        if (result.trim() === username) {
                             resolve(1);
                         } else {
                             resolve(result.trim());
@@ -165,11 +188,13 @@ export class FtpFileStream {
 
     /*Create an LCK file on Server*/
     private ftpRemoteLock (path: string) {
-        return new Promise((resolve)=>{
-
+        return new Promise(async (resolve)=>{
+            let username: string | undefined = await WORKSPACE_CONFIG.get('username');
             path = `${path}.LCK`;
-            ftpRemotePut(this.ftpSettings.user, path, this.ftpSettings);
-            resolve(1);
+            if (username){
+                ftpRemotePut(username, path, this.ftpSettings)
+                .then(()=>resolve(1));
+            }
         });
     }
 

@@ -14,6 +14,16 @@
     ],
     "main": "./out/extension.js",
     "contributes": {
+        "configuration" :{
+            "type": "object",
+            "title": "Live-Workspace Configuration",
+            "properties": {
+                "Live-Workspace.username":{
+                    "type":"string",
+                    "description": "Username to be used to lock files in the Live-Workspace."
+                }
+            }
+        },
         "commands": [
             {
                 "command": "live-workspace.refresh",
