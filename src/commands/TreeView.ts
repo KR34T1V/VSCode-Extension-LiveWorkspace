@@ -73,8 +73,8 @@ export class FtpModel {
 }
 
 export class FtpTreeDataProvider implements vscode.TreeDataProvider<FtpNode>, vscode.TextDocumentContentProvider {
-    private _onDidChange: vscode.EventEmitter<any> = new vscode.EventEmitter<any>();
-    private _onDidChangeTreeData: vscode.EventEmitter<any> = new vscode.EventEmitter<any>();
+    private _onDidChange: vscode.EventEmitter<any> = new vscode.EventEmitter<vscode.Uri>();
+    private _onDidChangeTreeData: vscode.EventEmitter<any> = new vscode.EventEmitter<vscode.Uri>();
     readonly onDidChange: vscode.Event<any> = this._onDidChange.event;
     readonly onDidChangeTreeData: vscode.Event<any> = this._onDidChangeTreeData.event;
     

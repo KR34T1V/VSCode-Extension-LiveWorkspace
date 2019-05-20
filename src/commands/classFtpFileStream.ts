@@ -18,9 +18,11 @@ export class FtpFileStream {
         this.ftpRemoteCheckLock(resource.path)
         .then((result)=>{
             if (result === 1){
-                vscode.window.showTextDocument(localPath);
+                vscode.workspace.openTextDocument(localPath)
+                .then((doc)=>vscode.window.showTextDocument(doc, { preview: false }));
             } else {
-                vscode.window.showTextDocument(resource);
+                vscode.workspace.openTextDocument(resource)
+                .then((doc)=>vscode.window.showTextDocument(doc, { preview: false }));
             }
         });
     }
