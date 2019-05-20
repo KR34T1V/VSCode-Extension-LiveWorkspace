@@ -4,7 +4,7 @@ export * from './commandCreateNewFile';
 export * from './commandCreateNewFolder';
 export * from './commandDeleteFile';
 export * from './commandDownloadFile';
-export * from './TreeView';
+export * from './classftpTreeView';
 export * from './commandRenameFile';
 export * from './commandUploadFile';
 export * from './commandViewFile';

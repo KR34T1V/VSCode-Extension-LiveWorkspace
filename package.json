@@ -134,13 +134,7 @@
                     "name": "Remote"
                 }
             ]
-        },
-        "jsonValidation": [
-            {
-                "fileMatch": ".vscode/sftp.json",
-                "url": "./schema/live-workspace.schema.json"
-            }
-        ]
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
