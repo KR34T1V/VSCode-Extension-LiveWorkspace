@@ -73,13 +73,13 @@ export class FtpModel {
 }
 
 export class FtpTreeDataProvider implements vscode.TreeDataProvider<FtpNode>, vscode.TextDocumentContentProvider {
-    private _onDidChangeTreeData: vscode.EventEmitter<any> = new vscode.EventEmitter<any>();
-    readonly onDidChangeTreeData: vscode.Event<any> = this._onDidChangeTreeData.event;
+    private _onDidChange: vscode.EventEmitter<any> = new vscode.EventEmitter<any>();
+    readonly onDidChange: vscode.Event<any> = this._onDidChange.event;
     
     constructor(private readonly model: FtpModel){ }
 
     public refresh(): any {
-		this._onDidChangeTreeData.fire();
+		this._onDidChange.fire();
 	}
 
 	public getTreeItem(element: FtpNode): vscode.TreeItem {
