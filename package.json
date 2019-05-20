@@ -135,7 +135,8 @@
             "live-workspace": [
                 {
                     "id": "live-workspace-remote",
-                    "name": "Remote"
+                    "name": "Remote",
+                    "when": "Live-Workspace.enabled"
                 }
             ]
         }
