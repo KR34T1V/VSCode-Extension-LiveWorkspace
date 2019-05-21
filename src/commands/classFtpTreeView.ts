@@ -86,6 +86,7 @@ export class FtpTreeDataProvider implements vscode.TreeDataProvider<FtpNode>, vs
 	}
 
 	public getTreeItem(element: FtpNode): vscode.TreeItem {
+        this._onDidChange.fire(element.resource);
         return {
             resourceUri: element.resource,
             collapsibleState: element.isDirectory ? vscode.TreeItemCollapsibleState.Collapsed : void 0,
@@ -116,7 +117,6 @@ export class FtpTreeDataProvider implements vscode.TreeDataProvider<FtpNode>, vs
     }
 
     public provideTextDocumentContent(uri: vscode.Uri, token: vscode.CancellationToken): vscode.ProviderResult<string> {
-        console.log(uri.path);
         return this.model.getContent(uri);
 	}
 }

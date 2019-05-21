@@ -23,7 +23,7 @@ This extension contributes the following settings:
 
 ## Known Issues
 
-* Remote view does not refresh the content
+* Connection Failure needs to restart vscode
 
 ## Release Notes
 
