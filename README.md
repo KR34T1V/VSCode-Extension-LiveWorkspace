@@ -23,7 +23,7 @@ This extension contributes the following settings:
 
 ## Known Issues
 
-* Connection Failure needs to restart vscode
+* Roger
 
 ## Release Notes
 
