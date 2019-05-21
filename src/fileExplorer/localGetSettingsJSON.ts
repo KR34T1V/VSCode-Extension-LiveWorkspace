@@ -5,6 +5,7 @@ import { VSCODE_OUTPUT,
         EXTENSION_SETTINGS_FILE 
         } from '../constants';
 import { SettingsJSON } from '../interfaces';
+import { dirname } from 'path';
 
 export function localGetSettingsJSON(): Thenable<SettingsJSON>{
     var root = vscode.workspace.rootPath;
@@ -37,7 +38,7 @@ function cleanPath (path: string): string {
     } else {
         path = path.trim();
         if (!path.endsWith('/')) {
-            path.concat('/');
+            path = path.concat('/');
         }
     }
     return path;

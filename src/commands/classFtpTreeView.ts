@@ -2,10 +2,28 @@ import * as vscode from 'vscode';
 import { basename, dirname } from 'path';
 import { localExistSettings, localGetSettingsJSON } from '../fileExplorer';
 import { ftpGetSettingsJSON, ftpRemoteList, ftpRemoteGet } from '../fileTransferProtocol';
-import { FtpNode, FtpSettingsJSON } from '../interfaces';
+import { FtpNode } from '../interfaces';
+import { EXTENSION_NAME } from '../constants';
 
 export class FtpModel {
-    constructor(private remotePath: string, private ftpSettings: FtpSettingsJSON){}
+    private ftpSettings: any;
+    private remotePath: any;
+    constructor() {
+        this.getFtpConfig();
+        let watcher = vscode.workspace.createFileSystemWatcher(`${vscode.workspace.rootPath}/.vscode/${EXTENSION_NAME}.json`,false,false,false);
+        watcher.onDidChange(()=>{
+            this.getFtpConfig();
+            vscode.commands.executeCommand('live-workspace.refresh');
+        });
+    }
+    private getFtpConfig (){
+        localGetSettingsJSON()
+        .then((result)=>ftpGetSettingsJSON(result))
+        .then((result)=>this.ftpSettings = result)
+        .then(()=>{
+            this.remotePath = this.ftpSettings.remotePath;
+        });
+    }
 
     public get roots(): Thenable<FtpNode[]>{
         return new Promise((resolve)=>{
@@ -17,7 +35,7 @@ export class FtpModel {
                     return resolve(sorted);
                 }
                 else {
-                    return resolve(result)
+                    return resolve(result);
                 }
             });
         });
@@ -135,23 +153,13 @@ export class FtpExplorer {
     constructor (context: vscode.ExtensionContext) {
         var ftpModel;
         var treeDataProvider: any;
-        var remotePath: string;
-        var ftpSettings: FtpSettingsJSON;
-        if (localExistSettings()){
-            localGetSettingsJSON()
-            .then((result)=>{
-                remotePath = result.remotePath;
-                ftpGetSettingsJSON(result)
-                .then((result)=>{
-                    ftpSettings = result;
 
-                    ftpModel = new FtpModel(remotePath, ftpSettings);
-                    treeDataProvider = new FtpTreeDataProvider(ftpModel);
-                    vscode.window.createTreeView('live-workspace-remote', { treeDataProvider });
-                    vscode.commands.registerCommand('live-workspace.refresh', () => treeDataProvider.refresh());
-                    context.subscriptions.push(vscode.workspace.registerTextDocumentContentProvider('ftp', treeDataProvider));
-                });
-            });
+        if (localExistSettings()){
+            ftpModel = new FtpModel();
+            treeDataProvider = new FtpTreeDataProvider(ftpModel);
+            vscode.window.createTreeView('live-workspace-remote', { treeDataProvider });
+            vscode.commands.registerCommand('live-workspace.refresh', () => treeDataProvider.refresh());
+            context.subscriptions.push(vscode.workspace.registerTextDocumentContentProvider('ftp', treeDataProvider));
         }
     }
 }
