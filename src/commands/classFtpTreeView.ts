@@ -11,9 +11,14 @@ export class FtpModel {
         return new Promise((resolve)=>{
             ftpRemoteList(this.remotePath, this.ftpSettings)
             .then((result)=>{
-                var data = Object.values(result);
-                var sorted = this.sort(data.map((entry) => { return {resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}${this.remotePath}${entry.name}`), isDirectory: entry.type === 'd' };}));
-                return resolve(sorted);
+                if (result){
+                    var data = Object.values(result);
+                    var sorted = this.sort(data.map((entry) => { return {resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}${this.remotePath}${entry.name}`), isDirectory: entry.type === 'd' };}));
+                    return resolve(sorted);
+                }
+                else {
+                    return resolve(result)
+                }
             });
         });
     }
@@ -22,9 +27,14 @@ export class FtpModel {
         return new Promise((resolve)=>{
             ftpRemoteList(node.resource.path, this.ftpSettings)
             .then((result)=>{
-                var data = Object.values(result);
-                var sorted = this.sort(data.map(entry => ({ resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}${node.resource.path}/${entry.name}`), isDirectory: entry.type === 'd' })));
-                return resolve(sorted);
+                if (result){
+                    var data = Object.values(result);
+                    var sorted = this.sort(data.map(entry => ({ resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}${node.resource.path}/${entry.name}`), isDirectory: entry.type === 'd' })));
+                    return resolve(sorted);
+                }
+                else {
+                    return resolve(result);
+                }
             });
         });
     }
@@ -81,7 +91,6 @@ export class FtpTreeDataProvider implements vscode.TreeDataProvider<FtpNode>, vs
     constructor(private readonly model: FtpModel){ }
 
     public refresh(): any {
-		this._onDidChange.fire();
 		this._onDidChangeTreeData.fire();
 	}
 

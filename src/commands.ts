@@ -8,12 +8,10 @@ export async function commandRefresh () {
     //if sftp
     //FTP
     var settingsFTP = await ftpGetSettingsJSON(settingsJSON);
-    console.log(`Path: ${path}`);
     ftpRemoteList(path, settingsFTP)
     .then(function (res: object){
         var Arr = Object.values(res);
         Arr.forEach(function(elem: FTPListingObjectItem) {
-            console.log(elem);
         });
     });
 }

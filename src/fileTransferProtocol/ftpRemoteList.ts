@@ -9,6 +9,7 @@ export function ftpRemoteList (path: string, settings: FtpSettingsJSON): Thenabl
         remote.connect(settings);
         remote.on('error',function(error) {
             VSCODE_OUTPUT.appendLine(`Oops, ${error}`);
+            resolve(undefined);
             throw(error);
         });
         remote.on('ready', function(){
@@ -17,6 +18,7 @@ export function ftpRemoteList (path: string, settings: FtpSettingsJSON): Thenabl
             remote.list(path, function(err, list){
                 if (err){
                     VSCODE_OUTPUT.appendLine(`\tError List => (${err})`);
+                    resolve(undefined);                    
                     throw(err);
                 }
                 else {
