@@ -1,4 +1,4 @@
-# `Live-Workspace` README
+# Live-Workspace README
 
 Live-Workspace is an extension for vscode, that provides a workspace for developers/teams who work on a server.
 
@@ -8,7 +8,7 @@ Live-Workspace offers users a "Live" environment, that allows you work on remote
 ## Features
 
 * `FTP  (File Transfer Protocol)` - Seamlessly transfer files to and from a FTP server.
-* `File Locking (Checkin/Checkout)` - Claim files when editing to prevent overwriting other users work.
+* `File Locking (Checkin/Checkout)` - Claim files when editing to prevent overwriting other users' work.
 * ~~`SFTP (Secure File Transfer Protocol)`~~ - Seamlessly transfer files to and from a SFTP server.
 
 ## Requirements
