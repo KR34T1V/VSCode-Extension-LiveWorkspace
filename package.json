@@ -44,11 +44,11 @@
             },
             {
                 "command": "live-workspace.checkout",
-                "title": "Check Out"
+                "title": "Check Out File"
             },
             {
                 "command": "live-workspace.checkin",
-                "title": "Check In"
+                "title": "Check In File"
             },
             {
                 "command": "live-workspace.upload",
