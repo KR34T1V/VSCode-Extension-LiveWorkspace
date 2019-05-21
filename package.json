@@ -14,6 +14,7 @@
         "Other"
     ],
     "activationEvents": [
+        "onCommand:live-workspace.setup",
         "workspaceContains:.vscode/Live-Workspace.json"
     ],
     "main": "./out/extension.js",
@@ -36,6 +37,10 @@
                     "dark": "./src/media/darkReload.svg",
                     "light": "./src/media/lightReload.svg"
                 }
+            },
+            {
+                "command": "live-workspace.setup",
+                "title": "Setup Live Workspace"
             },
             {
                 "command": "live-workspace.checkout",
