@@ -1,63 +1,45 @@
-Logo Provided by "Freepik" at https://www.flaticon.com/free-icon/laptop_22819
+# `Live-Workspace` README
 
-# ftp-filecontrol README
+Live-Workspace is an extension for vscode, that provides a workspace for developers/teams who work on a server.
 
-This is the README for your extension "ftp-filecontrol". After writing up a brief description, we recommend including the following sections.
+Live-Workspace offers users a "Live" environment, that allows you work on remote files as simply as it would be to work on local files. With Live-Workspace as your editor, managing files on a remote server is not only safe, but also easy.
+
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+* `FTP  (File Transfer Protocol)` - Seamlessly transfer files to and from a FTP server.
+* `File Locking (Checkin/Checkout)` - Claim files when editing to prevent overwriting other users work.
+* ~~`SFTP (Secure File Transfer Protocol)`~~ - Seamlessly transfer files to and from a SFTP server.
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+* Visual Studio Code V1.30.0 or higher
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
 This extension contributes the following settings:
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+* `Live-Workspace.username`: Username used to reserve files
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+* Remote view does not refresh the content
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+* Extension may be ready to release soon
 
 ### 1.0.0
 
-Initial release of ...
+Initial release Pending
 
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
 
 -----------------------------------------------------------------------------------------------------------
 
-## Working with Markdown
+## Contributors
 
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
+* Logo Provided by "Freepik" (https://www.flaticon.com/free-icon/laptop_22819)
+* Extension Written by "m4dm0nk3y" (m4dm0nk3y.za@gmail.com)
 
 ### For more information
 
