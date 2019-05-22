@@ -59,53 +59,53 @@ Populate the settings file according to your connection.
 Choose which protocol to use for the connection.
 >Options: `"ftp"` or ~~`"sftp"`~~
 
-#### Host
+#### Host:
 Connection host address to which to connect.
 >`"host": string`
 
-#### Port
+#### Port:
 Connection port to connect to.
 >`"port": number`
 
-#### RemotePath
+#### RemotePath:
 Remote path to display in the workspace.
 >`"remotePath": path`
 
-#### Username
+#### Username:
 Username used to connect to the remote server.
 >`"username:" string`
 
-#### Password
+#### Password:
 Password used to connect to the remote server.
 >`"password": string`
 
-#### SaveOnUpload
+#### SaveOnUpload:
 If true will save all files before uploading/Check In
 >`"saveOnUpload": boolean`
 
-#### Ignore
+#### Ignore:
 Array of items to hide from the Live-Workspace view. (Pathlike items)
 >`"ignore": [ string ]`
 
-#### ConnTimeout
+#### ConnTimeout:
 Time before connection fails in milliseconds.
 >`"connTimeout": number`
 
-#### PassvTimeout
+#### PassvTimeout:
 Time before the PASV connection fails in milliseconds.
 >`"passvTimeout": number`
 
-#### Keepalive 
+#### Keepalive:
 How often to send a NOOP to keep the connection alive.
 >`"keepalive": number`
 
-#### KeepaliveMaxCount
+#### KeepaliveMaxCount:
 Maximum number of connections to keep alive
 >`"keepaliveMaxCount": number`
 
 ### Vscode Settings
 
-#### Username
+#### Username:
 The username that will be used to reserve files on the server
 >`"live-workspace.username": string`
 
@@ -123,7 +123,7 @@ You can accomplish this by right clicking on the file you wish to edit in the fi
 This will lock the file on the server and prevent people from overwriting your work.
 
 ---
-#### Check In
+#### Check In:
 In order for others to gain access to a file that you have reserved, it must first be unlocked by the reservee.
 
 You can accomplish this if you are the reservee, by right clicking on the file you wish to release  in the file tree view, and choosing the `Check In` command.
@@ -131,7 +131,7 @@ You can accomplish this if you are the reservee, by right clicking on the file y
 This will unlock the file on the server and allow other users to reserve the file.
 
 ---
-#### Download
+#### Download:
 
 In order to sync a local copy of a file with the remote version you can use the Download command.
 
@@ -140,7 +140,7 @@ To accomplish this you must be the reservee of the target file, and can right cl
 This will update your local file to match the remote file.
 
 ---
-#### Upload
+#### Upload:
 
 In order for the remote server to be update with your file without having to check in, you can use the `Upload` command.
 
@@ -149,7 +149,7 @@ To accomplish this you must be the reservee of the target file, and can right cl
 This will update the remote server file to match your local file.
 
 ---
-#### New File
+#### New File:
 You can create new files straight to the remote server in any target directory.
 
 To accomplish this you simply need to right click on the target directory or a target within the directory, in the file tree view and choose the `New File` command.
@@ -157,7 +157,7 @@ To accomplish this you simply need to right click on the target directory or a t
 This will create a new folder straight onto the remote server at the target position.
 
 ---
-#### New Folder
+#### New Folder:
 You can create new direcories straight onto the remote server in any target directory.
 
 To accomplish this you simply need to right click on the target directory or a target within the directory, in the file tree view and choose the `New Folder` command.
@@ -165,7 +165,7 @@ To accomplish this you simply need to right click on the target directory or a t
 This will create a new directory straight onto the remote server at the target position.
 
 ---
-#### Delete
+#### Delete:
 You can delete files and direcories from the server.
 
 In order to accomplish this, right click on the target file/directory and select the `Delete` command.
@@ -173,7 +173,7 @@ In order to accomplish this, right click on the target file/directory and select
 This will remove the target from the server aswell as any sub files/directories.
 
 ---
-#### Rename
+#### Rename:
 You can rename files/directories on the server.
 
 To accomplish this, right click on the target file/directory and select the `Rename` command.
