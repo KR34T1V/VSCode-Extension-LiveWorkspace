@@ -80,7 +80,7 @@ Password used to connect to the remote server.
 >`"password": string`
 
 #### SaveOnUpload
-If true will save all files before uploading/Cheking in
+If true will save all files before uploading/Check In
 >`"saveOnUpload": boolean`
 
 #### Ignore
@@ -140,7 +140,6 @@ To accomplish this you must be the reservee of the target file, and can right cl
 This will update your local file to match the remote file.
 
 ---
-
 #### Upload
 
 In order for the remote server to be update with your file without having to check in, you can use the `Upload` command.
@@ -149,6 +148,7 @@ To accomplish this you must be the reservee of the target file, and can right cl
 
 This will update the remote server file to match your local file.
 
+---
 #### New File
 You can create new files straight to the remote server in any target directory.
 
@@ -156,6 +156,7 @@ To accomplish this you simply need to right click on the target directory or a t
 
 This will create a new folder straight onto the remote server at the target position.
 
+---
 #### New Folder
 You can create new direcories straight onto the remote server in any target directory.
 
@@ -163,6 +164,7 @@ To accomplish this you simply need to right click on the target directory or a t
 
 This will create a new directory straight onto the remote server at the target position.
 
+---
 #### Delete
 You can delete files and direcories from the server.
 
@@ -170,6 +172,7 @@ In order to accomplish this, right click on the target file/directory and select
 
 This will remove the target from the server aswell as any sub files/directories.
 
+---
 #### Rename
 You can rename files/directories on the server.
 
