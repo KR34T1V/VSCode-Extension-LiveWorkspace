@@ -9,3 +9,4 @@ export * from './commandRenameFile';
 export * from './commandUploadFile';
 export * from './commandViewFile';
 export * from './commandRefreshTree';
+export * from './commandSetupWorkspace';
