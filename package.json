@@ -180,6 +180,7 @@
         "@types/mkdirp": "^0.5.2",
         "@types/ssh2-sftp-client": "^2.4.1",
         "ftp": "^0.3.10",
+        "mkdirp": "^0.5.1",
         "ssh2-sftp-client": "^2.5.0"
     }
 }
