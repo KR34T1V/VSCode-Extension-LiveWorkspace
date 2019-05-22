@@ -266,37 +266,37 @@ export class FtpFileStream {
         }
     }
 
-        /*Create New Remote File*/
-        public async ftpNewFile (node: any) {
-            var username: string | undefined = await vscode.workspace.getConfiguration(EXTENSION_NAME).get('username');
-            if (node === undefined){
-                vscode.window.showInputBox()
-                .then((result)=>{
+    /*Create New Remote File*/
+    public async ftpNewFile (node: any) {
+        var username: string | undefined = await vscode.workspace.getConfiguration(EXTENSION_NAME).get('username');
+        if (node === undefined){
+            vscode.window.showInputBox()
+            .then((result)=>{
+                if (result !== undefined && result.length){
+                    ftpRemotePut(`File Created by ${username}`, `${this.ftpSettings.remotePath}${result}`, this.ftpSettings)
+                    .then(()=>refreshTree());
+                }
+            });
+        } else {
+
+            let resource = node.resource;
+            let path = resource.path;
+            let dir = dirname(resource.path);
+            vscode.window.showInputBox()
+            .then((result)=>{
+                if (node.isDirectory){
                     if (result !== undefined && result.length){
-                        ftpRemotePut(`File Created by ${username}`, `${this.ftpSettings.remotePath}${result}`, this.ftpSettings)
+                        ftpRemotePut(`File Created by ${username}`, `${path}/${result}`, this.ftpSettings)
                         .then(()=>refreshTree());
                     }
-                });
-            } else {
-
-                let resource = node.resource;
-                let path = resource.path;
-                let dir = dirname(resource.path);
-                vscode.window.showInputBox()
-                .then((result)=>{
-                    if (node.isDirectory){
-                        if (result !== undefined && result.length){
-                            ftpRemotePut(`File Created by ${username}`, `${path}/${result}`, this.ftpSettings)
-                            .then(()=>refreshTree());
-                        }
-                    } else {
-                        if (result !== undefined && result.length){
-                            ftpRemotePut(`File Created by ${username}`, `${dir}/${result}`, this.ftpSettings)
-                            .then(()=>refreshTree());
-                        }
+                } else {
+                    if (result !== undefined && result.length){
+                        ftpRemotePut(`File Created by ${username}`, `${dir}/${result}`, this.ftpSettings)
+                        .then(()=>refreshTree());
                     }
-                });
-            }
+                }
+            });
         }
+    }
 
 }
