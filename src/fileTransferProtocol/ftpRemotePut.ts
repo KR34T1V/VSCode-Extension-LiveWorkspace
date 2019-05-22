@@ -9,7 +9,7 @@ export function ftpRemotePut (src: string, dest: string, settings: FtpSettingsJS
         
         remote.connect(settings);
         remote.on('error',function(error) {
-            VSCODE_OUTPUT.appendLine('FTP: connected!');
+            VSCODE_OUTPUT.appendLine('FTP:');
             VSCODE_OUTPUT.appendLine(`Oops, ${error}`);
             throw(error);
         });

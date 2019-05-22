@@ -13,7 +13,7 @@ export function ftpRemoteList (path: string, settings: FtpSettingsJSON): Thenabl
             throw(error);
         });
         remote.on('ready', function(){
-            VSCODE_OUTPUT.appendLine('FTP: connected!');
+            VSCODE_OUTPUT.appendLine('FTP:');
     
             remote.list(path, function(err, list){
                 if (err){

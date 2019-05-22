@@ -13,7 +13,7 @@ export function ftpRemoteDelete (path: string, settings: FtpSettingsJSON) {
             throw(error);
         });
         remote.on('ready', function(){
-            VSCODE_OUTPUT.appendLine('FTP: connected!');
+            VSCODE_OUTPUT.appendLine('FTP:');
             remote.delete(path, function (err) {
                 if (err){
                     VSCODE_OUTPUT.appendLine(`\tError Delete ${err}`);

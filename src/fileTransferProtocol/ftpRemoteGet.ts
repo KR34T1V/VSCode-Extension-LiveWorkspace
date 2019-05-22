@@ -14,7 +14,7 @@ export function ftpRemoteGet (path: string, settings: FtpSettingsJSON): Thenable
             throw(error);
         });
         remote.on('ready', function () {
-            VSCODE_OUTPUT.appendLine('FTP: connected!');
+            VSCODE_OUTPUT.appendLine('FTP:');
             remote.get(path, function (err, stream) {
                 let string = '';
                 if (err){

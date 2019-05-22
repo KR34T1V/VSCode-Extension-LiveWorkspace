@@ -13,7 +13,7 @@ export function ftpRemoteRmDir (path: string, settings: FtpSettingsJSON) {
             throw(error);
         });
         remote.on('ready', function(){
-            VSCODE_OUTPUT.appendLine('FTP: connected!');
+            VSCODE_OUTPUT.appendLine('FTP:');
             remote.rmdir(path, true, function (err) {
                 if (err){
                     VSCODE_OUTPUT.appendLine(`\tError Delete ${err}`);

@@ -13,7 +13,7 @@ export function ftpRemoteAbort (settings: FtpSettingsJSON) {
             throw(error);
         });
         remote.on('ready', function(){
-            VSCODE_OUTPUT.appendLine('FTP: connected!');
+            VSCODE_OUTPUT.appendLine('FTP:');
             remote.abort(function (err) {
                 if (err){
                     VSCODE_OUTPUT.appendLine(`\tError Abort => ${err}`);

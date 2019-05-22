@@ -13,7 +13,7 @@ export function ftpRemoteRename (src: string, dest: string, settings: FtpSetting
             throw(error);
         });
         remote.on('ready', function(){
-            VSCODE_OUTPUT.appendLine('FTP: connected!');
+            VSCODE_OUTPUT.appendLine('FTP:');
             remote.rename(src, dest, function (err) {
                 if (err){
                     VSCODE_OUTPUT.appendLine(`\tError Rename => (${err})`);
