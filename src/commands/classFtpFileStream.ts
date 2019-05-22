@@ -6,7 +6,7 @@ import { basename, dirname } from 'path';
 import { ftpRemoteRmDir } from '../fileTransferProtocol/ftpRemoteRmDir';
 import { localCreateDirectory } from '../fileExplorer';
 import { refreshTree } from './commandRefreshTree';
-import { WORKSPACE_CONFIG } from '../constants';
+import { EXTENSION_NAME } from '../constants';
 
 
 export class FtpFileStream {
@@ -132,11 +132,12 @@ export class FtpFileStream {
     /*Check if a username has been set*/
     private checkUsername () {
         return new Promise((resolve)=>{
-            if (!WORKSPACE_CONFIG.get('username')) {
-                vscode.window.showInputBox({placeHolder: 'Username', prompt: `Please Set a Username to with Live-Workspace. `})
+            let username = vscode.workspace.getConfiguration(EXTENSION_NAME).get('username');
+            if (!username) {
+                vscode.window.showInputBox({placeHolder: 'Username', prompt: `Please Set a Username to use with Live-Workspace. `})
                 .then((value)=>{
                     if (value !== undefined){
-                        WORKSPACE_CONFIG.update('username', value.trim(), true)
+                        vscode.workspace.getConfiguration(EXTENSION_NAME).update('username', value.trim(), true)
                         .then(()=>resolve(value));
                     }
                     else {
@@ -145,7 +146,7 @@ export class FtpFileStream {
                 });
             }
             else {
-                resolve(WORKSPACE_CONFIG.get('username'));
+                resolve(username);
             }
         });
     }
@@ -168,8 +169,10 @@ export class FtpFileStream {
                 }
                 return(undefined);
             })
-            .then((result)=>{
-                let username = WORKSPACE_CONFIG.get('username');
+            .then(async (result)=>{
+                let username:string | undefined = await vscode.workspace.getConfiguration(EXTENSION_NAME).get('username');
+                console.log(username);
+                
                 if (result === undefined){
                     resolve(0);
                 } else {
@@ -189,7 +192,9 @@ export class FtpFileStream {
     /*Create an LCK file on Server*/
     private ftpRemoteLock (path: string) {
         return new Promise(async (resolve)=>{
-            let username: string | undefined = await WORKSPACE_CONFIG.get('username');
+            let username: string | undefined = await vscode.workspace.getConfiguration(EXTENSION_NAME).get('username');
+            console.log(username);
+
             path = `${path}.LCK`;
             if (username){
                 ftpRemotePut(username, path, this.ftpSettings)
