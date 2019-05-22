@@ -49,8 +49,8 @@
                 "command": "live-workspace.refresh",
                 "title": "Refresh",
                 "icon": {
-                    "dark": "./src/media/darkReload.svg",
-                    "light": "./src/media/lightReload.svg"
+                    "dark": "./resources/darkReload.svg",
+                    "light": "./resources/lightReload.svg"
                 }
             },
             {
@@ -147,7 +147,7 @@
                 {
                     "id": "live-workspace",
                     "title": "Live-Workspace",
-                    "icon": "./src/media/laptop.svg"
+                    "icon": "./resources/laptop.svg"
                 }
             ]
         },
