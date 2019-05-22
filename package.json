@@ -4,9 +4,25 @@
     "description": "An FTP/SFTP workspace, with seamless integration, Work as if it was on local, With the ability to lock a file for safe usage!",
     "version": "0.0.1",
     "publisher": "m4dm0nk3y.za@gmail.com",
-    "author": {
-        "name": "m4dm0nk3y"
-    },
+    "author": "m4dm0nk3y",
+    "license": "MIT",
+    "icon": "laptop.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/M4DM0NK3Y/VSCode-Extension-CheckoutHeader"
+      },
+      "bugs": {
+        "url": "https://github.com/M4DM0NK3Y/VSCode-Extension-CheckoutHeader/issues"
+      },
+      "homepage": "https://github.com/M4DM0NK3Y/VSCode-Extension-CheckoutHeader",
+      "keywords": [
+        "Live",
+        "Live Workspace",
+        "Workspace",
+        "Check Out",
+        "Check In",
+        "Dreamweaver"
+      ],
     "engines": {
         "vscode": "^1.30.0"
     },
