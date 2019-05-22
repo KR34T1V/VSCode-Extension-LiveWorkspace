@@ -15,6 +15,10 @@ export class FtpModel {
             this.getFtpConfig();
             vscode.commands.executeCommand('live-workspace.refresh');
         });
+        watcher.onDidCreate(()=>{
+            this.getFtpConfig();
+            vscode.commands.executeCommand('live-workspace.refresh');
+        })
     }
     private getFtpConfig (){
         localGetSettingsJSON()

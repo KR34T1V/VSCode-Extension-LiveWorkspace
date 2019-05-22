@@ -12,10 +12,8 @@ export function localGetSettingsJSON(): Thenable<SettingsJSON>{
 
     return new Promise((resolve)=>{
 
-        VSCODE_OUTPUT.appendLine(`Loading Settings`);
         try{
             let result = fs.readFileSync(root+'/'+EXTENSION_WORKSPACE_SETTINGS_FOLDER+'/'+EXTENSION_SETTINGS_FILE).toString();
-            VSCODE_OUTPUT.appendLine(`Read Success!`);
             if (result !== undefined){
                 let obj: SettingsJSON = JSON.parse(result.toString());
                 obj.remotePath = cleanPath(obj.remotePath);
