@@ -1,6 +1,6 @@
 {
     "name": "Live-Workspace",
-    "displayName": "Live Workspace",
+    "displayName": "Live Remote Workspace",
     "description": "An FTP/SFTP workspace, with seamless integration, Work as if it was on local, With the ability to lock a file for safe usage!",
     "version": "0.0.4",
     "publisher": "m4dm0nk3y",
