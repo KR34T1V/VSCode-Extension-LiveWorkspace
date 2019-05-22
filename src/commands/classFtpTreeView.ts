@@ -158,12 +158,10 @@ export class FtpExplorer {
         var ftpModel;
         var treeDataProvider: any;
 
-        if (localExistSettings()){
-            ftpModel = new FtpModel();
-            treeDataProvider = new FtpTreeDataProvider(ftpModel);
-            vscode.window.createTreeView('live-workspace-remote', { treeDataProvider });
-            vscode.commands.registerCommand('live-workspace.refresh', () => treeDataProvider.refresh());
-            context.subscriptions.push(vscode.workspace.registerTextDocumentContentProvider('ftp', treeDataProvider));
-        }
+        ftpModel = new FtpModel();
+        treeDataProvider = new FtpTreeDataProvider(ftpModel);
+        vscode.window.createTreeView('live-workspace-remote', { treeDataProvider });
+        vscode.commands.registerCommand('live-workspace.refresh', () => treeDataProvider.refresh());
+        context.subscriptions.push(vscode.workspace.registerTextDocumentContentProvider('ftp', treeDataProvider));
     }
 }
