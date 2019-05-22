@@ -8,7 +8,7 @@ export function checkInFile(node: FtpNode) {
     localGetSettingsJSON()
     .then((json)=>ftpGetSettingsJSON(json))
     .then((settings)=>{
-        saveFiles()
+        saveFiles(settings)
         .then(()=>{
             var stream = new FtpFileStream(settings);
             stream.ftpCheckIn(node);

@@ -9,6 +9,7 @@ export function ftpGetSettingsJSON (json: SettingsJSON):Thenable<FtpSettingsJSON
             "user": json.username,
             "remotePath": json.remotePath,
             "password": json.password,
+            "saveOnUpload": json.saveOnUpload,
             "connTimeout": json.connTimeout,
             "passvTimeout": json.passvTimeout,
             "keepalive": json.keepalive,

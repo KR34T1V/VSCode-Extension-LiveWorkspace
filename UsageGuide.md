@@ -35,6 +35,7 @@ Populate the settings file according to your connection.
 
         "username": "User",     //Required: Connection Username
         "password": "*******",  //Required: Connection Password
+        "saveOnUpload": true,   //Optional: Save Files before Checkin/Upload
 
         "ignore": [             //Optional: Files/Directories to hide
             "*/.DS_Store",
@@ -77,6 +78,10 @@ Username used to connect to the remote server.
 #### Password
 Password used to connect to the remote server.
 >`"password": string`
+
+#### SaveOnUpload
+If true will save all files before uploading/Cheking in
+>`"saveOnUpload": boolean`
 
 #### Ignore
 Array of items to hide from the Live-Workspace view. (Pathlike items)

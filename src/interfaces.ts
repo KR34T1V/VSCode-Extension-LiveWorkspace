@@ -9,6 +9,7 @@ export interface SettingsJSON {
     "username": string;
     "password": string;
     "ignore": Array<string>;
+    "saveOnUpload": boolean;
     "connTimeout": number;
     "passvTimeout": number;
     "keepalive": number;
@@ -21,6 +22,7 @@ export interface FtpSettingsJSON {
     "user": string;
     "remotePath": string;
     "password": string;
+    "saveOnUpload": boolean;
     "connTimeout": number;
     "passvTimeout": number;
     "keepalive": number;
