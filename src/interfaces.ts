@@ -10,7 +10,7 @@ export interface SettingsJSON {
     "password": string;
     "ignore": Array<string>;
     "connTimeout": number;
-    "passvTimout": number;
+    "passvTimeout": number;
     "keepalive": number;
     "keepaliveMaxCount": number;
 }
