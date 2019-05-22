@@ -30,6 +30,7 @@
         "Other"
     ],
     "activationEvents": [
+        "*",
         "onCommand:live-workspace.setup",
         "workspaceContains:.vscode/Live-Workspace.json"
     ],
