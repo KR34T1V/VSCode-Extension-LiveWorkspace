@@ -1,4 +1,3 @@
-export * from './ftpGetSettingsJSON';
 export * from './ftpRemoteAbort';
 export * from './ftpRemoteDelete';
 export * from './ftpRemoteGet';

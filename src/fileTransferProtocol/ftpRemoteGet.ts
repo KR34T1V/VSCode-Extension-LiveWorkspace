@@ -1,9 +1,9 @@
 import * as ftpClient from 'ftp';
 import { VSCODE_OUTPUT } from '../constants';
-import { FtpSettingsJSON } from '../interfaces';
+import { SettingsJSON } from '../interfaces';
 import * as fs from 'fs';
 
-export function ftpRemoteGet (path: string, settings: FtpSettingsJSON): Thenable<string> {
+export function ftpRemoteGet (path: string, settings: SettingsJSON): Thenable<string> {
     let remote = new ftpClient();
     
     return new Promise ((resolve)=>{

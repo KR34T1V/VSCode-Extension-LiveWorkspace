@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { basename, dirname } from 'path';
 import { localExistSettings, localGetSettingsJSON } from '../fileExplorer';
-import { ftpGetSettingsJSON, ftpRemoteList, ftpRemoteGet } from '../fileTransferProtocol';
+import { ftpRemoteList, ftpRemoteGet } from '../fileTransferProtocol';
 import { FtpNode } from '../interfaces';
 import { EXTENSION_NAME } from '../constants';
 
@@ -18,11 +18,10 @@ export class FtpModel {
         watcher.onDidCreate(()=>{
             this.getFtpConfig();
             vscode.commands.executeCommand('live-workspace.refresh');
-        })
+        });
     }
     private getFtpConfig (){
         localGetSettingsJSON()
-        .then((result)=>ftpGetSettingsJSON(result))
         .then((result)=>this.ftpSettings = result)
         .then(()=>{
             this.remotePath = this.ftpSettings.remotePath;

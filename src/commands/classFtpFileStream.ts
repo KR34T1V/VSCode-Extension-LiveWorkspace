@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as vscode from 'vscode';
 import { ftpRemoteGet, ftpRemoteList, ftpRemotePut, ftpRemoteDelete, ftpRemoteRename, ftpRemoteMkdir } from '../fileTransferProtocol';
-import { FtpSettingsJSON, FtpNode } from '../interfaces';
+import { SettingsJSON, FtpNode } from '../interfaces';
 import { basename, dirname } from 'path';
 import { ftpRemoteRmDir } from '../fileTransferProtocol/ftpRemoteRmDir';
 import { localCreateDirectory } from '../fileExplorer';
@@ -10,7 +10,7 @@ import { EXTENSION_NAME } from '../constants';
 
 
 export class FtpFileStream {
-    constructor (private ftpSettings: FtpSettingsJSON){}
+    constructor (private ftpSettings: SettingsJSON){}
     
     /*Open local file if you are the owner*/
     public ftpViewFile (resource: vscode.Uri) {

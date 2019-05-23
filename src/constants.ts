@@ -10,11 +10,12 @@ export const DEFAULT_SETTINGS = `
     "protocol": "ftp",
     "host": "localhost",
     "port": "21",
-    "remotePath": "/",
-
-    "username": "defaultUser",
+    "user": "defaultUser",
     "password": "*******",
-
+    
+    "remotePath": "/",
+    "uploadOnSave": false,
+    
     "ignore": [
         "*/.DS_Store",
         "*/.vscode/*",

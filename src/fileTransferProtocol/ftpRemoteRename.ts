@@ -1,8 +1,8 @@
 import * as ftpClient from 'ftp';
 import { VSCODE_OUTPUT } from '../constants';
-import { FtpSettingsJSON } from '../interfaces';
+import { SettingsJSON } from '../interfaces';
 
-export function ftpRemoteRename (src: string, dest: string, settings: FtpSettingsJSON) {
+export function ftpRemoteRename (src: string, dest: string, settings: SettingsJSON) {
     let remote = new ftpClient();
     
     return new Promise ((resolve)=>{

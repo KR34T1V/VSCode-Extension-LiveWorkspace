@@ -1,8 +1,8 @@
 import * as ftpClient from 'ftp';
 import { VSCODE_OUTPUT } from '../constants';
-import { FtpSettingsJSON } from '../interfaces';
+import { SettingsJSON } from '../interfaces';
 
-export function ftpRemoteAbort (settings: FtpSettingsJSON) {
+export function ftpRemoteAbort (settings: SettingsJSON) {
     let remote = new ftpClient();
     
     return new Promise ((resolve)=>{

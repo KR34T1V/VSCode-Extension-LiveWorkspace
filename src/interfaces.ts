@@ -5,28 +5,15 @@ export interface SettingsJSON {
     "protocol": string;
     "host": string;
     "port": number;
-    "remotePath": string;
-    "username": string;
+    "user": string;
     "password": string;
-    "ignore": Array<string>;
+    "remotePath": string;
     "saveOnUpload": boolean;
+    "ignore": Array<string>;
     "connTimeout": number;
     "passvTimeout": number;
     "keepalive": number;
     "keepaliveMaxCount": number;
-}
-
-export interface FtpSettingsJSON {
-    "host": string;
-    "port": number;
-    "user": string;
-    "remotePath": string;
-    "password": string;
-    "saveOnUpload": boolean;
-    "connTimeout": number;
-    "passvTimeout": number;
-    "keepalive": number;
-    "ignore": Array<string>;
 }
 
 export interface FileRights {
