@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { basename, dirname } from 'path';
-import { localExistSettings, localGetSettingsJSON } from '../fileExplorer';
+import { localGetSettingsJSON, localUploadOnSave } from '../fileExplorer';
 import { ftpRemoteList, ftpRemoteGet } from '../fileTransferProtocol';
 import { FtpNode } from '../interfaces';
 import { EXTENSION_NAME } from '../constants';
@@ -24,6 +24,11 @@ export class FtpModel {
         localGetSettingsJSON()
         .then((result)=>this.ftpSettings = result)
         .then(()=>{
+            if (this.ftpSettings.uploadOnSave){                
+                vscode.workspace.onDidSaveTextDocument((doc)=>{
+                    localUploadOnSave(doc.uri);
+                });
+            }
             this.remotePath = this.ftpSettings.remotePath;
         });
     }
