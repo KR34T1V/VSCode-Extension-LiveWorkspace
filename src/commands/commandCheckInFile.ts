@@ -2,13 +2,13 @@ import { FtpNode } from "../interfaces";
 import { localGetSettingsJSON } from "../fileExplorer";
 import { ftpGetSettingsJSON } from "../fileTransferProtocol";
 import { FtpFileStream } from "./classFtpFileStream";
-import { saveFiles } from "./commandSaveFile";
+import { autoSaveFile } from "./commandSaveFile";
 
 export function checkInFile(node: FtpNode) {
     localGetSettingsJSON()
     .then((json)=>ftpGetSettingsJSON(json))
     .then((settings)=>{
-        saveFiles(settings)
+        autoSaveFile(node.resource, settings)
         .then(()=>{
             var stream = new FtpFileStream(settings);
             stream.ftpCheckIn(node);
