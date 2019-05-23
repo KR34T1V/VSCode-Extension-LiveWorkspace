@@ -14,7 +14,7 @@ export class FtpFileStream {
     
     /*Open local file if you are the owner*/
     public ftpViewFile (resource: vscode.Uri) {
-        let localPath = vscode.Uri.parse(`file:///${vscode.workspace.rootPath}${resource.path}`);
+        let localPath = vscode.Uri.parse(`file:/${vscode.workspace.rootPath}${resource.path}`);
         this.ftpRemoteCheckLock(resource.path)
         .then((result)=>{
             if (result === 1){
@@ -28,7 +28,7 @@ export class FtpFileStream {
     /*Handle Checkout Command*/
     public ftpCheckOut (node: any) {
         let resource = node.resource;
-        let uri = vscode.Uri.parse(`file:///${vscode.workspace.rootPath}${resource.path}`);
+        let uri = vscode.Uri.parse(`file:/${vscode.workspace.rootPath}${resource.path}`);
         //Check LCK
         this.ftpRemoteCheckLock(resource.path)
         .then((result)=>{
@@ -96,7 +96,7 @@ export class FtpFileStream {
     /*Handle Download Command*/
     public ftpDownload (node: any) {
         let resource = node.resource;
-        let uri = vscode.Uri.parse(`file:///${vscode.workspace.rootPath}${resource.path}`);
+        let uri = vscode.Uri.parse(`file:/${vscode.workspace.rootPath}${resource.path}`);
         //CHECK LCK
         this.ftpRemoteCheckLock(resource.path)
         .then((result)=>{
