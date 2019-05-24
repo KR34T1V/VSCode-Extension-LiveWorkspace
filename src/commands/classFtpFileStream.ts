@@ -4,9 +4,10 @@ import { ftpRemoteGet, ftpRemoteList, ftpRemotePut, ftpRemoteDelete, ftpRemoteRe
 import { SettingsJSON, FtpNode } from '../interfaces';
 import { basename, dirname } from 'path';
 import { ftpRemoteRmDir } from '../fileTransferProtocol/ftpRemoteRmDir';
-import { localCreateDirectory } from '../fileExplorer';
+import { localCreateDirectory, localExistFile } from '../fileExplorer';
 import { refreshTree } from './commandRefreshTree';
 import { EXTENSION_NAME } from '../constants';
+import { downloadFile } from './commandDownloadFile';
 
 
 export class FtpFileStream {
@@ -17,8 +18,10 @@ export class FtpFileStream {
         let localPath = vscode.Uri.parse(`file:/${vscode.workspace.rootPath}${resource.path}`);
         this.ftpRemoteCheckLock(resource.path)
         .then((result)=>{
-            if (result === 1){
+            if (result === 1 && localExistFile(resource.path)){
                 vscode.window.showTextDocument(localPath, {preview: false});
+            } else if(result === 1){
+                downloadFile({"resource":resource, "isDirectory": false});
             } else {
                 vscode.window.showTextDocument(resource, {preview: true});
             }
