@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { basename, dirname } from 'path';
-import { localGetSettingsJSON, localUploadOnSave } from '../fileExplorer';
+import { localGetSettingsJSON, localUploadOnSave, localExistSettings } from '../fileExplorer';
 import { ftpRemoteList, ftpRemoteGet } from '../fileTransferProtocol';
 import { FtpNode } from '../interfaces';
 import { EXTENSION_NAME } from '../constants';
@@ -21,16 +21,18 @@ export class FtpModel {
         });
     }
     private getFtpConfig (){
-        localGetSettingsJSON()
-        .then((result)=>this.ftpSettings = result)
-        .then(()=>{
-            if (this.ftpSettings.uploadOnSave){                
-                vscode.workspace.onDidSaveTextDocument((doc)=>{
-                    localUploadOnSave(doc.uri);
-                });
-            }
-            this.remotePath = this.ftpSettings.remotePath;
-        });
+        if(localExistSettings()) {
+            localGetSettingsJSON()
+            .then((result)=>this.ftpSettings = result)
+            .then(()=>{
+                if (this.ftpSettings.uploadOnSave){                
+                    vscode.workspace.onDidSaveTextDocument((doc)=>{
+                        localUploadOnSave(doc.uri);
+                    });
+                }
+                this.remotePath = this.ftpSettings.remotePath;
+            });
+        }
     }
 
     public get roots(): Thenable<FtpNode[]>{
