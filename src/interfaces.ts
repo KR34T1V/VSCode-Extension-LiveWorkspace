@@ -8,7 +8,8 @@ export interface SettingsJSON {
     "user": string;
     "password": string;
     "remotePath": string;
-    "saveOnUpload": boolean;
+    "saveOnCheckIn": boolean;
+    "uploadOnSave": boolean;
     "ignore": Array<string>;
     "connTimeout": number;
     "passvTimeout": number;

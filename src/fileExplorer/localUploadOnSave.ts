@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
 import { FtpNode } from '../interfaces';
 import { localGetSettingsJSON } from './localGetSettingsJSON';
-import { autoSaveFile } from '../commands/commandSaveFile';
 import { FtpFileStream } from '../commands/classFtpFileStream';
 
 export function localUploadOnSave(resource: vscode.Uri) {
