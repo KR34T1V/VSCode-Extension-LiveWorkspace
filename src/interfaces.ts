@@ -10,6 +10,7 @@ export interface SettingsJSON {
     "remotePath": string;
     "saveOnCheckIn": boolean;
     "uploadOnSave": boolean;
+    "clearCacheOnCheckIn": boolean;
     "ignore": Array<string>;
     "connTimeout": number;
     "passvTimeout": number;

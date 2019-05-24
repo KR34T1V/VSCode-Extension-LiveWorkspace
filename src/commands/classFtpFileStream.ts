@@ -8,6 +8,7 @@ import { localCreateDirectory, localExistFile } from '../fileExplorer';
 import { refreshTree } from './commandRefreshTree';
 import { EXTENSION_NAME } from '../constants';
 import { downloadFile } from './commandDownloadFile';
+import { localDeleteFile } from '../fileExplorer/localDeleteFile';
 
 
 export class FtpFileStream {
@@ -64,6 +65,7 @@ export class FtpFileStream {
                 //UPLOAD, UNLOCK AND REVEAL
                 ftpRemotePut(localPath,resource.path, this.ftpSettings)
                 .then(()=>ftpRemoteDelete(`${resource.path}.LCK`, this.ftpSettings))
+                .then(()=>localDeleteFile(localPath, this.ftpSettings))
                 .then(()=>vscode.window.showTextDocument(resource))
                 .then(()=>refreshTree());
             } else if (result === 0) {

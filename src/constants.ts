@@ -16,6 +16,7 @@ export const DEFAULT_SETTINGS = `
     "remotePath": "/",
     "uploadOnSave": false,
     "saveOnCheckIn": false,
+    "clearCacheOnCheckIn": false,
     
     "ignore": [
         "*/.DS_Store",

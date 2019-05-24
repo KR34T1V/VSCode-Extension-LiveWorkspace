@@ -2,6 +2,7 @@ import { FtpNode } from "../interfaces";
 import { localGetSettingsJSON } from "../fileExplorer";
 import { FtpFileStream } from "./classFtpFileStream";
 import { autoSaveFile } from "./commandSaveFile";
+import { localDeleteFile } from "../fileExplorer/localDeleteFile";
 
 export function checkInFile(node: FtpNode) {
     localGetSettingsJSON()
