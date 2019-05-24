@@ -9,8 +9,6 @@ import { VSCODE_OUTPUT,
 
 export function localCreateSettings (): Thenable<boolean> {
     var root = vscode.workspace.rootPath;
-    console.log('Creating Settings');
-    
     return new Promise((resolve)=>{
 
         VSCODE_OUTPUT.appendLine(`Creating Settings File! => ${EXTENSION_SETTINGS_FILE}`);

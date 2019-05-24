@@ -6,3 +6,4 @@ export * from './localGetSettingsJSON';
 export * from  './localCreateDirectory';
 export * from './localUploadOnSave';
 export * from './localExistFile';
+export * from './localCloseEditor';

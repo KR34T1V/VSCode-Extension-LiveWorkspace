@@ -4,8 +4,6 @@ import { localGetSettingsJSON } from './localGetSettingsJSON';
 import { FtpFileStream } from '../commands/classFtpFileStream';
 
 export function localUploadOnSave(resource: vscode.Uri) {
-    console.log(resource);
-    
     var root = vscode.workspace.rootPath;
     if (root) {
         var path: vscode.Uri = vscode.Uri.parse(`ftp:${resource.path.replace(`/${root}`, '')}`);

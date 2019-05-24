@@ -4,7 +4,7 @@ import { ftpRemoteGet, ftpRemoteList, ftpRemotePut, ftpRemoteDelete, ftpRemoteRe
 import { SettingsJSON, FtpNode } from '../interfaces';
 import { basename, dirname } from 'path';
 import { ftpRemoteRmDir } from '../fileTransferProtocol/ftpRemoteRmDir';
-import { localCreateDirectory, localExistFile } from '../fileExplorer';
+import { localCreateDirectory, localExistFile, localCloseEditor } from '../fileExplorer';
 import { refreshTree } from './commandRefreshTree';
 import { EXTENSION_NAME } from '../constants';
 import { downloadFile } from './commandDownloadFile';
@@ -65,8 +65,9 @@ export class FtpFileStream {
                 //UPLOAD, UNLOCK AND REVEAL
                 ftpRemotePut(localPath,resource.path, this.ftpSettings)
                 .then(()=>ftpRemoteDelete(`${resource.path}.LCK`, this.ftpSettings))
+                .then(()=>localCloseEditor(localPath))
                 .then(()=>localDeleteFile(localPath, this.ftpSettings))
-                .then(()=>vscode.commands.executeCommand('workbench.action.files.revert')) //May Cause Issues (used to refresh document)
+                //.then(()=>vscode.commands.executeCommand('workbench.action.files.revert')) //May Cause Issues (used to refresh document)
                 .then(()=>vscode.window.showTextDocument(resource))
                 .then(()=>refreshTree());
             } else if (result === 0) {

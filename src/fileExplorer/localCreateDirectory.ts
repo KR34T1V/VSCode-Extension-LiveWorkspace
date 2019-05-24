@@ -4,8 +4,6 @@ import { VSCODE_OUTPUT, EXTENSION_WORKSPACE_SETTINGS_FOLDER } from '../constants
 
 /*Create Preceding Directories In Path*/
 export function localCreateDirectory(path: string) {
-    console.log('Creating Directory');
-
     return new Promise((resolve)=>{
         VSCODE_OUTPUT.appendLine(`Creating Directory: => ${path}`);
         let dir = dirname(path);
