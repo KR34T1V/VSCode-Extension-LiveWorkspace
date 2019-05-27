@@ -1,4 +1,5 @@
 import * as ftpClient from 'ftp';
+import * as vscode from 'vscode';
 import { VSCODE_OUTPUT } from '../constants';
 import { SettingsJSON } from '../interfaces';
 import * as fs from 'fs';
@@ -11,6 +12,7 @@ export function ftpRemoteGet (path: string, settings: SettingsJSON): Thenable<st
         remote.connect(settings);
         remote.on('error',function(error) {
             VSCODE_OUTPUT.appendLine(`Oops, ${error}`);
+            vscode.window.showWarningMessage(`Oops, ${error}`);
             throw(error);
         });
         remote.on('ready', function () {
@@ -19,6 +21,7 @@ export function ftpRemoteGet (path: string, settings: SettingsJSON): Thenable<st
                 let string = '';
                 if (err){
                     VSCODE_OUTPUT.appendLine(`\tError Get => ${err}`);
+                    vscode.window.showWarningMessage(`Error Get => ${err}`);
                     throw(err);
                 }
                 else {

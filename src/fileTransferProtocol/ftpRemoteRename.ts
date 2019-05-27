@@ -1,4 +1,5 @@
 import * as ftpClient from 'ftp';
+import * as vscode from 'vscode';
 import { VSCODE_OUTPUT } from '../constants';
 import { SettingsJSON } from '../interfaces';
 
@@ -10,13 +11,17 @@ export function ftpRemoteRename (src: string, dest: string, settings: SettingsJS
         remote.connect(settings);
         remote.on('error',function(error) {
             VSCODE_OUTPUT.appendLine(`Oops, ${error}`);
+            vscode.window.showWarningMessage(`Oops, ${error}`);
+
             throw(error);
         });
         remote.on('ready', function(){
             VSCODE_OUTPUT.appendLine('FTP:');
             remote.rename(src, dest, function (err) {
                 if (err){
-                    VSCODE_OUTPUT.appendLine(`\tError Rename => (${err})`);
+                    VSCODE_OUTPUT.appendLine(`\tError Rename => ${err}`);
+                    vscode.window.showWarningMessage(`Error Rename => ${err}`);
+
                     throw(err);
                 }
                 else {
