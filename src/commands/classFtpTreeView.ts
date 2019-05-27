@@ -42,7 +42,7 @@ export class FtpModel {
                 if (result){
                     var data = Object.values(result);
                     var sorted = this.sort(data.map((entry) => { return {resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}${this.remotePath}${entry.name}`), isDirectory: entry.type === 'd' };}));
-                    return resolve(sorted);
+                    return resolve(this.ignore(sorted));
                 }
                 else {
                     return resolve(result);
@@ -58,7 +58,7 @@ export class FtpModel {
                 if (result){
                     var data = Object.values(result);
                     var sorted = this.sort(data.map(entry => ({ resource: vscode.Uri.parse(`ftp://${this.ftpSettings.host}${node.resource.path}/${entry.name}`), isDirectory: entry.type === 'd' })));
-                    return resolve(sorted);
+                    return resolve(this.ignore(sorted));
                 }
                 else {
                     return resolve(result);
@@ -83,10 +83,10 @@ export class FtpModel {
 		});
     }
     //REFACTOR THIS GARBAGE VVVVVV
-    /*private ignore(node: FtpNode[]) {
+    private ignore(node: FtpNode[]) {
         var TempNode: FtpNode[] = [];
         node.forEach((element1, i) => {
-             this.ftpSettings.ignore.forEach( element2 => {
+             this.ftpSettings.ignore.forEach( (element2: any) => {
                 element2 =  element2.replace('/', '\\/').replace('.','\\.').replace('*','.*');
                 var regExp = new RegExp(`^${element2}$`, "i");
                 var thePath =  element1.resource.path;
@@ -105,7 +105,7 @@ export class FtpModel {
             }
        });
        return NodeArray;
-    }*/
+    }
     //REFACTOR THIS GARBAGE ^^^^^^^^
 
 }
