@@ -12,7 +12,8 @@ export function autoSaveFile (uri: vscode.Uri ,settings: SettingsJSON) {
                     let localPath = rootPath.concat(uri.fsPath).trim();                    
                     if (localPath === remotePath) {                        
                         VSCODE_OUTPUT.appendLine(`\tSaving: ${localPath}`);
-                        resolve(value.save());
+                        value.save()
+                        .then(()=>setTimeout(()=>resolve(),50));
                     }
                 }
             });
