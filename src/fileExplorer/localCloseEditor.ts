@@ -1,7 +1,14 @@
 import * as vscode from 'vscode';
 
-export function localCloseEditor (path: string){
-    var uri: vscode.Uri = vscode.Uri.parse(`file:${path}`);
-    vscode.window.showTextDocument(uri, {preview: false})
-    .then(()=>vscode.commands.executeCommand('workbench.action.closeActiveEditor'));
+export function localCloseEditor (resource: vscode.Uri){
+    var docs = vscode.workspace.textDocuments;
+    if (docs) {
+        docs.forEach((value, index)=>{
+            var path= value.uri.path;
+            if (path.includes(resource.path)){
+                vscode.window.showTextDocument(value)
+                .then(()=>vscode.commands.executeCommand('workbench.action.closeActiveEditor'));
+            }
+        });
+    }
 }

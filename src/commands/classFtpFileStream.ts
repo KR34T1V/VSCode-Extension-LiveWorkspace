@@ -65,7 +65,7 @@ export class FtpFileStream {
                 //UPLOAD, UNLOCK AND REVEAL
                 ftpRemotePut(localPath,resource.path, this.ftpSettings)
                 .then(()=>ftpRemoteDelete(`${resource.path}.LCK`, this.ftpSettings))
-                //.then(()=>localCloseEditor(localPath))
+                .then(()=>localCloseEditor(resource))
                 .then(()=>localDeleteFile(localPath, this.ftpSettings))
                 //.then(()=>vscode.commands.executeCommand('workbench.action.files.revert')) //May Cause Issues (used to refresh document)
                 .then(()=>vscode.window.showTextDocument(resource))
