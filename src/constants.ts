@@ -9,7 +9,7 @@ export const DEFAULT_SETTINGS = `
 
     "protocol": "ftp",
     "host": "localhost",
-    "port": "21",
+    "port": 21,
     "user": "defaultUser",
     "password": "*******",
     
