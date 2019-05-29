@@ -11,8 +11,8 @@ Live-Workspace offers users a "Live" environment, that allows you work on remote
 * `File Locking (Checkin/Checkout)` - Claim files when editing to prevent overwriting other users' work.
 * ~~`SFTP (Secure File Transfer Protocol)`~~ - Seamlessly transfer files to and from a SFTP server.
 
-##Guide
-https://github.com/M4DM0NK3Y/VSCode-Extension-LiveWorkspace/blob/master/UsageGuide.md
+## Guide
+https://github.com/M4DM0NK3Y/VSCode-Extension-LiveWorkspace/blob/master/UserGuide.md
 
 ## Requirements
 

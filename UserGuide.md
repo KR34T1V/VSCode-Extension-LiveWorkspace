@@ -18,8 +18,10 @@ Run the setup command to create a settings template within your workspace. To do
 Open the command palette:
 >Press F1
 
-Run Setup
->Run `Setup Live Workspace`
+>Search `'Setup Live Workspace'`
+
+>Run Setup
+
 ---
 
 ### Step 3:
@@ -28,16 +30,19 @@ Populate the settings file according to your connection.
 
     {
         "profile": "default", 
-        "protocol": "ftp",      //Required: Connection Protocol (ftp/sftp)
-        "host": "localhost",    //Required: Connection Host Address
-        "port": "21",           //Required: Connection Port
-        "remotePath": "/",      //Optional: Remote Working Directory
+        "protocol": "ftp",              //Required: Connection Protocol (ftp/sftp)
+        "host": "localhost",            //Required: Connection Host Address
+        "port": "21",                   //Required: Connection Port
+        "remotePath": "/",              //Optional: Remote Working Directory
 
-        "username": "User",     //Required: Connection Username
-        "password": "*******",  //Required: Connection Password
-        "saveOnUpload": true,   //Optional: Save Files before Checkin/Upload
+        "username": "User",             //Required: Connection Username
+        "password": "*******",          //Required: Connection Password
 
-        "ignore": [             //Optional: Files/Directories to hide
+        "saveCheckIn": true,            //Optional: Save Files before Checkin/Upload
+        "uploadOnSave": true,           //Optional: Upload file each time it is saved
+        "clearCacheOnCheckIn": true,    //Optional: Delete local files after Check In
+
+        "ignore": [                     //Optional: Files/Directories to hide from the tree view
             "*/.DS_Store",
             "*/.vscode/*",
             "*/.git/*",
@@ -53,61 +58,76 @@ Populate the settings file according to your connection.
 
 ## Settings:
 ### Live-Workspace.json
+
 #### Profile:
->Currently has no effect.
+Currently has no effect.
+>`"profile": "default"`
+
 #### Protocol:
-Choose which protocol to use for the connection.
->Options: `"ftp"` or ~~`"sftp"`~~
+Choose which transfer protocol to use for the connection.
+>`"protocol": "ftp"`
+
+Options:
+- `"ftp"`
+- ~~`"sftp"`~~
 
 #### Host:
 Connection host address to which to connect.
->`"host": string`
+>`"host": "127.0.0.1"`
 
 #### Port:
-Connection port to connect to.
->`"port": number`
+Connection host port to which to connect.
+>`"port": "21"`
 
 #### RemotePath:
 Remote path to display in the workspace.
->`"remotePath": path`
+>`"remotePath": "/Users/Test"`
 
 #### Username:
 Username used to connect to the remote server.
->`"username:" string`
+>`"username": "admin"`
 
 #### Password:
 Password used to connect to the remote server.
->`"password": string`
+>`"password": "*****"`
 
-#### SaveOnUpload:
-If true will save all files before uploading/Check In
->`"saveOnUpload": boolean`
+#### SaveOnCheckIn:
+If true will save the file before uploading/Check In
+>`"saveOnCheckIn": true`
+
+#### UploadOnSave:
+If true will upload the file after saving
+>`"uploadOnSave": true`
+
+#### ClearCacheOnCheckIn:
+If true will delete local file after the file has been Checked In
+>`"clearCacheOnCheckIn": true`
 
 #### Ignore:
 Array of items to hide from the Live-Workspace view. (Pathlike items)
->`"ignore": [ string ]`
+>`"ignore": [ 'index.html', '*.LCK' ]`
 
 #### ConnTimeout:
 Time before connection fails in milliseconds.
->`"connTimeout": number`
+>`"connTimeout": 10000`
 
 #### PassvTimeout:
 Time before the PASV connection fails in milliseconds.
->`"passvTimeout": number`
+>`"passvTimeout": 10000`
 
 #### Keepalive:
 How often to send a NOOP to keep the connection alive.
->`"keepalive": number`
+>`"keepalive": 10000`
 
 #### KeepaliveMaxCount:
 Maximum number of connections to keep alive
->`"keepaliveMaxCount": number`
+>`"keepaliveMaxCount": 10000`
 
 ### Vscode Settings
 
 #### Username:
 The username that will be used to reserve files on the server
->`"live-workspace.username": string`
+>`"live-workspace.username": "uesername"`
 
 ---
 
@@ -115,6 +135,10 @@ The username that will be used to reserve files on the server
 
 Navigate to the Live-Workspace icon on the left side of the screen.
 
+If all is done correctly you should see your remote server files in the Live-Workspace.
+
+---
+## Commands:
 #### Checkout:
 In order to work on a file it must first be reserved, to prevent others from working on it at the same time.
 
