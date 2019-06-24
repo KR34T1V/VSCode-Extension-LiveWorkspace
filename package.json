@@ -1,187 +1,188 @@
 {
-    "name": "Live-Workspace",
-    "displayName": "Live-Workspace",
-    "description": "An FTP/SFTP workspace, with seamless integration, Work as if it was on local, With the ability to lock a file for safe usage!",
-    "version": "0.0.21",
-    "publisher": "m4dm0nk3y",
-    "author": "m4dm0nk3y",
-    "license": "MIT",
-    "icon": "laptop.png",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/M4DM0NK3Y/VSCode-Extension-CheckoutHeader"
-    },
-    "bugs": {
-        "url": "https://github.com/M4DM0NK3Y/VSCode-Extension-CheckoutHeader/issues"
-    },
-    "homepage": "https://github.com/M4DM0NK3Y/VSCode-Extension-CheckoutHeader",
-    "keywords": [
-        "Live",
-        "Live Workspace",
-        "Workspace",
-        "Check Out",
-        "Check In",
-        "Dreamweaver"
-    ],
-    "engines": {
-        "vscode": "^1.30.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "onCommand:live-workspace.setup",
-        "workspaceContains:.vscode/Live-Workspace.json"
-    ],
-    "main": "./out/extension.js",
-    "contributes": {
-        "configuration": {
-            "type": "object",
-            "title": "Live-Workspace Configuration",
-            "properties": {
-                "Live-Workspace.username": {
-                    "type": "string",
-                    "description": "Username to be used to lock files in the Live-Workspace."
-                }
-            }
-        },
-        "commands": [
-            {
-                "command": "live-workspace.refresh",
-                "title": "Refresh",
-                "icon": {
-                    "dark": "./resources/darkReload.svg",
-                    "light": "./resources/lightReload.svg"
-                }
-            },
-            {
-                "command": "live-workspace.setup",
-                "title": "Setup Live Workspace"
-            },
-            {
-                "command": "live-workspace.checkout",
-                "title": "Check Out"
-            },
-            {
-                "command": "live-workspace.checkin",
-                "title": "Check In"
-            },
-            {
-                "command": "live-workspace.upload",
-                "title": "Upload"
-            },
-            {
-                "command": "live-workspace.download",
-                "title": "Download"
-            },
-            {
-                "command": "live-workspace.rename",
-                "title": "Rename"
-            },
-            {
-                "command": "live-workspace.delete",
-                "title": "Delete"
-            },
-            {
-                "command": "live-workspace.newfolder",
-                "title": "New Folder"
-            },
-            {
-                "command": "live-workspace.newfile",
-                "title": "New File"
-            }
-        ],
-        "menus": {
-            "commandPalette": [],
-            "view/title": [
-                {
-                    "command": "live-workspace.refresh",
-                    "when": "view == live-workspace-remote",
-                    "group": "navigation"
-                }
-            ],
-            "view/item/context": [
-                {
-                    "command": "live-workspace.checkout",
-                    "group": "LWS-a",
-                    "when": "view == live-workspace-remote && viewItem == file"
-                },
-                {
-                    "command": "live-workspace.checkin",
-                    "group": "LWS-a",
-                    "when": "view == live-workspace-remote && viewItem == file"
-                },
-                {
-                    "command": "live-workspace.upload",
-                    "group": "LWS-b",
-                    "when": "view == live-workspace-remote && viewItem == file"
-                },
-                {
-                    "command": "live-workspace.download",
-                    "group": "LWS-b",
-                    "when": "view == live-workspace-remote && viewItem == file"
-                },
-                {
-                    "command": "live-workspace.rename",
-                    "group": "LWS-d",
-                    "when": "view == live-workspace-remote"
-                },
-                {
-                    "command": "live-workspace.delete",
-                    "group": "LWS-d",
-                    "when": "view == live-workspace-remote"
-                },
-                {
-                    "command": "live-workspace.newfolder",
-                    "group": "LWS-c",
-                    "when": "view == live-workspace-remote"
-                },
-                {
-                    "command": "live-workspace.newfile",
-                    "group": "LWS-c",
-                    "when": "view == live-workspace-remote"
-                }
-            ]
-        },
-        "viewsContainers": {
-            "activitybar": [
-                {
-                    "id": "live-workspace",
-                    "title": "Live-Workspace",
-                    "icon": "./resources/laptop.svg"
-                }
-            ]
-        },
-        "views": {
-            "live-workspace": [
-                {
-                    "id": "live-workspace-remote",
-                    "name": "Remote",
-                    "when": "Live-Workspace.enabled"
-                }
-            ]
+  "name": "Live-Workspace",
+  "displayName": "Live-Workspace",
+  "description": "An FTP/SFTP workspace, with seamless integration, Work as if it was on local, With the ability to lock a file for safe usage!",
+  "version": "0.0.21",
+  "publisher": "m4dm0nk3y",
+  "author": "m4dm0nk3y",
+  "license": "MIT",
+  "icon": "laptop.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/M4DM0NK3Y/VSCode-Extension-CheckoutHeader"
+  },
+  "bugs": {
+    "url": "https://github.com/M4DM0NK3Y/VSCode-Extension-CheckoutHeader/issues"
+  },
+  "homepage": "https://github.com/M4DM0NK3Y/VSCode-Extension-CheckoutHeader",
+  "keywords": [
+    "Live",
+    "Live Workspace",
+    "Workspace",
+    "Check Out",
+    "Check In",
+    "Dreamweaver"
+  ],
+  "engines": {
+    "vscode": "^1.30.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:live-workspace.setup",
+    "workspaceContains:.vscode/Live-Workspace.json"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Live-Workspace Configuration",
+      "properties": {
+        "Live-Workspace.username": {
+          "type": "string",
+          "description": "Username to be used to lock files in the Live-Workspace."
         }
+      }
     },
-    "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    "commands": [
+      {
+        "command": "live-workspace.refresh",
+        "title": "Refresh",
+        "icon": {
+          "dark": "./resources/darkReload.svg",
+          "light": "./resources/lightReload.svg"
+        }
+      },
+      {
+        "command": "live-workspace.setup",
+        "title": "Setup Live Workspace"
+      },
+      {
+        "command": "live-workspace.checkout",
+        "title": "Check Out"
+      },
+      {
+        "command": "live-workspace.checkin",
+        "title": "Check In"
+      },
+      {
+        "command": "live-workspace.upload",
+        "title": "Upload"
+      },
+      {
+        "command": "live-workspace.download",
+        "title": "Download"
+      },
+      {
+        "command": "live-workspace.rename",
+        "title": "Rename"
+      },
+      {
+        "command": "live-workspace.delete",
+        "title": "Delete"
+      },
+      {
+        "command": "live-workspace.newfolder",
+        "title": "New Folder"
+      },
+      {
+        "command": "live-workspace.newfile",
+        "title": "New File"
+      }
+    ],
+    "menus": {
+      "commandPalette": [],
+      "view/title": [
+        {
+          "command": "live-workspace.refresh",
+          "when": "view == live-workspace-remote",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "live-workspace.checkout",
+          "group": "LWS-a",
+          "when": "view == live-workspace-remote && viewItem == file"
+        },
+        {
+          "command": "live-workspace.checkin",
+          "group": "LWS-a",
+          "when": "view == live-workspace-remote && viewItem == file"
+        },
+        {
+          "command": "live-workspace.upload",
+          "group": "LWS-b",
+          "when": "view == live-workspace-remote && viewItem == file"
+        },
+        {
+          "command": "live-workspace.download",
+          "group": "LWS-b",
+          "when": "view == live-workspace-remote && viewItem == file"
+        },
+        {
+          "command": "live-workspace.rename",
+          "group": "LWS-d",
+          "when": "view == live-workspace-remote"
+        },
+        {
+          "command": "live-workspace.delete",
+          "group": "LWS-d",
+          "when": "view == live-workspace-remote"
+        },
+        {
+          "command": "live-workspace.newfolder",
+          "group": "LWS-c",
+          "when": "view == live-workspace-remote"
+        },
+        {
+          "command": "live-workspace.newfile",
+          "group": "LWS-c",
+          "when": "view == live-workspace-remote"
+        }
+      ]
     },
-    "devDependencies": {
-        "@types/mocha": "^5.2.7",
-        "@types/node": "^12.0.10",
-        "tslint": "^5.18.0",
-        "typescript": "^3.5.2",
-        "vscode": "^1.1.34"
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "live-workspace",
+          "title": "Live-Workspace",
+          "icon": "./resources/laptop.svg"
+        }
+      ]
     },
-    "dependencies": {
-        "@types/ftp": "^0.3.29",
-        "@types/mkdirp": "^0.5.2",
-        "@types/ssh2-sftp-client": "^2.5.1",
-        "ftp": "^0.3.10",
-        "mkdirp": "^0.5.1",
-        "ssh2-sftp-client": "^2.5.0"
+    "views": {
+      "live-workspace": [
+        {
+          "id": "live-workspace-remote",
+          "name": "Remote",
+          "when": "Live-Workspace.enabled"
+        }
+      ]
     }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.0.10",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.2",
+    "vscode": "^1.1.34"
+  },
+  "dependencies": {
+    "@types/ftp": "^0.3.29",
+    "@types/mkdirp": "^0.5.2",
+    "@types/ssh2-sftp-client": "^2.5.1",
+    "diff": "^4.0.1",
+    "ftp": "^0.3.10",
+    "mkdirp": "^0.5.1",
+    "ssh2-sftp-client": "^2.5.0"
+  }
 }
