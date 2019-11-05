@@ -47,7 +47,7 @@ Populate the settings file according to your connection.
             "*/.vscode/*",
             "*/.git/*",
             "*/*.LCK"
-        ]
+        ],
 
         "connTimeout": 10000,   //Optional: Connection Timeout
         "passvTimeout": 10000,   //Optional: Connection PASV Timeout
