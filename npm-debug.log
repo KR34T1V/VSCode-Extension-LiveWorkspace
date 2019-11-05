@@ -1,0 +1,63 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'show', 'vsce', 'version' ]
+2 info using npm@3.5.2
+3 info using node@v8.10.0
+4 silly mapToRegistry name vsce
+5 silly mapToRegistry using default registry
+6 silly mapToRegistry registry https://registry.npmjs.org/
+7 silly mapToRegistry uri https://registry.npmjs.org/vsce
+8 verbose request uri https://registry.npmjs.org/vsce
+9 verbose request no auth needed
+10 info attempt registry request try #1 at 16:07:09
+11 verbose request id cfa3eaa314ef679b
+12 verbose etag W/"72fff97ab5c2aa4539fbc99f9b530ca6"
+13 verbose lastModified Tue, 29 Oct 2019 14:32:04 GMT
+14 http request GET https://registry.npmjs.org/vsce
+15 http 304 https://registry.npmjs.org/vsce
+16 verbose headers { date: 'Tue, 05 Nov 2019 14:07:09 GMT',
+16 verbose headers   connection: 'keep-alive',
+16 verbose headers   'set-cookie':
+16 verbose headers    [ '__cfduid=d71cda898d637109957614593990455ed1572962829; expires=Wed, 04-Nov-20 14:07:09 GMT; path=/; domain=.npmjs.org; HttpOnly' ],
+16 verbose headers   'cf-cache-status': 'HIT',
+16 verbose headers   'cache-control': 'max-age=300',
+16 verbose headers   'cf-ray': '530f64742c7dac82-JNB',
+16 verbose headers   age: '6814',
+16 verbose headers   etag: '"72fff97ab5c2aa4539fbc99f9b530ca6"',
+16 verbose headers   'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+16 verbose headers   'last-modified': 'Tue, 29 Oct 2019 14:32:04 GMT',
+16 verbose headers   vary: 'accept-encoding, accept',
+16 verbose headers   'x-amz-meta-rev': '123-f266f7217d7a0dc6eacb9e0fe2b1c549',
+16 verbose headers   server: 'cloudflare' }
+17 silly get cb [ 304,
+17 silly get   { date: 'Tue, 05 Nov 2019 14:07:09 GMT',
+17 silly get     connection: 'keep-alive',
+17 silly get     'set-cookie':
+17 silly get      [ '__cfduid=d71cda898d637109957614593990455ed1572962829; expires=Wed, 04-Nov-20 14:07:09 GMT; path=/; domain=.npmjs.org; HttpOnly' ],
+17 silly get     'cf-cache-status': 'HIT',
+17 silly get     'cache-control': 'max-age=300',
+17 silly get     'cf-ray': '530f64742c7dac82-JNB',
+17 silly get     age: '6814',
+17 silly get     etag: '"72fff97ab5c2aa4539fbc99f9b530ca6"',
+17 silly get     'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+17 silly get     'last-modified': 'Tue, 29 Oct 2019 14:32:04 GMT',
+17 silly get     vary: 'accept-encoding, accept',
+17 silly get     'x-amz-meta-rev': '123-f266f7217d7a0dc6eacb9e0fe2b1c549',
+17 silly get     server: 'cloudflare' } ]
+18 verbose etag https://registry.npmjs.org/vsce from cache
+19 verbose get saving vsce to /home/cterblan/.npm/registry.npmjs.org/vsce/.cache.json
+20 verbose exit [ 0, true ]
+21 verbose stack Error: write EPIPE
+21 verbose stack     at _errnoException (util.js:1022:11)
+21 verbose stack     at WriteWrap.afterWrite [as oncomplete] (net.js:880:14)
+22 verbose cwd /home/cterblan/Desktop/Dev/VSCode-Extension-LiveWorkspace
+23 error Linux 5.0.0-32-generic
+24 error argv "/usr/bin/node" "/usr/bin/npm" "show" "vsce" "version"
+25 error node v8.10.0
+26 error npm  v3.5.2
+27 error code EPIPE
+28 error errno EPIPE
+29 error syscall write
+30 error write EPIPE
+31 error If you need help, you may report this error at:
+31 error     <https://github.com/npm/npm/issues>
+32 verbose exit [ 1, true ]

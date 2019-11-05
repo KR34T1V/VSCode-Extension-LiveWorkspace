@@ -9,12 +9,12 @@
   "icon": "laptop.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/M4DM0NK3Y/VSCode-Extension-CheckoutHeader"
+    "url": "https://github.com/M4DM0NK3Y/VSCode-Extension-LiveWorkspace"
   },
   "bugs": {
-    "url": "https://github.com/M4DM0NK3Y/VSCode-Extension-CheckoutHeader/issues"
+    "url": "https://github.com/M4DM0NK3Y/VSCode-Extension-LiveWorkspace/issues"
   },
-  "homepage": "https://github.com/M4DM0NK3Y/VSCode-Extension-CheckoutHeader",
+  "homepage": "https://github.com/M4DM0NK3Y/VSCode-Extension-LiveWorkspace",
   "keywords": [
     "Live",
     "Live Workspace",
