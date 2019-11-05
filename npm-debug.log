@@ -1,63 +1,47 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'show', 'vsce', 'version' ]
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'run', 'vscode:prepublish' ]
 2 info using npm@3.5.2
 3 info using node@v8.10.0
-4 silly mapToRegistry name vsce
-5 silly mapToRegistry using default registry
-6 silly mapToRegistry registry https://registry.npmjs.org/
-7 silly mapToRegistry uri https://registry.npmjs.org/vsce
-8 verbose request uri https://registry.npmjs.org/vsce
-9 verbose request no auth needed
-10 info attempt registry request try #1 at 16:47:09
-11 verbose request id a77f361cc66c39d1
-12 verbose etag W/"72fff97ab5c2aa4539fbc99f9b530ca6"
-13 verbose lastModified Tue, 29 Oct 2019 14:32:04 GMT
-14 http request GET https://registry.npmjs.org/vsce
-15 http 304 https://registry.npmjs.org/vsce
-16 verbose headers { date: 'Tue, 05 Nov 2019 14:47:09 GMT',
-16 verbose headers   connection: 'keep-alive',
-16 verbose headers   'set-cookie':
-16 verbose headers    [ '__cfduid=d3235299cbd3aa8dff317406d8fa2f1c41572965229; expires=Wed, 04-Nov-20 14:47:09 GMT; path=/; domain=.npmjs.org; HttpOnly' ],
-16 verbose headers   'cf-cache-status': 'HIT',
-16 verbose headers   'cache-control': 'max-age=300',
-16 verbose headers   'cf-ray': '530f9f0d5d8aac7c-JNB',
-16 verbose headers   age: '1251',
-16 verbose headers   etag: '"72fff97ab5c2aa4539fbc99f9b530ca6"',
-16 verbose headers   'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
-16 verbose headers   'last-modified': 'Tue, 29 Oct 2019 14:32:04 GMT',
-16 verbose headers   vary: 'accept-encoding, accept',
-16 verbose headers   'x-amz-meta-rev': '123-f266f7217d7a0dc6eacb9e0fe2b1c549',
-16 verbose headers   server: 'cloudflare' }
-17 silly get cb [ 304,
-17 silly get   { date: 'Tue, 05 Nov 2019 14:47:09 GMT',
-17 silly get     connection: 'keep-alive',
-17 silly get     'set-cookie':
-17 silly get      [ '__cfduid=d3235299cbd3aa8dff317406d8fa2f1c41572965229; expires=Wed, 04-Nov-20 14:47:09 GMT; path=/; domain=.npmjs.org; HttpOnly' ],
-17 silly get     'cf-cache-status': 'HIT',
-17 silly get     'cache-control': 'max-age=300',
-17 silly get     'cf-ray': '530f9f0d5d8aac7c-JNB',
-17 silly get     age: '1251',
-17 silly get     etag: '"72fff97ab5c2aa4539fbc99f9b530ca6"',
-17 silly get     'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
-17 silly get     'last-modified': 'Tue, 29 Oct 2019 14:32:04 GMT',
-17 silly get     vary: 'accept-encoding, accept',
-17 silly get     'x-amz-meta-rev': '123-f266f7217d7a0dc6eacb9e0fe2b1c549',
-17 silly get     server: 'cloudflare' } ]
-18 verbose etag https://registry.npmjs.org/vsce from cache
-19 verbose get saving vsce to /home/cterblan/.npm/registry.npmjs.org/vsce/.cache.json
-20 verbose exit [ 0, true ]
-21 verbose stack Error: write EPIPE
-21 verbose stack     at _errnoException (util.js:1022:11)
-21 verbose stack     at WriteWrap.afterWrite [as oncomplete] (net.js:880:14)
-22 verbose cwd /home/cterblan/Desktop/Dev/VSCode-Extension-LiveWorkspace
-23 error Linux 5.0.0-32-generic
-24 error argv "/usr/bin/node" "/usr/bin/npm" "show" "vsce" "version"
-25 error node v8.10.0
-26 error npm  v3.5.2
-27 error code EPIPE
-28 error errno EPIPE
-29 error syscall write
-30 error write EPIPE
-31 error If you need help, you may report this error at:
-31 error     <https://github.com/npm/npm/issues>
-32 verbose exit [ 1, true ]
+4 verbose run-script [ 'prevscode:prepublish',
+4 verbose run-script   'vscode:prepublish',
+4 verbose run-script   'postvscode:prepublish' ]
+5 info lifecycle Live-Workspace@0.1.1~prevscode:prepublish: Live-Workspace@0.1.1
+6 silly lifecycle Live-Workspace@0.1.1~prevscode:prepublish: no script for prevscode:prepublish, continuing
+7 info lifecycle Live-Workspace@0.1.1~vscode:prepublish: Live-Workspace@0.1.1
+8 verbose lifecycle Live-Workspace@0.1.1~vscode:prepublish: unsafe-perm in lifecycle true
+9 verbose lifecycle Live-Workspace@0.1.1~vscode:prepublish: PATH: /usr/share/npm/bin/node-gyp-bin:/home/cterblan/Desktop/Dev/VSCode-Extension-LiveWorkspace/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+10 verbose lifecycle Live-Workspace@0.1.1~vscode:prepublish: CWD: /home/cterblan/Desktop/Dev/VSCode-Extension-LiveWorkspace
+11 silly lifecycle Live-Workspace@0.1.1~vscode:prepublish: Args: [ '-c', 'npm run compile' ]
+12 silly lifecycle Live-Workspace@0.1.1~vscode:prepublish: Returned: code: 1  signal: null
+13 info lifecycle Live-Workspace@0.1.1~vscode:prepublish: Failed to exec vscode:prepublish script
+14 verbose stack Error: Live-Workspace@0.1.1 vscode:prepublish: `npm run compile`
+14 verbose stack Exit status 1
+14 verbose stack     at EventEmitter.<anonymous> (/usr/share/npm/lib/utils/lifecycle.js:232:16)
+14 verbose stack     at emitTwo (events.js:126:13)
+14 verbose stack     at EventEmitter.emit (events.js:214:7)
+14 verbose stack     at ChildProcess.<anonymous> (/usr/share/npm/lib/utils/spawn.js:24:14)
+14 verbose stack     at emitTwo (events.js:126:13)
+14 verbose stack     at ChildProcess.emit (events.js:214:7)
+14 verbose stack     at maybeClose (internal/child_process.js:925:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:209:5)
+15 verbose pkgid Live-Workspace@0.1.1
+16 verbose cwd /home/cterblan/Desktop/Dev/VSCode-Extension-LiveWorkspace
+17 error Linux 5.0.0-32-generic
+18 error argv "/usr/bin/node" "/usr/bin/npm" "run" "vscode:prepublish"
+19 error node v8.10.0
+20 error npm  v3.5.2
+21 error code ELIFECYCLE
+22 error Live-Workspace@0.1.1 vscode:prepublish: `npm run compile`
+22 error Exit status 1
+23 error Failed at the Live-Workspace@0.1.1 vscode:prepublish script 'npm run compile'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the Live-Workspace package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     npm run compile
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs Live-Workspace
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls Live-Workspace
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]
