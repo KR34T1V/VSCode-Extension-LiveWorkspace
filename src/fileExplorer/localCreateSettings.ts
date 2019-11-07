@@ -7,14 +7,13 @@ import { VSCODE_OUTPUT,
         DEFAULT_SETTINGS
         } from '../constants';
 
-export function localCreateSettings (): Thenable<boolean> {
-    var root = vscode.workspace.rootPath;
+export function localCreateSettings (path:vscode.Uri): Thenable<boolean> {
     return new Promise((resolve)=>{
 
         VSCODE_OUTPUT.appendLine(`Creating Settings File! => ${EXTENSION_SETTINGS_FILE}`);
         if (!localExistSettings()){
             try{
-                fs.writeFileSync(root+'/'+EXTENSION_WORKSPACE_SETTINGS_FOLDER+'/'+EXTENSION_SETTINGS_FILE, DEFAULT_SETTINGS);
+                fs.writeFileSync(path.fsPath+'/'+EXTENSION_WORKSPACE_SETTINGS_FOLDER+'/'+EXTENSION_SETTINGS_FILE, DEFAULT_SETTINGS);
                 resolve(true);
             }
             catch(err){

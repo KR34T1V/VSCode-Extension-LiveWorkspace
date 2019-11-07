@@ -3,20 +3,23 @@ import { localExistSettingsFolder, localCreateSettingsFolder, localCreateSetting
 import { EXTENSION_NAME } from '../constants';
 
 export function setupWorkspace() {
-    var path = vscode.Uri.parse(`file:///${vscode.workspace.rootPath}/.vscode/${EXTENSION_NAME}.json`);
-    if (!localExistSettingsFolder()) {
-        localCreateSettingsFolder()
-            .then(() => localCreateSettings())
-            .then(()=>{
-                vscode.workspace.openTextDocument(path)
-                .then((value)=>vscode.window.showTextDocument(value));
-        });
-    }
-    else {
-        localCreateSettings()
-        .then(()=>{
-            vscode.workspace.openTextDocument(path)
-            .then((value)=>vscode.window.showTextDocument(value));
-    });
-    }
+	if (vscode.workspace.workspaceFolders){
+		let newUri:vscode.Uri = vscode.workspace.workspaceFolders[0].uri.toJSON();
+		let path:vscode.Uri = vscode.Uri.file(`${newUri.fsPath}/.vscode/${EXTENSION_NAME}.json`);
+		if (!localExistSettingsFolder(newUri)) {
+			localCreateSettingsFolder(newUri)
+				.then(() => localCreateSettings(newUri))
+				.then(()=>{
+					vscode.workspace.openTextDocument(path.fsPath)
+					.then((value)=>vscode.window.showTextDocument(value));
+			});
+		}
+		else {
+			localCreateSettings(newUri)
+			.then(()=>{
+				vscode.workspace.openTextDocument(path.fsPath)
+				.then((value)=>vscode.window.showTextDocument(value));
+		});
+		}
+	}
 }

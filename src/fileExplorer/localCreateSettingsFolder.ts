@@ -6,15 +6,14 @@ import { VSCODE_OUTPUT,
         } from '../constants';
 import mkdirp = require('mkdirp');
 
-export function localCreateSettingsFolder (): Thenable<boolean>{
-    var root = vscode.workspace.rootPath;
+export function localCreateSettingsFolder (path:vscode.Uri): Thenable<boolean>{
     
     return new Promise((resolve)=>{
 
         VSCODE_OUTPUT.appendLine(`Creating Settings Folder! => ${EXTENSION_WORKSPACE_SETTINGS_FOLDER}`);
-        if (!localExistSettingsFolder()){
+        if (!localExistSettingsFolder(path)){
             try {
-                mkdirp(root+'/'+EXTENSION_WORKSPACE_SETTINGS_FOLDER,(err)=>{
+                mkdirp(path.fsPath+'/'+EXTENSION_WORKSPACE_SETTINGS_FOLDER,(err)=>{
                     if (err){
                         throw(err);
                     }
