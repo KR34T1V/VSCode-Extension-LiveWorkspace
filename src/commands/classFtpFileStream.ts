@@ -284,7 +284,7 @@ export class FtpFileStream {
                     .then(()=>refreshTree());
                 }
             });
-        } else {
+        } else if (node && node.resource && node.resource.path){
 
             let resource = node.resource;
             let path = resource.path;
@@ -303,7 +303,17 @@ export class FtpFileStream {
                     }
                 }
             });
-        }
+        } else {
+			if (!node){
+				console.log("No node was given");
+			}
+			if (node && !node.resource){
+				console.log("No node resource given");
+			}
+			if (node && node.resource && !node.resource.path){
+				console.log("No resource path given");
+			}
+		}
     }
 
 }
