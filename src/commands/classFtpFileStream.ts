@@ -43,14 +43,14 @@ export class FtpFileStream {
                 //DOWNLOAD AND OPEN
                 this.ftpDownloadFile(resource)
                 .then(()=>vscode.window.showTextDocument(uri))
-				.then(()=>logAction("CheckOut", `${resource.path} :Already Checked Out.`));
+				.then(()=>logAction("CheckOut", `Already Checked Out ${resource.path}`));
             } else if (result === 0) {
                 //LOCK , DOWNLOAD AND OPEN
                 this.ftpRemoteLock(resource.path)
                 .then(()=>this.ftpDownloadFile(resource))
                 .then(()=>vscode.window.showTextDocument(uri))
                 .then(()=>refreshTree())
-				.then(()=>logAction("CheckOut", `${resource.path} :Successfully Checked Out`));
+				.then(()=>logAction("CheckOut", `Successfully Checked Out ${resource.path}`));
             } else {
                 //REPORT OWNER
                 vscode.window.showWarningMessage(`Locked By: ${result}`)
@@ -64,7 +64,7 @@ export class FtpFileStream {
     public ftpCheckIn (node: any) {
         let resource = node.resource;
         let localPath = `${vscode.workspace.rootPath}${resource.path}`;
-		logAction("CheckIn", `${resource.path}`);
+		logAction("CheckIn", `${localPath}`);
         //CHECK LCK
         this.ftpRemoteCheckLock(resource.path)
         .then((result)=>{
@@ -94,7 +94,7 @@ export class FtpFileStream {
     public ftpUpload (node: any) {
         let resource = node.resource;
         let localPath = `${vscode.workspace.rootPath}${resource.path}`;
-		logAction("Upload", `${resource.path}`);
+		logAction("Upload", `${localPath}`);
         //CHECK LCK
         this.ftpRemoteCheckLock(resource.path)
         .then((result)=>{
@@ -167,7 +167,8 @@ export class FtpFileStream {
                         .then(()=>resolve(value));
                     }
                     else {
-                        vscode.window.showErrorMessage('Username Not Set!');
+                        vscode.window.showErrorMessage('Username Not Set!')
+						.then(()=>logError("CheckUsername", `Username Not Set!`));
                     }
                 });
             }
@@ -240,7 +241,7 @@ export class FtpFileStream {
 				logAction("ftpRename", `${resource.path}->${dir}/${value}`);
                 ftpRemoteRename(resource.path, `${dir}/${value}`, this.ftpSettings)
                 .then(()=>{
-					logAction("ftpRename", `{Renamed} ${resource.path} -> ${dir}/${value}`);
+					logAction("ftpRename", `Renamed ${resource.path} -> ${dir}/${value}`);
 					refreshTree();
 					});
             }
@@ -257,13 +258,13 @@ export class FtpFileStream {
                 if (result === `Away With It!`){
                     ftpRemoteRmDir(resource.path, this.ftpSettings)
                     .then(()=>refreshTree())
-					.then(()=>logAction("Delete", `{Directory Deleted} ${resource.fsPath}`));
+					.then(()=>logAction("Delete", `Directory Deleted ${resource.fsPath}`));
                 }
             } else {
                 if (result === `Away With It!`){
                     ftpRemoteDelete(resource.path, this.ftpSettings)
                     .then(()=>refreshTree())
-					.then(()=>logAction("Delete", `{File Deleted} ${resource.fsPath}`));
+					.then(()=>logAction("Delete", `File Deleted ${resource.fsPath}`));
                 }
             }
         });
@@ -277,7 +278,7 @@ export class FtpFileStream {
                 if (result !== undefined && result.length){  
                     ftpRemoteMkdir(`${this.ftpSettings.remotePath}${result}`, this.ftpSettings)
                     .then(()=>refreshTree())
-					.then(()=>logAction("NewFolder", `{Folder Created} ${result}`));
+					.then(()=>logAction("NewFolder", `Folder Created ${result}`));
                 }
             });
         } else {
@@ -290,13 +291,13 @@ export class FtpFileStream {
                     if (result !== undefined && result.length){  
                         ftpRemoteMkdir(`${path}/${result}`, this.ftpSettings)
                         .then(()=>refreshTree())
-						.then(()=>logAction("NewFolder", `{Folder Created} ${result}`));
+						.then(()=>logAction("NewFolder", `Folder Created ${result}`));
                     }
                 } else {
                     if (result !== undefined && result.length){
                         ftpRemoteMkdir(`${dir}/${result}`, this.ftpSettings)
                         .then(()=>refreshTree())
-						.then(()=>logAction("NewFolder", `{Folder Created} ${result}`));
+						.then(()=>logAction("NewFolder", `Folder Created ${result}`));
                     }
                 }
             });
@@ -312,7 +313,7 @@ export class FtpFileStream {
                 if (result !== undefined && result.length){
                     ftpRemotePut(`File Created by ${username}`, `${this.ftpSettings.remotePath}${result}`, this.ftpSettings)
                     .then(()=>refreshTree())
-					.then(()=>logAction("NewFile", `{File Created} ${result}`));
+					.then(()=>logAction("NewFile", `File Created ${result}`));
                 }
             });
         } else if (node && node.resource && node.resource.path){
@@ -326,13 +327,13 @@ export class FtpFileStream {
                     if (result !== undefined && result.length){
                         ftpRemotePut(`File Created by ${username}`, `${path}/${result}`, this.ftpSettings)
                         .then(()=>refreshTree())
-						.then(()=>logAction("NewFile", `{File Created} ${result}`));
+						.then(()=>logAction("NewFile", `File Created ${result}`));
                     }
                 } else {
                     if (result !== undefined && result.length){
                         ftpRemotePut(`File Created by ${username}`, `${dir}/${result}`, this.ftpSettings)
                         .then(()=>refreshTree())
-						.then(()=>logAction("NewFile", `{File Created} ${result}`));
+						.then(()=>logAction("NewFile", `File Created ${result}`));
                     }
                 }
             });

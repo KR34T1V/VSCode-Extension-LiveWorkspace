@@ -9,10 +9,11 @@ export function autoSaveFile (uri: vscode.Uri ,settings: SettingsJSON) {
             vscode.workspace.textDocuments.forEach((value, index)=>{
                 let rootPath = vscode.workspace.rootPath;
                 if (rootPath){
+				logAction("rootPath", rootPath.concat(uri.fsPath).trim());                   
+				logAction("fsPath", value.uri.fsPath.slice(1));
                     let remotePath = value.uri.fsPath.trim();
-                    let localPath = rootPath.concat(uri.fsPath).trim();                    
+                    let localPath = rootPath.concat(uri.fsPath).trim();
                     if (localPath === remotePath) { 
-						logAction("autoSaveFile", localPath);                    
                         value.save()
                         .then(()=>setTimeout(()=>resolve(),50));
                     }
