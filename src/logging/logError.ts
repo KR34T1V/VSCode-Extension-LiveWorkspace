@@ -2,11 +2,14 @@ import * as fs from 'fs';
 import * as vscode from 'vscode';
 import { VSCODE_OUTPUT, EXTENSION_NAME } from '../constants';
 
-export function logError(msg: String, error?: Error){
+export function logError(msg: String, error?: Error | String){
 	if (vscode.workspace.workspaceFolders){
 		let newUri:vscode.Uri = vscode.workspace.workspaceFolders[0].uri.toJSON();
 		let path:vscode.Uri = vscode.Uri.file(`${newUri.fsPath}/.vscode/${EXTENSION_NAME}.log`);
 		let date = new Date;
+		if (!error){
+			error = `No Additional Information Provided`;
+		}
 		let output = `${date} | Error: ${msg} {${error}}\n`;
 		fs.appendFileSync(`${path.fsPath}`,output);
 	} else {

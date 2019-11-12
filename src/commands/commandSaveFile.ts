@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { SettingsJSON } from '../interfaces';
 import { VSCODE_OUTPUT } from '../constants';
+import { logAction } from '../logging/logAction';
 
 export function autoSaveFile (uri: vscode.Uri ,settings: SettingsJSON) {
     return new Promise((resolve)=>{
@@ -10,8 +11,8 @@ export function autoSaveFile (uri: vscode.Uri ,settings: SettingsJSON) {
                 if (rootPath){
                     let remotePath = value.uri.fsPath.trim();
                     let localPath = rootPath.concat(uri.fsPath).trim();                    
-                    if (localPath === remotePath) {                        
-                        VSCODE_OUTPUT.appendLine(`\tSaving: ${localPath}`);
+                    if (localPath === remotePath) { 
+						logAction("autoSaveFile", localPath);                    
                         value.save()
                         .then(()=>setTimeout(()=>resolve(),50));
                     }
