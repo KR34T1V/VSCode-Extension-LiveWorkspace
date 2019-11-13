@@ -9,6 +9,7 @@ export function logAction(func: String, msg?: String){
 		let date = new Date;
 		let output = `${date} | Action: (${func}) "${msg}"\n`;
 		fs.appendFileSync(`${path.fsPath}`,output);
+		VSCODE_OUTPUT.append(output);
 	} else {
 		VSCODE_OUTPUT.appendLine("Warning: No workspace detected, Logging disabled");
 	}

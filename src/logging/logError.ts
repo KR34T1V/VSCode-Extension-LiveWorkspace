@@ -12,6 +12,7 @@ export function logError(func: String, error?: Error | String){
 		}
 		let output = `${date} | Error: (${func}) {${error}}\n`;
 		fs.appendFileSync(`${path.fsPath}`,output);
+		VSCODE_OUTPUT.append(output);
 	} else {
 		VSCODE_OUTPUT.appendLine("Warning: No workspace detected, Logging disabled");
 	}
