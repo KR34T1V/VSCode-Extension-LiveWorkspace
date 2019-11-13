@@ -26,7 +26,7 @@ This extension contributes the following settings:
 
 ## Known Issues
 
-* Roger
+* https://github.com/M4DM0NK3Y/VSCode-Extension-LiveWorkspace/issues
 
 ## Release Notes
 
