@@ -42,7 +42,7 @@ Initial release Pending
 ## Contributors
 
 * Logo Provided by "Freepik" (https://www.flaticon.com/free-icon/laptop_22819)
-* Extension Written by "m4dm0nk3y" (m4dm0nk3y.za@gmail.com)
+* Extension Written by "Cornelis Terblanche" (1997corry@gmail.com)
 
 ### For more information
 
