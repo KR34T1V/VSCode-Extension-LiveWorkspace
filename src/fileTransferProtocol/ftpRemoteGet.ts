@@ -26,16 +26,17 @@ export function ftpRemoteGet (path: string, settings: SettingsJSON): Thenable<st
                 }
                 else {
                     VSCODE_OUTPUT.appendLine(`\tGet Remote => (${path})`);
+                    stream.setEncoding('utf8');
                     stream.on('data', function (buffer){
                         if (buffer) {
-                            var part = buffer.toString();
+                            var part = buffer;
                             string += part;
                         }
                     });
                 }
                 stream.once('close', function () {
                     remote.end();
-                    resolve(string);
+                    resolve(string.toString());
                 });
             });
         });
